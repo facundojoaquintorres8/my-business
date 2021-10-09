@@ -27,6 +27,10 @@ export const routes: Routes = [
         path: 'proveedores',
         loadChildren: () => import('./proveedores/proveedores.module').then(m => m.ProveedorModule)
       },
+      {
+        path: 'clientes',
+        loadChildren: () => import('./clientes/clientes.module').then(m => m.ClientesModule)
+      }
     ],
   },
   { path: '**', redirectTo: '/' },
