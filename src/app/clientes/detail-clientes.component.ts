@@ -29,7 +29,7 @@ export class DetailClientesComponent implements  OnInit {
     }
   }
   previousState(): void{
-    window.history.back(); //¿ Aprovecha una propiedad del DOM?
+    window.history.back(); // ¿ Aprovecha una propiedad del DOM?
   }
   delete(dni: string): void {
     this.ngbModalRef = this.modalService.open(DeleteClientesModalComponent, { size: 'lg', backdrop: 'static'});

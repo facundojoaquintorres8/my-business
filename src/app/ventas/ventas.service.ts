@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import {Observable} from 'rxjs';
 import {SERVER_API_URL} from '../app.constants';
 import {createRequestOption} from '../shared/request-util';
-import {IVentas} from './ventas.model';
+import {IVentas, IDetailVenta} from './ventas.model';
 
 @Injectable({
   providedIn: 'root'
@@ -19,5 +19,9 @@ export class VentasService {
     return this.http.get<any>(`${this.resourceUrl}`, {params: options, observe: 'response'});
 
   }
+  find(id: number): Observable<HttpResponse<IDetailVenta>>{
+    return this.http.get<IDetailVenta>(`${this.resourceUrl}/${id}`, {observe: 'response'});
+  }
+
 
 }

@@ -1,0 +1,69 @@
+<div class="container">
+  <h2>Detalle de Venta</h2>
+  <div class="row">
+    <div class="col-lg-6">
+      <div class="card">
+        <div class="card-header">
+          <h3>Venta</h3>
+        </div>
+        <dl *ngIf="venta">
+          <dt>Venta id</dt>
+          <dd>{{venta.id}}</dd>
+          <dt>Total</dt>
+          <dd>{{venta.total}}</dd>
+          <dt>Nombre Tarjeta</dt>
+          <dd>{{venta.nomTarjeta}}</dd>
+          <dt>Numero de tarjeta</dt>
+          <dd>{{venta.numTarjeta}}</dd>
+          <dt>Cuotas</dt>
+          <dd>{{venta.cantCuotas}}</dd>
+          <dt>fecha venta</dt>
+          <dd>{{venta.fechaVenta}}</dd>
+        </dl>
+      </div>
+    </div>
+    <div class="col-lg-6">
+      <div class="card">
+        <div class="card-header">
+          <h3>Cliente</h3>
+        </div>
+        <dl *ngIf="venta">
+          <dt>DNI:</dt>
+          <dd>{{venta.Cliente.dni}}</dd>
+          <dt>Nombre:</dt>
+          <dd>{{venta.Cliente.nombre}}</dd>
+          <dt>Apellido:</dt>
+          <dd>{{venta.Cliente.apellido}}</dd>
+          <dt>Telefono:</dt>
+          <dd>{{venta.Cliente.telefono}}</dd>
+          <dt>Direccion:</dt>
+          <dd>{{venta.Cliente.direccion}}</dd>
+          <dt>Es mayorista:</dt>
+          <dd *ngIf="venta.Cliente.esMayorista">Si</dd>
+          <dd *ngIf="!cliente.esMayorista">No</dd>
+        </dl>
+      </div>
+    </div>
+
+  </div>
+  <div *ngFor="let item of venta.Items" class="card">
+    <dl>
+      <div class="card-header">
+        <h3>Item / Producto</h3>
+      </div>
+      <dt>Item Nro:</dt>
+      <dd>{{item.id}}</dd>
+      <dt>Cantidad Solicitada:</dt>
+      <dd>{{item.cantPedida}}</dd>
+      <dt>Descripcion Producto:</dt>
+      <dd>{{item.Producto.descripcion}}</dd>
+      <dt>Precio Producto:</dt>
+      <dd>{{item.Producto.precioVenta}}</dd>
+    </dl>
+  </div>
+  <div class="button-form">
+    <button type="button" class="btn btn-secondary" (click)="previousState()" title="Volver">
+      <fa-icon icon="arrow-left"></fa-icon> Volver
+    </button>
+  </div>
+</div>

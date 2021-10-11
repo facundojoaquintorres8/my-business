@@ -56,6 +56,8 @@
     [limit]="page.size"
     (page)="setPage($event)"
   >
+
+    <ngx-datatable-column name="ID" prop="id"></ngx-datatable-column>
     <ngx-datatable-column name="total" prop="total"></ngx-datatable-column>
     <ngx-datatable-column name="nomTarjeta" prop="nomTarjeta"></ngx-datatable-column>
     <ngx-datatable-column name="numTarjeta" prop="numTarjeta"></ngx-datatable-column>
@@ -68,6 +70,12 @@
       </ng-template>
     </ngx-datatable-column>
     <ngx-datatable-column name="clienteDni" prop="ClienteDni"></ngx-datatable-column>
-
+    <ngx-datatable-column name="" prop="id" [sortable]="false" [cellClass]="'column-actions'" >
+      <ng-template let-value="value" let-row="row" ngx-datatable-cell-template>
+        <button type="button" [routerLink]="['./', value, 'view']" class="btn btn-primary" title="Ver">
+          <fa-icon icon="eye"></fa-icon>
+        </button>
+      </ng-template>
+    </ngx-datatable-column>
   </ngx-datatable>
 </div>

@@ -3,11 +3,13 @@ import { CommonModule } from '@angular/common';
 import {RouterModule} from '@angular/router';
 import {SharedModule} from '../shared/shared.module';
 import {VentaComponent} from './venta.component';
+import {DetailVentasComponent} from './detail-ventas.component';
 import {ventasRoute} from './ventas.route';
 
 @NgModule({
   declarations: [
-    VentaComponent
+    VentaComponent,
+    DetailVentasComponent
   ],
   imports: [
     CommonModule,
