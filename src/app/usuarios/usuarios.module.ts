@@ -4,9 +4,13 @@ import {RouterModule} from '@angular/router';
 import {SharedModule} from '../shared/shared.module';
 import {usuariosRoute} from './usuarios.route';
 import {UsuariosComponent} from './usuarios.component';
+import {UpdateUsuarioComponent} from "./update-usuario.component";
+
 
 @NgModule({
-  declarations: [UsuariosComponent],
+  declarations: [ UsuariosComponent,
+                  UpdateUsuarioComponent
+  ],
 
   imports: [
     CommonModule,

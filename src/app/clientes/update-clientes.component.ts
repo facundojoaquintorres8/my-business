@@ -9,7 +9,7 @@ import {ICliente} from './clientes.models';
 
 
 @Component({
-  selector: 'app-update-categorias-productos',
+  selector: 'app-update-clientes',
   templateUrl: './update-clientes.component.html'
 })
 export class UpdateClientesComponent implements OnInit{

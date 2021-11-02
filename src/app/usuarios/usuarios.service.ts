@@ -4,6 +4,7 @@ import {Observable} from 'rxjs';
 import {SERVER_API_URL} from '../app.constants';
 import {createRequestOption} from '../shared/request-util';
 import {IUsuario} from './usuarios.models';
+import {ICliente} from "../clientes/clientes.models";
 
 @Injectable({
   providedIn: 'root'
@@ -18,5 +19,17 @@ export class UsuariosService {
     const options = createRequestOption(filter);
     return this.http.get<any>(`${this.resourceUrl}`, {params: options, observe: 'response'});
 
+  }
+  find(id: number): Observable<HttpResponse<IUsuario>> {
+    return this.http.get<IUsuario>(`${this.resourceUrl}/${id}`, {observe: 'response'});
+  }
+  create(usuario: IUsuario): Observable<HttpResponse<IUsuario>> {
+    return this.http.post<IUsuario>(this.resourceUrl, usuario,{ observe: 'response'});
+  }
+  update(usuario: IUsuario): Observable<HttpResponse<IUsuario>> {
+    return this.http.put<IUsuario>(this.resourceUrl, usuario,{ observe: 'response'});
+  }
+  delete(id: number): Observable<HttpResponse<any>>{
+    return this.http.delete<any>( `${this.resourceUrl}/${id}`, { observe: 'response'});
   }
 }

@@ -1,10 +1,52 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Title</title>
-</head>
-<body>
-  <h1>HOLA</h1>
-</body>
-</html>
+<div class="container">
+
+  <h2>
+    <button type="button" [routerLink]="['new']" class="btn btn-primary btn-icon" title="Dar de Alta un Usuario">
+      <fa-icon icon="plus"></fa-icon>
+    </button> Usuarios
+  </h2>
+
+
+  <ngx-datatable
+    class="material striped"
+    [rows]="rows"
+    [columnMode]="'force'"
+    [headerHeight]="50"
+    [footerHeight]="50"
+    rowHeight="auto"
+    [loadingIndicator]="loading"
+    [externalSorting]="true"
+
+    [externalPaging]="true"
+    [count]="page.totalElements"
+    [offset]="page.offset"
+    [limit]="page.size"
+
+
+  >
+    <ngx-datatable-column name="id" prop="id"></ngx-datatable-column>
+    <ngx-datatable-column name="usuario" prop="usuario"></ngx-datatable-column>
+    <ngx-datatable-column name="rol" prop="rol"></ngx-datatable-column>
+    <ngx-datatable-column  name="Activo" prop="activo" >
+      <ng-template   let-value="value" let-row="row" ngx-datatable-cell-template >
+        <fa-icon *ngIf="value" icon="check-square" class="text-success"></fa-icon>
+        <fa-icon *ngIf="!value" icon="square" class="text-danger"></fa-icon>
+      </ng-template>
+    </ngx-datatable-column>
+    <ngx-datatable-column name="" prop="dni" [sortable]="false" [cellClass]="'column-actions'">
+      <ng-template let-value="value" let-row="row" ngx-datatable-cell-template>
+        <button type="button" [routerLink]="['./',value,'edit']" class="btn btn-primary" title="Editar" >
+          <fa-icon icon="pencil-alt"></fa-icon>
+        </button>
+        <button type="button" [routerLink]="['./', value, 'view']" class="btn btn-primary" title="Ver">
+          <fa-icon icon="eye"></fa-icon>
+        </button>
+        <button type="button" class="btn btn-danger" title="Eliminar" (click)="delete(value)">
+          <fa-icon icon="times"></fa-icon>
+        </button>
+      </ng-template>
+    </ngx-datatable-column>
+  </ngx-datatable>
+
+
+</div>

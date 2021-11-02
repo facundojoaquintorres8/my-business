@@ -70,5 +70,8 @@ export class UsuariosComponent implements OnInit {
     });
 
   }
+  delete(dni:number){
+
+  }
 
 }
