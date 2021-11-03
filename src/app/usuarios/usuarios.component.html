@@ -33,7 +33,7 @@
         <fa-icon *ngIf="!value" icon="square" class="text-danger"></fa-icon>
       </ng-template>
     </ngx-datatable-column>
-    <ngx-datatable-column name="" prop="dni" [sortable]="false" [cellClass]="'column-actions'">
+    <ngx-datatable-column name="" prop="id" [sortable]="false" [cellClass]="'column-actions'">
       <ng-template let-value="value" let-row="row" ngx-datatable-cell-template>
         <button type="button" [routerLink]="['./',value,'edit']" class="btn btn-primary" title="Editar" >
           <fa-icon icon="pencil-alt"></fa-icon>

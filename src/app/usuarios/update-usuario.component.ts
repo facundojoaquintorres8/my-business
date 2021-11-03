@@ -15,12 +15,13 @@ import {IProducto} from "../productos/productos.models";
 export class UpdateUsuarioComponent implements OnInit{
 
   isSaving = false;
+  isUpdate = false;
 
   myForm = this.fb.group({
     id: [],
-    usuario: [],
+    usuario: [null,[Validators.required]],
     password: [],
-    rol: [],
+    rol: [null,[Validators.required]],
     activo: []
   });
 
@@ -33,9 +34,14 @@ export class UpdateUsuarioComponent implements OnInit{
 
   ngOnInit(): void {
     const id = this.activatedRoute.snapshot.paramMap.get('id');
+    console.log('id: ', id);
     if (id){
       this.usuarioService.find(parseInt(id)).subscribe(
-        (res:HttpResponse<IUsuario>) => this.updateForm(res.body!)
+        (res:HttpResponse<IUsuario>) => {
+          this.updateForm(res.body!);
+          this.isUpdate = true;
+          console.log('Datos encontrados: ', res.body);
+        }
       );
     }
   }

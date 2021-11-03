@@ -5,17 +5,20 @@ import {SharedModule} from '../shared/shared.module';
 import {usuariosRoute} from './usuarios.route';
 import {UsuariosComponent} from './usuarios.component';
 import {UpdateUsuarioComponent} from "./update-usuario.component";
+import {DeleteUsuariosModalComponent} from './delete-usuarios-modal.component';
 
 
 @NgModule({
   declarations: [ UsuariosComponent,
-                  UpdateUsuarioComponent
+                  UpdateUsuarioComponent,
+                  DeleteUsuariosModalComponent
   ],
 
   imports: [
     CommonModule,
     SharedModule,
     RouterModule.forChild(usuariosRoute)
-    ]
+    ],
+  entryComponents: [DeleteUsuariosModalComponent]
 })
 export class UsuariosModule { }

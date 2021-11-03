@@ -5,6 +5,7 @@ import { IPage, newPage, totalPages } from '../shared/page.models';
 import { ActivatedRoute, Router } from '@angular/router';
 import {IUsuario} from './usuarios.models';
 import {UsuariosService} from './usuarios.service';
+import {DeleteUsuariosModalComponent} from "./delete-usuarios-modal.component";
 
 @Component({
   selector: 'app-usuarios',
@@ -28,7 +29,7 @@ export class UsuariosComponent implements OnInit {
     private router: Router,
     private activatedRoute: ActivatedRoute,
     private usuariosService: UsuariosService,
-    private modelService: NgbModal,
+    private modalService: NgbModal,
     private fb: FormBuilder)
   {
     this.activatedRoute.data.subscribe(data => {
@@ -70,7 +71,18 @@ export class UsuariosComponent implements OnInit {
     });
 
   }
-  delete(dni:number){
+  delete(id: number){
+    this.ngbModalRef = this.modalService.open(DeleteUsuariosModalComponent, {size: 'lg', backdrop: 'static'});
+    this.ngbModalRef.componentInstance.id = id;
+    this.ngbModalRef.result.then(
+      ()=> {
+        this.ngbModalRef = undefined;
+        this.findAll();
+      },
+      ()=>{
+        this.ngbModalRef = undefined;
+      }
+    )
 
   }
 

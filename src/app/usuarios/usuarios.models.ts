@@ -1,5 +1,5 @@
 export interface IUsuario{
-  id: string;
+  id: number;
   usuario: string;
   password: string;
   rol: string;
