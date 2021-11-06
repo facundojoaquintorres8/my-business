@@ -5,3 +5,9 @@ export interface IUsuario{
   rol: string;
   activo: string;
 }
+
+
+export interface IUsuarioPassword{
+  id: number,
+  password: string
+}

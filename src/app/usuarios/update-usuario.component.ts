@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import { HttpResponse } from '@angular/common/http';
 import { FormBuilder, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import { Observable } from 'rxjs';
 import {IUsuario} from './usuarios.models';
 import {UsuariosService} from './usuarios.service';
@@ -16,6 +16,8 @@ export class UpdateUsuarioComponent implements OnInit{
 
   isSaving = false;
   isUpdate = false;
+  show = false;
+  idd: number = 0;
 
   myForm = this.fb.group({
     id: [],
@@ -29,11 +31,12 @@ export class UpdateUsuarioComponent implements OnInit{
     private usuarioService: UsuariosService,
     private activatedRoute: ActivatedRoute,
     private fb: FormBuilder,
+    private router: Router
   ) {
   }
 
   ngOnInit(): void {
-    const id = this.activatedRoute.snapshot.paramMap.get('id');
+     const id = this.activatedRoute.snapshot.paramMap.get('id');
     console.log('id: ', id);
     if (id){
       this.usuarioService.find(parseInt(id)).subscribe(
@@ -44,6 +47,13 @@ export class UpdateUsuarioComponent implements OnInit{
         }
       );
     }
+  }
+  password() {
+    this.show = !this.show;
+  }
+  cambiarClave(id: number){
+    this.router.navigate([`usuarios/cambiarclave/${id}`])
+
   }
   updateForm(usuario: IUsuario){
     this.myForm.patchValue({

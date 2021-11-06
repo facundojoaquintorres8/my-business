@@ -22,7 +22,7 @@
           <div class="col-lg-4" [hidden]="isUpdate">
             <div class="form-group">
               <label class="form-control-label required" for="password">Contraseñia</label>
-              <input type="text" class="form-control" name="password" id="password"
+              <input [type]="show ? 'text' : 'password' "  class="form-control" name="password" id="password"
                      formControlName="password" />
               <div
                 *ngIf="myForm.get('password')!.invalid && (myForm.get('password')!.dirty || myForm.get('password')!.touched)">
@@ -64,5 +64,8 @@
       </div>
 
   </form>
+  <button type="button" (click)="cambiarClave(myForm.get('id')!.value)"  class="btn btn-secondary" title="Cambiar Clave" >
+    Cambiar Clave
+  </button>
 
 </div>
