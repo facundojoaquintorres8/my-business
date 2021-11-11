@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import {Observable} from 'rxjs';
 import {SERVER_API_URL} from '../app.constants';
 import {createRequestOption} from '../shared/request-util';
-import {IUsuario, IUsuarioPassword} from './usuarios.models';
+import {IUsuario, IUsuarioPassword, IUsuarioLogin} from './usuarios.models';
 
 @Injectable({
   providedIn: 'root'
@@ -11,6 +11,7 @@ import {IUsuario, IUsuarioPassword} from './usuarios.models';
 export class UsuariosService {
   public resourceUrl = SERVER_API_URL + 'api/usuario';
   public passwordUrl = SERVER_API_URL + 'api/cambiarclave';
+
 
   constructor(private http: HttpClient) { }
 
@@ -34,5 +35,8 @@ export class UsuariosService {
   }
   updatePassword(usuario: IUsuarioPassword):Observable<any>{
     return this.http.patch<IUsuarioPassword>(this.passwordUrl, usuario, {observe: 'response'});
+  }
+  login(usuarioLogin: IUsuarioLogin): Observable<any>{
+    return  this.http.post<IUsuarioLogin>(`${this.resourceUrl}/login`, usuarioLogin, {observe: 'response'});
   }
 }

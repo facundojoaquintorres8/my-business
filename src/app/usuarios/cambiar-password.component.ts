@@ -1,12 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import {AbstractControl, FormBuilder, Validators} from '@angular/forms';
+import {AbstractControl, FormBuilder, FormGroup, Validators} from '@angular/forms';
 import { IPage, newPage, totalPages } from '../shared/page.models';
 import { ActivatedRoute, Router } from '@angular/router';
 import {IUsuario, IUsuarioPassword} from './usuarios.models';
 import {UsuariosService} from './usuarios.service';
 import {Observable} from "rxjs";
-import {HttpResponse} from "@angular/common/http";
-import {validate} from "codelyzer/walkerFactory/walkerFn";
+import {HttpResponse} from "@angular/common/http"
 
 @Component({
   selector: 'app-cambiar-password',
@@ -15,12 +14,14 @@ import {validate} from "codelyzer/walkerFactory/walkerFn";
 export class CambiarPasswordComponent{
 
   isSaving = false;
-  usuario!: IUsuarioPassword
+  usuarioPassword!: IUsuarioPassword
+  expresion : string = '^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z]){8,32}$';
+
 
   myForm = this.fb.group({
-    claveVieja:[null, Validators.required],
-    claveNueva:[null, [Validators.required,Validators.pattern('^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[*.!@$%^&(){}[]:;<>,.?/~_+-=|\\]).{8,32}$')]],
-    claveNuevaRepetida:[]
+    claveVieja:[null, [Validators.required, ValidateUrl]],
+    claveNueva:[null, [Validators.required,Validators.pattern('^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z]).{8,32}$')]],
+    claveNuevaRepetida:[null, Validators.required]
   });
 
   constructor(
@@ -32,9 +33,9 @@ export class CambiarPasswordComponent{
 
   save(){
     this.isSaving = true;
-    this.usuario = this.getUserData();
-    console.log(this.usuario);
-    this.subscribeToSaveResponse(this.usuarioService.updatePassword(this.usuario))
+    this.usuarioPassword = this.getUserData();
+    console.log(this.usuarioPassword);
+    this.subscribeToSaveResponse(this.usuarioService.updatePassword(this.usuarioPassword))
   }
   private getUserData():IUsuarioPassword {
     return{
@@ -53,11 +54,16 @@ export class CambiarPasswordComponent{
   previousState():void{
     window.history.back();
   }
+  public hola(){
+    console.log('hola');
+  }
 }
 
 export function ValidateUrl(control: AbstractControl) {
-  if (!control.value.startsWith('https') || !control.value.includes('.io')) {
+  /*if (!control.value.startsWith('https') || !control.value.includes('.io')) {
     return { validUrl: true };
-  }
-  return null;
+  }*/
+  console.log('Control: ',control.value)
+
+
 }

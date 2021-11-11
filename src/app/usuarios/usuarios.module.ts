@@ -7,13 +7,15 @@ import {UsuariosComponent} from './usuarios.component';
 import {UpdateUsuarioComponent} from "./update-usuario.component";
 import {DeleteUsuariosModalComponent} from './delete-usuarios-modal.component';
 import {CambiarPasswordComponent} from './cambiar-password.component';
+import {LoginComponent} from "./login.component";
 
 
 @NgModule({
   declarations: [ UsuariosComponent,
                   UpdateUsuarioComponent,
                   DeleteUsuariosModalComponent,
-                  CambiarPasswordComponent
+                  CambiarPasswordComponent,
+                  LoginComponent
   ],
 
   imports: [

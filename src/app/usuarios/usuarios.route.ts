@@ -4,6 +4,7 @@ import {UsuariosComponent} from './usuarios.component';
 import {UpdateUsuarioComponent} from "./update-usuario.component";
 import {DeleteUsuariosModalComponent} from "./delete-usuarios-modal.component";
 import {CambiarPasswordComponent} from "./cambiar-password.component";
+import {LoginComponent} from "./login.component";
 
 export const usuariosRoute: Routes = [
   {
@@ -24,6 +25,16 @@ export const usuariosRoute: Routes = [
     },
     data: {
       title: 'Nuevo Usuarios'
+    }
+  },
+  {
+    path: 'login',
+    component: LoginComponent,
+    resolve: {
+      paginParams: PagingParamsResolve
+    },
+    data: {
+      title: 'Login'
     }
   },
   {
