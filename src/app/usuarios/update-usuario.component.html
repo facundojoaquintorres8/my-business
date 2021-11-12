@@ -21,12 +21,12 @@
           </div>
           <div class="col-lg-4" [hidden]="isUpdate">
             <div class="form-group">
-              <label class="form-control-label required" for="password">Contraseñia</label>
-              <input [type]="show ? 'text' : 'password' "  class="form-control" name="password" id="password"
-                     formControlName="password" />
+              <label class="form-control-label required" for="clave">Contraseñia</label>
+              <input [type]="show ? 'text' : 'password' "  class="form-control" name="clave" id="clave"
+                     formControlName="clave" />
               <div
-                *ngIf="myForm.get('password')!.invalid && (myForm.get('password')!.dirty || myForm.get('password')!.touched)">
-                <small class="form-text text-danger" *ngIf="myForm.get('password')?.errors?.required">
+                *ngIf="myForm.get('clave')!.invalid && (myForm.get('clave')!.dirty || myForm.get('clave')!.touched)">
+                <small class="form-text text-danger" *ngIf="myForm.get('clave')?.errors?.required">
                   El campo es requerido.
                 </small>
               </div>

@@ -22,7 +22,7 @@ export class UpdateUsuarioComponent implements OnInit{
   myForm = this.fb.group({
     id: [],
     usuario: [null,[Validators.required]],
-    password: [],
+    clave: [],
     rol: [null,[Validators.required]],
     activo: []
   });
@@ -48,7 +48,7 @@ export class UpdateUsuarioComponent implements OnInit{
       );
     }
   }
-  password() {
+  clave() {
     this.show = !this.show;
   }
   cambiarClave(id: number){
@@ -59,7 +59,7 @@ export class UpdateUsuarioComponent implements OnInit{
     this.myForm.patchValue({
       id: usuario.id,
       usuario: usuario.usuario,
-      password: usuario.password,
+      clave: usuario.clave,
       rol: usuario.rol,
       activo: usuario.activo
     });
@@ -83,7 +83,7 @@ export class UpdateUsuarioComponent implements OnInit{
     return {
       id: this.myForm.get(['id'])!.value,
       usuario: this.myForm.get(['usuario'])!.value,
-      password: this.myForm.get(['password'])!.value,
+      clave: this.myForm.get(['clave'])!.value,
       rol: this.myForm.get(['rol'])!.value,
       activo: this.myForm.get(['activo'])!.value
     }

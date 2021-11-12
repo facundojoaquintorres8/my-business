@@ -18,7 +18,7 @@ export class UsuariosComponent implements OnInit {
   page!: IPage;
   myForm = this.fb.group({
     usuario: [null],
-    password: [null],
+    clave: [null],
     rol: [null],
     verInactivos: [null]
   });

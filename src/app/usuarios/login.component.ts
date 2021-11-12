@@ -4,7 +4,7 @@ import { IPage, newPage, totalPages } from '../shared/page.models';
 import {UsuariosService} from './usuarios.service';
 import {HttpResponse} from "@angular/common/http"
 import {ActivatedRoute} from "@angular/router";
-import {IUsuarioLogin, IUsuarioPassword} from "./usuarios.models";
+import {IUsuarioLogin, IUsuarioClave} from "./usuarios.models";
 import {Observable} from "rxjs";
 
 
@@ -32,7 +32,7 @@ export class LoginComponent{
   private getUserData():IUsuarioLogin {
     return{
       usuario: this.myForm.get(['usuario'])!.value,
-      password: this.myForm.get(['clave'])!.value
+      clave: this.myForm.get(['clave'])!.value
     };
   }
   private subscribeToSaveResponse(result: Observable<HttpResponse<IUsuarioLogin>>): void {

@@ -6,7 +6,7 @@ import {usuariosRoute} from './usuarios.route';
 import {UsuariosComponent} from './usuarios.component';
 import {UpdateUsuarioComponent} from "./update-usuario.component";
 import {DeleteUsuariosModalComponent} from './delete-usuarios-modal.component';
-import {CambiarPasswordComponent} from './cambiar-password.component';
+import {CambiarClaveComponent} from './cambiar-clave.component';
 import {LoginComponent} from "./login.component";
 
 
@@ -14,7 +14,7 @@ import {LoginComponent} from "./login.component";
   declarations: [ UsuariosComponent,
                   UpdateUsuarioComponent,
                   DeleteUsuariosModalComponent,
-                  CambiarPasswordComponent,
+                  CambiarClaveComponent,
                   LoginComponent
   ],
 

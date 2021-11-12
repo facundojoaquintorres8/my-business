@@ -1,18 +1,21 @@
 export interface IUsuario{
   id: number;
   usuario: string;
-  password: string;
+  clave: string;
   rol: string;
   activo: string;
 }
 
 
-export interface IUsuarioPassword{
+export interface IUsuarioClave{
   id: number,
-  password: string
+  claveVieja: string,
+  claveNueva: string,
+  claveNuevaRepetida: string
+
 }
 
 export interface IUsuarioLogin{
   usuario: string,
-  password: string
+  clave: string
 }
