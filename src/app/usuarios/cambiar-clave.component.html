@@ -45,7 +45,7 @@
           <small class="form-text text-danger" *ngIf="myForm.get('claveNuevaRepetida')?.errors?.required">
             El campo es requerido.
           </small>
-          <small class="form-text text-danger" *ngIf="myForm.get('claveNuevaRepetida')?.errors?.validUrl">
+          <small class="form-text text-danger" *ngIf="myForm.get('claveNuevaRepetida')?.errors?.errorClaveNevaRepetida">
             Las Contraseñas no coinciden.
           </small>
         </div>

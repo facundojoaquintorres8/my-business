@@ -7,6 +7,7 @@ import {IUsuario} from './usuarios.models';
 import {UsuariosService} from './usuarios.service';
 import {toNumbers} from "@angular/compiler-cli/src/diagnostics/typescript_version";
 import {IProducto} from "../productos/productos.models";
+import {ValidarClaveRepetida} from "../shared/custom-validators";
 
 @Component({
   selector: 'app-update-usuario',
@@ -22,7 +23,7 @@ export class UpdateUsuarioComponent implements OnInit{
   myForm = this.fb.group({
     id: [],
     usuario: [null,[Validators.required]],
-    clave: [],
+    clave: [null,[Validators.required,Validators.pattern('^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z]).{8,32}$')]],
     rol: [null,[Validators.required]],
     activo: []
   });
@@ -37,16 +38,21 @@ export class UpdateUsuarioComponent implements OnInit{
 
   ngOnInit(): void {
      const id = this.activatedRoute.snapshot.paramMap.get('id');
-    console.log('id: ', id);
     if (id){
       this.usuarioService.find(parseInt(id)).subscribe(
         (res:HttpResponse<IUsuario>) => {
           this.updateForm(res.body!);
           this.isUpdate = true;
-          console.log('Datos encontrados: ', res.body);
+          let control = this.myForm.get(['clave']);
+          control?.disabled ? control?.enable() : control?.disable();
         }
       );
     }
+
+
+
+
+
   }
   clave() {
     this.show = !this.show;
@@ -71,6 +77,7 @@ export class UpdateUsuarioComponent implements OnInit{
   save(): void{
     this.isSaving = true;
     const usuario = this.createFromForm();
+
     if (usuario.id){
       this.subscribeToSaveResponse(this.usuarioService.update(usuario));
     }else{

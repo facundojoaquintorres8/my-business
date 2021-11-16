@@ -19,9 +19,9 @@
               </div>
             </div>
           </div>
-          <div class="col-lg-4" [hidden]="isUpdate">
+          <div class="col-lg-4" [hidden]="isUpdate" >
             <div class="form-group">
-              <label class="form-control-label required" for="clave">Contraseñia</label>
+              <label class="form-control-label required" for="clave">Contraseña</label>
               <input [type]="show ? 'text' : 'password' "  class="form-control" name="clave" id="clave"
                      formControlName="clave" />
               <div
@@ -29,14 +29,25 @@
                 <small class="form-text text-danger" *ngIf="myForm.get('clave')?.errors?.required">
                   El campo es requerido.
                 </small>
+                <small class="form-text text-danger" *ngIf="myForm.get('clave')?.errors?.pattern ">
+                  <p>
+                    La contraseña debe tener:<br>
+                    - Debe ser entre 8 y 32 caracteres<br>
+                    - Debe tener al menos una minuscula<br>
+                    - Debe tener al menos una mayuscula<br>
+                    - Debe tener al menos un numero<br>
+                  </p>
+                </small>
               </div>
             </div>
           </div>
           <div class="col-lg-3">
             <div class="form-group">
               <label class="form-control-label required" for="rol">Rol</label>
-              <input type="text" class="form-control" name="rol" id="rol"
-                     formControlName="rol" />
+              <select class="form-select" name="rol" id="rol" formControlName="rol" >
+                <option value="administrador">administrador</option>
+                <option value="usuario">usuario</option>
+              </select>
               <div
                 *ngIf="myForm.get('rol')!.invalid && (myForm.get('rol')!.dirty || myForm.get('rol')!.touched)">
                 <small class="form-text text-danger" *ngIf="myForm.get('rol')?.errors?.required">
