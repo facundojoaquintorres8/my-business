@@ -1,0 +1,107 @@
+import { Component, OnInit } from '@angular/core';
+import {IVentas} from './ventas.model';
+import {IPage, newPage, totalPages} from '../shared/page.models';
+import {ActivatedRoute, Router} from '@angular/router';
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {FormBuilder} from '@angular/forms';
+import {VentasService} from './ventas.service';
+
+@Component({
+  selector: 'app-ventas',
+  templateUrl: './ventas.component.html'
+
+})
+export class VentaComponent implements  OnInit{
+
+  collapsedFilter = false;
+  page!: IPage;
+  myForm = this.fb.group({
+    ClienteDni : [null],
+    verInactivas: [null]
+  });
+  rows: IVentas[] = [];
+  loading = false;
+
+  constructor(
+    private router: Router,
+    private activatedRoute: ActivatedRoute,
+    private modelService: NgbModal,
+    private fb: FormBuilder,
+    private ventasService: VentasService,
+  )
+  {
+    this.activatedRoute.data.subscribe(data => {
+      this.page = data.pagingParams ? data.pagingParams : newPage({activa: true}, ['id', 'ASC']);
+    });
+  }
+
+  ngOnInit() {
+    this.findAll();
+
+    if (this.page.filter.activa){
+      this.myForm.get(['verInactivas'])!.setValue(false);
+    }else{
+      this.myForm.get(['verInactivas'])!.setValue(true);
+    }
+
+  }
+  onFilter(){
+    this.page.filter = {};
+
+    if (!this.myForm.get(['verInactivas'])!.value){
+      Object.assign(this.page.filter,{
+        activa: true
+      });
+    }
+    if (this.myForm.get(['ClienteDni'])!.value){
+      Object.assign(this.page.filter, {
+        dni: this.myForm.get(['ClienteDni'])!.value.toLowerCase()
+      });
+    }
+    this.findAll();
+  }
+  findAll(): void {
+    this.transition();
+    this.loading = true;
+    console.log('Asi viajan en en findAll--> ', this.page.filter.activa);
+    this.ventasService.findAll({
+      ...this.page.filter,
+      ...{
+        offset: this.page.offset,
+        order: this.page.order
+      }
+    }).subscribe(res => {
+      console.log('Antes de findAll en service', res.body.rows);
+      this.rows = res.body.rows;
+      console.log('Despues de findAll en service', this.rows);
+      this.loading = false;
+      this.page.totalElements = res.body.count;
+      this.page.totalPages = totalPages(this.page.size, this.page.totalElements);
+    }, () => this.loading = false );
+
+  }
+  onSort(event: any): void { // ¿ que hace aca?
+    this.page.order = [event.sorts[0].prop, event.sorts[0].dir];
+    this.findAll();
+  }
+  setPage(pageInfo: any): void { // ¿que hace aca?
+    this.page.offset = pageInfo.offset;
+    this.findAll();
+  }
+  clearFilter(): void{
+    this.page.filter = {activa: true};
+    this.page = newPage(this.page.filter, this.page.order);
+    this.myForm.get(['ClienteDni'])!.setValue('');
+    this.myForm.get(['verInactivas'])!.setValue(false);
+    this.findAll();
+  }
+  transition(): void {
+    this.router.navigate(['/ventas'],
+      {
+        queryParams: {
+          page: JSON.stringify(this.page)
+        },
+        replaceUrl: true
+      });
+  }
+}

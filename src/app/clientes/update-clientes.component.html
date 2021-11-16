@@ -1,0 +1,85 @@
+<div class="container">
+  <form name="myForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="myForm">
+    <h2 *ngIf="!myForm.get(['dni'])">Crear Cliente</h2>
+    <h2 *ngIf="myForm.get(['dni'])">Editar Cliente</h2>
+      <div class="card">
+        <div class="row">
+          <div class="col-lg-2">
+            <div class="form-group">
+              <label class="form-control-label required" for="dni">DNI</label>
+              <input type="text" class="form-control" id="dni" name="dni" formControlName="dni" [readOnly]="isUpdate">
+              <div  *ngIf="myForm.get('dni')!.invalid && (myForm.get('dni')!.dirty || myForm.get('dni')!.touched)">
+                <small class="form-text text-danger" *ngIf="myForm.get('dni')?.errors?.required">
+                  El campo es requerido.
+                </small>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4">
+            <div class="form-group">
+              <label class="form-control-label required" for="nombre">Nombre</label>
+              <input type="text" class="form-control" id="nombre" name="nombre" formControlName="nombre">
+              <div  *ngIf="myForm.get('nombre')!.invalid && (myForm.get('nombre')!.dirty || myForm.get('nombre')!.touched)">
+                <small class="form-text text-danger" *ngIf="myForm.get('nombre')?.errors?.required">
+                  El campo es requerido.
+                </small>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4">
+            <div class="form-group">
+              <label class="form-control-label required" for="apellido">Apellido</label>
+              <input type="text" class="form-control" id="apellido" name="apellido" formControlName="apellido">
+              <div  *ngIf="myForm.get('apellido')!.invalid && (myForm.get('apellido')!.dirty || myForm.get('apellido')!.touched)">
+                <small class="form-text text-danger" *ngIf="myForm.get('apellido')?.errors?.required">
+                  El campo es requerido.
+                </small>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-3">
+            <div class="form-group">
+              <label class="form-control-label required" for="telefono">Telefono</label>
+              <input type="text" class="form-control" id="telefono" name="telefono" formControlName="telefono">
+              <div  *ngIf="myForm.get('telefono')!.invalid && (myForm.get('telefono')!.dirty || myForm.get('telefono')!.touched)">
+                <small class="form-text text-danger" *ngIf="myForm.get('telefono')?.errors?.required">
+                  El campo es requerido.
+                </small>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-3">
+            <div class="form-group">
+              <label class="form-control-label required" for="direccion">Direccion</label>
+              <input type="text" class="form-control" id="direccion" name="direccion" formControlName="direccion">
+              <div  *ngIf="myForm.get('direccion')!.invalid && (myForm.get('direccion')!.dirty || myForm.get('direccion')!.touched)">
+                <small class="form-text text-danger" *ngIf="myForm.get('direccion')?.errors?.required">
+                  El campo es requerido.
+                </small>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-1">
+            <div class="form-check form-switch">
+              <label class="form-check-label" for="esMayorista">Mayorista</label>
+              <input type="checkbox" class="form-check-input" id="esMayorista" name="esMayorista" formControlName="esMayorista">
+            </div>
+          </div>
+          <div class="col-lg-1" *ngIf="isUpdate">
+            <div class="form-check form-switch">
+              <label class="form-check-label" for="activo">Activo</label>
+              <input type="checkbox" class="form-check-input" id="activo" name="activo" formControlName="activo">
+            </div>
+          </div>
+        </div>
+        <div class="button-form mt-4">
+          <button type="button" class="btn btn-secondary" (click)="previousState()" title="Cancelar">
+            <fa-icon icon="ban"></fa-icon>&nbsp;Cancelar
+          </button>
+          <button type="submit" [disabled]="myForm.invalid || isSaving" class="btn btn-primary" title="Guardar">
+            <fa-icon icon="save"></fa-icon>&nbsp;Guardar
+          </button>
+        </div>
+      </div>
+  </form>
+</div>

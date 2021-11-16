@@ -1,0 +1,34 @@
+<div class="container">
+  <h2>Detalle</h2>
+  <div class="card">
+    <dl *ngIf="cliente">
+      <dt>Dni</dt>
+      <dd>{{cliente.dni}}</dd>
+      <dt>Nombre</dt>
+      <dd>{{cliente.nombre}}</dd>
+      <dt>Apelido</dt>
+      <dd>{{cliente.apellido}}</dd>
+      <dt>Telefono</dt>
+      <dd>{{cliente.telefono}}</dd>
+      <dt>direcion</dt>
+      <dd>{{cliente.direccion}}</dd>
+      <dt>Es mayorista</dt>
+      <dd *ngIf="cliente.esMayorista">Si</dd>
+      <dd *ngIf="!cliente.esMayorista">No</dd>
+    </dl>
+
+    <div class="button-form">
+      <button type="button" class="btn btn-secondary" (click)="previousState()" title="Volver">
+        <fa-icon icon="arrow-left"></fa-icon> Volver
+      </button>
+      <button type="button" class="btn btn-primary" [routerLink]="['../../', cliente?.dni, 'edit']" title="Editar">
+        <fa-icon icon="pencil-alt"></fa-icon> Editar
+      </button>
+      <button type="button" class="btn btn-danger" (click)="delete(cliente.dni)" title="Eliminar">
+        <fa-icon icon="times"></fa-icon> Eliminar
+      </button>
+    </div>
+
+  </div>
+
+</div>

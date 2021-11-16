@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { LayoutComponent } from './layout/layout.component';
+import {UsuariosModule} from "./usuarios/usuarios.module";
 
 export const routes: Routes = [
   {
@@ -27,6 +28,18 @@ export const routes: Routes = [
         path: 'proveedores',
         loadChildren: () => import('./proveedores/proveedores.module').then(m => m.ProveedorModule)
       },
+      {
+        path: 'clientes',
+        loadChildren: () => import('./clientes/clientes.module').then(m => m.ClientesModule)
+      },
+      {
+        path: 'ventas',
+        loadChildren: () => import('./ventas/ventas.module').then(m => m.VentasModule)
+      },
+      {
+        path: 'usuarios',
+        loadChildren: () => import('./usuarios/usuarios.module').then(m => UsuariosModule)
+      }
     ],
   },
   { path: '**', redirectTo: '/' },
