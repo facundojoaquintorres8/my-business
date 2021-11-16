@@ -6,7 +6,7 @@ import {IUsuario, IUsuarioClave} from './usuarios.models';
 import {UsuariosService} from './usuarios.service';
 import {Observable} from "rxjs";
 import {HttpResponse} from "@angular/common/http"
-import {ValidateUrl} from "../shared/custom-validators";
+import {ValidarClaveRepetida, ValidarClave} from "../shared/custom-validators";
 
 @Component({
   selector: 'app-cambiar-clave',
@@ -23,7 +23,7 @@ export class CambiarClaveComponent{
   myForm = this.fb.group({
     claveVieja:[null, [Validators.required]],
     claveNueva:[null, [Validators.required,Validators.pattern('^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z]).{8,32}$')]],
-    claveNuevaRepetida:[null, [Validators.required,ValidateUrl]]
+    claveNuevaRepetida:[null, [Validators.required,ValidarClaveRepetida]]
   });
 
   constructor(
@@ -33,11 +33,16 @@ export class CambiarClaveComponent{
   )
   {}
 
+  clearFormInput() {
+    this.myForm.get(['claveNuevaRepetida'])?.reset();
+  }
+
   save(){
     this.isSaving = true;
     this.usuarioClave = this.getUserData();
     console.log(this.usuarioClave);
     this.subscribeToSaveResponse(this.usuarioService.updatePassword(this.usuarioClave))
+    this.clearFormInput();
   }
   private getUserData():IUsuarioClave {
     return{
