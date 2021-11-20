@@ -1,13 +1,25 @@
-import { Injectable } from '@angular/core'; // imports the class that provides local storage for token
-import { HttpEvent, HttpInterceptor, HttpHandler, HttpRequest, HttpErrorResponse } from '@angular/common/http';
+import { Injectable, OnInit } from '@angular/core'; // imports the class that provides local storage for token
+import {
+  HttpEvent,
+  HttpInterceptor,
+  HttpHandler,
+  HttpRequest,
+  HttpErrorResponse,
+  HttpClient, HttpResponse
+} from '@angular/common/http';
 import { catchError, filter, take, switchMap } from "rxjs/operators";
 import { Observable, throwError } from 'rxjs';
+import {SERVER_API_URL} from "../app.constants";
 
 @Injectable({
   providedIn: 'root'
 })
 
-export class AuthInterceptorService implements HttpInterceptor {
+export class AuthInterceptorService implements HttpInterceptor{
+
+  public resourceUrl = SERVER_API_URL + 'api/token/sign';
+
+  constructor(private http: HttpClient) {}
 
   intercept(req: HttpRequest<any>, next: HttpHandler) {
     console.log("Interception In Progress"); // Interception Stage
@@ -28,4 +40,9 @@ export class AuthInterceptorService implements HttpInterceptor {
         })
       );
   }
+
+  signIn():Observable<HttpResponse<any>> {
+    return  this.http.get<any>(this.resourceUrl);
+  }
+
 }
