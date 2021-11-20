@@ -3,8 +3,8 @@ import { PagingParamsResolve } from '../util/paging-params-resolve';
 import {UsuariosComponent} from './usuarios.component';
 import {UpdateUsuarioComponent} from "./update-usuario.component";
 import {DeleteUsuariosModalComponent} from "./delete-usuarios-modal.component";
-import {CambiarClaveComponent} from "./cambiar-clave.component";
-import {LoginComponent} from "./login.component";
+import {CambiarClaveComponent} from "../cuenta/cambiar-clave.component";
+import {LoginComponent} from "../auth/login.component";
 
 export const usuariosRoute: Routes = [
   {
@@ -35,16 +35,6 @@ export const usuariosRoute: Routes = [
     },
     data: {
       title: 'Login'
-    }
-  },
-  {
-    path: 'cambiarclave/:id',
-    component: CambiarClaveComponent,
-    resolve: {
-      paginParams: PagingParamsResolve
-    },
-    data: {
-      title: 'Cambio de Contraseña'
     }
   },
   {

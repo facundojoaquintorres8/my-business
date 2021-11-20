@@ -2,6 +2,8 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { LayoutComponent } from './layout/layout.component';
 import {UsuariosModule} from "./usuarios/usuarios.module";
+import {CuentaModule} from "./cuenta/cuenta.module";
+import {AuthModule} from "./auth/auth.module";
 
 export const routes: Routes = [
   {
@@ -39,6 +41,14 @@ export const routes: Routes = [
       {
         path: 'usuarios',
         loadChildren: () => import('./usuarios/usuarios.module').then(m => UsuariosModule)
+      },
+      {
+        path: 'cuenta',
+        loadChildren: () => import('./cuenta/cuenta.module').then(m => CuentaModule)
+      },
+      {
+        path: 'login',
+        loadChildren: () => import('./auth/auth.module').then(m => AuthModule)
       }
     ],
   },
@@ -50,3 +60,5 @@ export const routes: Routes = [
   exports: [RouterModule]
 })
 export class AppRoutingModule {}
+
+

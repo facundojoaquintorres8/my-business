@@ -10,7 +10,7 @@ import {IUsuario, IUsuarioClave, IUsuarioLogin} from './usuarios.models';
 })
 export class UsuariosService {
   public resourceUrl = SERVER_API_URL + 'api/usuario';
-  public claveUrl = SERVER_API_URL + 'api/cambiarclave';
+
 
 
   constructor(private http: HttpClient) { }
@@ -32,11 +32,5 @@ export class UsuariosService {
   }
   delete(id: number): Observable<HttpResponse<any>>{
     return this.http.delete<any>( `${this.resourceUrl}/${id}`, { observe: 'response'});
-  }
-  updatePassword(usuario: IUsuarioClave):Observable<any>{
-    return this.http.patch<IUsuarioClave>(this.claveUrl, usuario, {observe: 'response'});
-  }
-  login(usuarioLogin: IUsuarioLogin): Observable<any>{
-    return  this.http.post<IUsuarioLogin>(`${this.resourceUrl}/login`, usuarioLogin, {observe: 'response'});
   }
 }

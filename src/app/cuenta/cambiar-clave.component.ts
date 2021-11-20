@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import {AbstractControl, FormBuilder, FormGroup, Validators} from '@angular/forms';
 import { IPage, newPage, totalPages } from '../shared/page.models';
 import { ActivatedRoute, Router } from '@angular/router';
-import {IUsuario, IUsuarioClave} from './usuarios.models';
-import {UsuariosService} from './usuarios.service';
+import {IUsuario, IUsuarioClave} from '../usuarios/usuarios.models';
+import {CuentaService} from './cuenta.service'
 import {Observable} from "rxjs";
 import {HttpResponse} from "@angular/common/http"
 import {ValidarClaveRepetida, ValidarClave} from "../shared/custom-validators";
@@ -29,7 +29,7 @@ export class CambiarClaveComponent{
   constructor(
     private activatedRoute: ActivatedRoute,
     private fb: FormBuilder,
-    private usuarioService: UsuariosService
+    private cuentaService: CuentaService
   )
   {}
 
@@ -40,8 +40,7 @@ export class CambiarClaveComponent{
   save(){
     this.isSaving = true;
     this.usuarioClave = this.getUserData();
-    console.log(this.usuarioClave);
-    this.subscribeToSaveResponse(this.usuarioService.updatePassword(this.usuarioClave))
+    this.subscribeToSaveResponse(this.cuentaService.updatePassword(this.usuarioClave))
     this.clearFormInput();
   }
   private getUserData():IUsuarioClave {

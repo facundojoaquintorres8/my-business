@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import {AbstractControl, FormBuilder, FormGroup, Validators} from '@angular/forms';
 import { IPage, newPage, totalPages } from '../shared/page.models';
-import {UsuariosService} from './usuarios.service';
+import {AuthService} from './auth.service'
 import {HttpResponse} from "@angular/common/http"
 import {ActivatedRoute} from "@angular/router";
-import {IUsuarioLogin, IUsuarioClave} from "./usuarios.models";
+import {IUsuarioLogin, IUsuarioClave} from "../usuarios/usuarios.models";
 import {Observable} from "rxjs";
 
 
@@ -26,7 +26,7 @@ export class LoginComponent{
   constructor(
     private activatedRoute: ActivatedRoute,
     private fb: FormBuilder,
-    private usuarioService: UsuariosService
+    private auth: AuthService
   ) {
   }
   private getUserData():IUsuarioLogin {
@@ -43,7 +43,7 @@ export class LoginComponent{
       } ,
       (err) => {
         this.isSaving = false;
-        console.log('algo paso: ', err.error.msg);
+        console.log('Ocurrio un error: ', err.error.msg);
         this.mensaje = err.error.msg;
 
       }
@@ -55,6 +55,8 @@ export class LoginComponent{
   save(){
     this.isSaving = true;
     const usuario = this.getUserData();
-    this.subscribeToSaveResponse(this.usuarioService.login(usuario))
+    this.subscribeToSaveResponse(this.auth.login(usuario))
   }
 }
+
+

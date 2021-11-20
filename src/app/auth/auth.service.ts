@@ -10,16 +10,21 @@ import {
 import { catchError, filter, take, switchMap } from "rxjs/operators";
 import { Observable, throwError } from 'rxjs';
 import {SERVER_API_URL} from "../app.constants";
+import {IUsuarioClave, IUsuarioLogin} from "../usuarios/usuarios.models";
 
 @Injectable({
   providedIn: 'root'
 })
 
-export class AuthInterceptorService implements HttpInterceptor{
+export class AuthService implements HttpInterceptor{
 
-  public resourceUrl = SERVER_API_URL + 'api/token/sign';
+  public resourceUrl = SERVER_API_URL + 'api/login';
 
   constructor(private http: HttpClient) {}
+
+  login(usuarioLogin: IUsuarioLogin): Observable<any>{
+    return  this.http.post<IUsuarioLogin>(`${this.resourceUrl}`, usuarioLogin, {observe: 'response'});
+  }
 
   intercept(req: HttpRequest<any>, next: HttpHandler) {
     console.log("Interception In Progress"); // Interception Stage

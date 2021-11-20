@@ -1,28 +1,29 @@
-// the modules required by the app are imported here
-import { BrowserModule } from '@angular/platform-browser'; // this ensures the application will run on the browser
+import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
+import {LoginComponent} from "./login.component";
+import { CommonModule } from '@angular/common';
+import {SharedModule} from '../shared/shared.module';
 //import { AppRoutingModule } from './app-routing.module'; // ensures the application have routing capabilities
-
 //import { AppComponent } from './app.component'; // made present for bootstrapping application on the launch
-
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http'; // enables the application to communicate with the backend services
-import { AuthInterceptorService } from './auth-interceptor.service'; // this will allow the app to automatically attach authorization information to requests
+import { AuthService } from './auth.service';
+import {RouterModule} from "@angular/router";
+import {authRoute} from "./auth.route"; // this will allow the app to automatically attach authorization information to requests
 //import { HomeComponent } from './home/home.component'; // implements the home route
 
 @NgModule({
-  declarations: [  /*
-  ACA VAN LOS COMPONENTES ENTRE LOS QUE ME MUEVA CUANDO VALIDE
-  */
+  declarations: [
+    LoginComponent
   ],
   imports: [
-    BrowserModule,
-
-
-    HttpClientModule
+    CommonModule,
+    SharedModule,
+    //BrowserModule,
+    HttpClientModule,
+    RouterModule.forChild(authRoute)
   ],
   providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true }
+    { provide: HTTP_INTERCEPTORS, useClass: AuthService, multi: true }
   ],
 })
-export class AppModule { }
+export class AuthModule { }

@@ -8,6 +8,7 @@ import {UsuariosService} from './usuarios.service';
 import {toNumbers} from "@angular/compiler-cli/src/diagnostics/typescript_version";
 import {IProducto} from "../productos/productos.models";
 import {ValidarClaveRepetida} from "../shared/custom-validators";
+import {error} from "protractor";
 
 @Component({
   selector: 'app-update-usuario',
@@ -58,7 +59,12 @@ export class UpdateUsuarioComponent implements OnInit{
     this.show = !this.show;
   }
   cambiarClave(id: number){
-    this.router.navigate([`usuarios/cambiarclave/${id}`])
+    this.router.navigate([`/${id}`])
+      .then(val => {
+        console.log('todo bien', val)
+      })
+     ;
+
 
   }
   updateForm(usuario: IUsuario){
