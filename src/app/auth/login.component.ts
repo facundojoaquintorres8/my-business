@@ -6,6 +6,7 @@ import {HttpResponse} from "@angular/common/http"
 import {ActivatedRoute} from "@angular/router";
 import {IUsuarioLogin, IUsuarioClave} from "../usuarios/usuarios.models";
 import {Observable} from "rxjs";
+import {ILoginUser} from "./auth.models";
 
 
 @Component({
@@ -35,11 +36,15 @@ export class LoginComponent{
       clave: this.myForm.get(['clave'])!.value
     };
   }
-  private subscribeToSaveResponse(result: Observable<HttpResponse<IUsuarioLogin>>): void {
+  private subscribeToSaveResponse(result: Observable<HttpResponse<ILoginUser>>): void {
     result.subscribe(
       (res) =>{
-        console.log('bien', res);
-        this.previousState();
+        console.log('res body', res.body);
+        console.log('token', res.body?.token);
+        console.log('token', res.body?.user);
+        this.auth.onLoginSuccess(res.body!);
+       // this.previousState();
+
       } ,
       (err) => {
         this.isSaving = false;
@@ -52,11 +57,12 @@ export class LoginComponent{
   previousState():void{
     window.history.back();
   }
-  save(){
+  login(){
     this.isSaving = true;
     const usuario = this.getUserData();
-    this.subscribeToSaveResponse(this.auth.login(usuario))
+    this.subscribeToSaveResponse(this.auth.login(this.getUserData()))
   }
+
 }
 
 

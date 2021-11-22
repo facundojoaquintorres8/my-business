@@ -6,7 +6,6 @@ export interface IUsuario{
   activo: string;
 }
 
-
 export interface IUsuarioClave{
   id: number,
   claveVieja: string,

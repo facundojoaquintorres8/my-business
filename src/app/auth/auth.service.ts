@@ -11,6 +11,7 @@ import { catchError, filter, take, switchMap } from "rxjs/operators";
 import { Observable, throwError } from 'rxjs';
 import {SERVER_API_URL} from "../app.constants";
 import {IUsuarioClave, IUsuarioLogin} from "../usuarios/usuarios.models";
+import {ILoginUser, ITokenUser} from "./auth.models";
 
 @Injectable({
   providedIn: 'root'
@@ -22,8 +23,8 @@ export class AuthService implements HttpInterceptor{
 
   constructor(private http: HttpClient) {}
 
-  login(usuarioLogin: IUsuarioLogin): Observable<any>{
-    return  this.http.post<IUsuarioLogin>(`${this.resourceUrl}`, usuarioLogin, {observe: 'response'});
+  login(usuarioLogin: IUsuarioLogin): Observable<HttpResponse<ILoginUser>>{
+    return  this.http.post<ILoginUser>(`${this.resourceUrl}`, usuarioLogin, {observe: 'response'});
   }
 
   intercept(req: HttpRequest<any>, next: HttpHandler) {
@@ -44,6 +45,19 @@ export class AuthService implements HttpInterceptor{
           return throwError(error); // any further errors are returned to frontend
         })
       );
+  }
+
+  public onLoginSuccess(loginUser: ILoginUser): void {
+    this.setSessionUser(loginUser.user);
+    this.setToken(loginUser.token);
+  }
+
+  private setSessionUser(user: ITokenUser){
+    localStorage.setItem('user', JSON.stringify(user));
+  }
+
+  private setToken(jwt: string): void {
+    localStorage.setItem('token',jwt);
   }
 
   signIn():Observable<HttpResponse<any>> {
