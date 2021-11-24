@@ -3,7 +3,7 @@ import {AbstractControl, FormBuilder, FormGroup, Validators} from '@angular/form
 import { IPage, newPage, totalPages } from '../shared/page.models';
 import {AuthService} from './auth.service'
 import {HttpResponse} from "@angular/common/http"
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {IUsuarioLogin, IUsuarioClave} from "../usuarios/usuarios.models";
 import {Observable} from "rxjs";
 import {ILoginUser} from "./auth.models";
@@ -27,7 +27,8 @@ export class LoginComponent{
   constructor(
     private activatedRoute: ActivatedRoute,
     private fb: FormBuilder,
-    private auth: AuthService
+    private auth: AuthService,
+    private router: Router
   ) {
   }
   private getUserData():IUsuarioLogin {
@@ -39,18 +40,12 @@ export class LoginComponent{
   private subscribeToSaveResponse(result: Observable<HttpResponse<ILoginUser>>): void {
     result.subscribe(
       (res) =>{
-        console.log('res body', res.body);
-        console.log('token', res.body?.token);
-        console.log('token', res.body?.user);
         this.auth.onLoginSuccess(res.body!);
-       // this.previousState();
-
-      } ,
+        this.router.navigate(['/categorias-productos']);
+      },
       (err) => {
         this.isSaving = false;
-        console.log('Ocurrio un error: ', err.error.msg);
         this.mensaje = err.error.msg;
-
       }
     );
   }

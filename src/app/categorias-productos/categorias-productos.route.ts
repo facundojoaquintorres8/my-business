@@ -3,6 +3,7 @@ import { DetailCategoriaProductoComponent } from './detail-categorias-productos.
 import { UpdateCategoriaProductoComponent } from './update-categorias-productos.component';
 import { CategoriaProductoComponent } from './categorias-productos.component';
 import { PagingParamsResolve } from '../util/paging-params-resolve';
+import {AuthGuards} from "../security/auth-guards";
 
 export const categoriaProductoRoutes: Routes = [
   {
@@ -13,7 +14,9 @@ export const categoriaProductoRoutes: Routes = [
   },
     data: {
       title: 'Categorías de Productos',
+      permissions: ['categorias-productos.read']
     },
+    canActivate: [AuthGuards]
   },
   {
     path: 'new',

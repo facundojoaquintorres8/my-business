@@ -46,22 +46,31 @@ export class AuthService implements HttpInterceptor{
         })
       );
   }
-
   public onLoginSuccess(loginUser: ILoginUser): void {
     this.setSessionUser(loginUser.user);
     this.setToken(loginUser.token);
   }
-
-  private setSessionUser(user: ITokenUser){
+  private setSessionUser(user: ITokenUser) {
     localStorage.setItem('user', JSON.stringify(user));
   }
-
+  public getSessionUser(): ITokenUser{
+    return JSON.parse(localStorage.getItem('user')!);
+  }
   private setToken(jwt: string): void {
     localStorage.setItem('token',jwt);
   }
-
+  public getToken(): string | null {
+    return localStorage.getItem('token');
+  }
   signIn():Observable<HttpResponse<any>> {
     return  this.http.get<any>(this.resourceUrl);
   }
+  public getPermissions(): string[] {
+    let sessionUserPermission: string[] = [];
 
+    return sessionUserPermission;
+  }
+  public logout(): void {
+    localStorage.clear();
+  }
 }
