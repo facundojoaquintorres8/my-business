@@ -1,7 +1,8 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { CompraModule } from './compras/compras.module';
 import { LayoutComponent } from './layout/layout.component';
-import {UsuariosModule} from "./usuarios/usuarios.module";
+import { UsuariosModule } from "./usuarios/usuarios.module";
 
 export const routes: Routes = [
   {
@@ -39,6 +40,10 @@ export const routes: Routes = [
       {
         path: 'usuarios',
         loadChildren: () => import('./usuarios/usuarios.module').then(m => UsuariosModule)
+      },
+      {
+        path: 'compras',
+        loadChildren: () => import('./compras/compras.module').then(m => CompraModule)
       }
     ],
   },
@@ -49,4 +54,4 @@ export const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }
