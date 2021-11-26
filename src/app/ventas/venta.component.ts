@@ -63,7 +63,6 @@ export class VentaComponent implements  OnInit{
   findAll(): void {
     this.transition();
     this.loading = true;
-    console.log('Asi viajan en en findAll--> ', this.page.filter.activa);
     this.ventasService.findAll({
       ...this.page.filter,
       ...{
@@ -71,9 +70,7 @@ export class VentaComponent implements  OnInit{
         order: this.page.order
       }
     }).subscribe(res => {
-      console.log('Antes de findAll en service', res.body.rows);
       this.rows = res.body.rows;
-      console.log('Despues de findAll en service', this.rows);
       this.loading = false;
       this.page.totalElements = res.body.count;
       this.page.totalPages = totalPages(this.page.size, this.page.totalElements);

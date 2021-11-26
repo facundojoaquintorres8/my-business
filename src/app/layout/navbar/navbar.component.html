@@ -26,10 +26,19 @@
           <a class="nav-link" href="/usuarios">Usuarios</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/login">Iniciar Sesion</a>
-        </li>
-        <li class="nav-item">
           <a class="nav-link" href="/cuenta/cambiarclave">Cambiar Clave</a>
+        </li>
+        <li class="nav-item dropdown">
+          <div class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button"
+               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <fa-icon icon="alien"></fa-icon>
+            {{ user?.usuario }}
+          </div>
+          <div class="dropdown-menu dropdown-menu-right mt-0" aria-labelledby="navbarDropdown">
+            <small class="dropdown-item text-muted disabled">({{ user?.usuario }})</small>
+            <a class="dropdown-item" href="/cuenta/cambiarclave">Cambiar Contraseña</a>
+            <a class="dropdown-item" href="#" (click)="logOut()">Cerrar Sesión</a>
+          </div>
         </li>
       </ul>
     </div>

@@ -13,7 +13,7 @@ import {ILoginUser} from "./auth.models";
   selector: 'app-login',
   templateUrl: './login.component.html'
 })
-export class LoginComponent{
+export class LoginComponent implements OnInit{
 
   isSaving = false;
   mensaje? : string;
@@ -29,8 +29,11 @@ export class LoginComponent{
     private fb: FormBuilder,
     private auth: AuthService,
     private router: Router
-  ) {
+  ) {}
+  ngOnInit() {
+    this.auth.logout();
   }
+
   private getUserData():IUsuarioLogin {
     return{
       usuario: this.myForm.get(['usuario'])!.value,

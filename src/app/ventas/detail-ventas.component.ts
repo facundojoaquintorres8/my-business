@@ -23,8 +23,6 @@ export class DetailVentasComponent implements OnInit{
       this.ventasService.find(parseInt(id)).subscribe((res: HttpResponse<IDetailVenta>) => {
         this.venta = res.body!;
         this.cliente = this.venta.Cliente;
-        console.log('Venta encontrada: ', this.venta);
-        console.log('Cliente encontrado: ', this.cliente);
       });
     }
   }

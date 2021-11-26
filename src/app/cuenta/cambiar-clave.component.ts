@@ -6,7 +6,7 @@ import {IUsuario, IUsuarioClave} from '../usuarios/usuarios.models';
 import {CuentaService} from './cuenta.service'
 import {Observable} from "rxjs";
 import {HttpResponse} from "@angular/common/http"
-import {ValidarClaveRepetida, ValidarClave} from "../shared/custom-validators";
+import {ValidarClaveRepetida} from "../shared/custom-validators";
 
 @Component({
   selector: 'app-cambiar-clave',
@@ -18,7 +18,6 @@ export class CambiarClaveComponent{
   usuarioClave!: IUsuarioClave
   expresion : string = '^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z]){8,32}$';
   mensaje? : string;
-
 
   myForm = this.fb.group({
     claveVieja:[null, [Validators.required]],
@@ -32,11 +31,9 @@ export class CambiarClaveComponent{
     private cuentaService: CuentaService
   )
   {}
-
   clearFormInput() {
     this.myForm.get(['claveNuevaRepetida'])?.reset();
   }
-
   save(){
     this.isSaving = true;
     this.usuarioClave = this.getUserData();
@@ -50,14 +47,11 @@ export class CambiarClaveComponent{
       claveNueva: this.myForm.get(['claveNueva'])!.value,
       claveNuevaRepetida: this.myForm.get(['claveNuevaRepetida'])!.value
     };
-
-
   }
   private subscribeToSaveResponse(result: Observable<HttpResponse<IUsuarioClave>>): void {
     result.subscribe(
-      (res) => console.log(res), //this.previousState(),
+      (res) => this.previousState(),
       (err) =>{
-        console.log('algo paso', err.error.msg)  //
         this.isSaving = false;
         this.mensaje = err.error.msg;
       }
@@ -65,9 +59,6 @@ export class CambiarClaveComponent{
   }
   previousState():void{
     window.history.back();
-  }
-  public hola(){
-    console.log('hola');
   }
 }
 

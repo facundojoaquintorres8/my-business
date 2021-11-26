@@ -9,7 +9,6 @@ export class AuthGuards implements CanActivate {
 
   canActivate(activatedRouteSnapshot: ActivatedRouteSnapshot):boolean {
     if(!this.authService.getToken()) {
-      console.log('session expirada');
       this.router.navigate(['login'])
       return false;
     }

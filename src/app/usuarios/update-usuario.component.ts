@@ -59,13 +59,7 @@ export class UpdateUsuarioComponent implements OnInit{
     this.show = !this.show;
   }
   cambiarClave(id: number){
-    this.router.navigate([`/${id}`])
-      .then(val => {
-        console.log('todo bien', val)
-      })
-     ;
-
-
+    this.router.navigate([`/${id}`]);
   }
   updateForm(usuario: IUsuario){
     this.myForm.patchValue({
@@ -76,6 +70,7 @@ export class UpdateUsuarioComponent implements OnInit{
       activo: usuario.activo
     });
   }
+
   previousState(): void {
     window.history.back();
   }

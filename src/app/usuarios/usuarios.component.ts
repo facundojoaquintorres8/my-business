@@ -53,8 +53,6 @@ export class UsuariosComponent implements OnInit {
       }
     }).subscribe(res => {
       this.rows = res.body.rows;
-      console.log('body rows: ',res.body.rows);
-      console.log('rows', this.rows);
       this.loading = false;
       this.page.totalElements = res.body.count;
       this.page.totalPages = totalPages(this.page.size, this.page.totalElements);

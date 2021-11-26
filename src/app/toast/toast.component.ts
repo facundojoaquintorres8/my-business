@@ -28,10 +28,7 @@ export class ToastComponent implements OnInit {
         this.showInfoToast = message?.showInfoToast!;
       }
     );
-
-
   }
-
   closeAllToast(): void {
     this.toastService.changeMessage(
       {
