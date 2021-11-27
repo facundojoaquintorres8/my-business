@@ -54,7 +54,6 @@ export class LoginComponent implements OnInit{
   }
   login(){
     this.isSaving = true;
-    const usuario = this.getUserData();
     this.subscribeToSaveResponse(this.auth.login(this.getUserData()))
   }
 

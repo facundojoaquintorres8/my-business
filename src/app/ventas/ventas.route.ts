@@ -2,6 +2,7 @@ import { Routes } from '@angular/router';
 import { PagingParamsResolve } from '../util/paging-params-resolve';
 import {VentaComponent} from './venta.component';
 import {DetailVentasComponent} from './detail-ventas.component';
+import {AuthGuards} from "../security/auth-guards";
 
 
 export const ventasRoute: Routes = [
@@ -13,7 +14,8 @@ export const ventasRoute: Routes = [
     },
     data: {
       title: 'Ventas'
-    }
+    },
+    canActivate: [AuthGuards]
   },
   {
     path: ':id/view',
@@ -23,6 +25,7 @@ export const ventasRoute: Routes = [
     },
     data: {
       title: 'Detalle Venta'
-    }
+    },
+    canActivate: [AuthGuards]
   }
   ];

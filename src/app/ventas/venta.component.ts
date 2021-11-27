@@ -17,7 +17,9 @@ export class VentaComponent implements  OnInit{
   page!: IPage;
   myForm = this.fb.group({
     ClienteDni : [null],
-    verInactivas: [null]
+    verInactivas: [null],
+    nomTarjeta:[null],
+    numTarjeta:[null],
   });
   rows: IVentas[] = [];
   loading = false;
@@ -58,6 +60,19 @@ export class VentaComponent implements  OnInit{
         dni: this.myForm.get(['ClienteDni'])!.value.toLowerCase()
       });
     }
+    if (this.myForm.get(['nomTarjeta'])!.value){
+      Object.assign(this.page.filter, {
+        nomTarjeta: this.myForm.get(['nomTarjeta'])!.value.toLowerCase()
+      });
+    }
+    if (this.myForm.get(['numTarjeta'])!.value){
+      Object.assign(this.page.filter, {
+        numTarjeta: this.myForm.get(['numTarjeta'])!.value.toLowerCase()
+      });
+    }
+    console.log(this.myForm.get(['nomTarjeta'])!.value);
+    console.log(this.myForm.get(['numTarjeta'])!.value);
+    console.log(this.myForm.get(['ClienteDni'])!.value);
     this.findAll();
   }
   findAll(): void {
@@ -77,11 +92,11 @@ export class VentaComponent implements  OnInit{
     }, () => this.loading = false );
 
   }
-  onSort(event: any): void { // ¿ que hace aca?
+  onSort(event: any): void {
     this.page.order = [event.sorts[0].prop, event.sorts[0].dir];
     this.findAll();
   }
-  setPage(pageInfo: any): void { // ¿que hace aca?
+  setPage(pageInfo: any): void {
     this.page.offset = pageInfo.offset;
     this.findAll();
   }
@@ -90,6 +105,8 @@ export class VentaComponent implements  OnInit{
     this.page = newPage(this.page.filter, this.page.order);
     this.myForm.get(['ClienteDni'])!.setValue('');
     this.myForm.get(['verInactivas'])!.setValue(false);
+    this.myForm.get(['nomTarjeta'])!.setValue('');
+    this.myForm.get(['numTarjeta'])!.setValue('');
     this.findAll();
   }
   transition(): void {

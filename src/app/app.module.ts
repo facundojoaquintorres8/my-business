@@ -14,14 +14,14 @@ import {TokenInterceptor} from "./security/token-interceptor";
 import {ToastComponent} from "./toast/toast.component";
 
 const APP_CONTAINERS = [
-
+  PublicLayoutComponent,
+  PrivateLayoutComponent
 ]
 
 @NgModule({
   declarations: [
     AppComponent,
-    PublicLayoutComponent,
-    PrivateLayoutComponent,
+    ...APP_CONTAINERS,
     NavbarComponent,
     HomeComponent,
     ToastComponent

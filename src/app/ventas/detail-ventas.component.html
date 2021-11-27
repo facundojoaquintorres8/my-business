@@ -46,10 +46,10 @@
     </div>
 
   </div>
-  <ng-container *ngIf="!venta.Items.length" >
+  <ng-container *ngIf="items?.length ==0 " >
     <h3>No hay items asociados a esta venta</h3>
   </ng-container>
-    <div *ngFor="let item of venta.Items" class="card">
+    <div *ngFor="let item of items" class="card">
       <dl>
         <div class="card-header">
           <h3>Item / Producto</h3>

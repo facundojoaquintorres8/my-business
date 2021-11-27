@@ -17,5 +17,4 @@ export class CuentaService{
   updatePassword(usuario: IUsuarioClave):Observable<any>{
     return this.http.patch<IUsuarioClave>(this.claveUrl, usuario, {observe: 'response'});
   }
-
 }
