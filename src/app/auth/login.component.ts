@@ -17,13 +17,10 @@ export class LoginComponent implements OnInit{
 
   isSaving = false;
   mensaje? : string;
-
   myForm = this.fb.group({
     usuario: [null],
     clave: []
   });
-
-
   constructor(
     private activatedRoute: ActivatedRoute,
     private fb: FormBuilder,

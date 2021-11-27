@@ -1,0 +1,25 @@
+<div class="container">
+  <h2>Detalle</h2>
+  <div class="card">
+    <dl *ngIf="user">
+      <dt>Nombre usuario</dt>
+      <dd>{{user.usuario}}</dd>
+      <dt>Rol</dt>
+      <dd>{{user.rol}}</dd>
+      <dt>Actualmente activo</dt>
+      <dd *ngIf="user.activo">Si</dd>
+      <dd *ngIf="!user.activo">No</dd>
+    </dl>
+    <div class="button-form">
+      <button type="button" class="btn btn-secondary" (click)="previousState()" title="Volver">
+        <fa-icon icon="arrow-left"></fa-icon> Volver
+      </button>
+      <button type="button" class="btn btn-primary" [routerLink]="['../../', user?.id, 'edit']" title="Editar">
+        <fa-icon icon="pencil-alt"></fa-icon> Editar
+      </button>
+      <button type="button" class="btn btn-danger" (click)="delete(user.id)" title="Eliminar">
+        <fa-icon icon="times"></fa-icon> Eliminar
+      </button>
+    </div>
+  </div>
+</div>

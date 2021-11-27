@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import {UsuariosService} from './usuarios.service';
-import {IUsuario} from './usuarios.models';
+import {IUser, IUsuario} from './usuarios.models';
 
 @Component({
   templateUrl: './delete-usuarios-modal.component.html'
 })
 export class DeleteUsuariosModalComponent implements OnInit{
   id!: number;
-  usuario!: IUsuario;
+  usuario!: IUser;
 
   constructor(private usuarioService: UsuariosService, private activeModal: NgbActiveModal) { }
 

@@ -62,11 +62,6 @@ export class UpdateClientesComponent implements OnInit{
     const cliente = this.createFromForm();
     if (!cliente.esMayorista){
       cliente.esMayorista = false;
-      /*
-      * CONSULTA:
-      * Es la unica forma que encontre de que me asigne por
-      * defecto falso en esMayorista
-      * */
     }
     if (this.isUpdate){
       this.subscribeToSaveResponse(this.clienteService.update(cliente));

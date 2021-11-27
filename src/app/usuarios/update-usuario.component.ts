@@ -3,7 +3,7 @@ import { HttpResponse } from '@angular/common/http';
 import { FormBuilder, Validators } from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
 import { Observable } from 'rxjs';
-import {IUsuario} from './usuarios.models';
+import {IUser, IUsuario} from './usuarios.models';
 import {UsuariosService} from './usuarios.service';
 import {toNumbers} from "@angular/compiler-cli/src/diagnostics/typescript_version";
 import {IProducto} from "../productos/productos.models";
@@ -20,7 +20,7 @@ export class UpdateUsuarioComponent implements OnInit{
   isUpdate = false;
   show = false;
   idd: number = 0;
-
+  mensaje? : string;
   myForm = this.fb.group({
     id: [],
     usuario: [null,[Validators.required]],
@@ -34,14 +34,13 @@ export class UpdateUsuarioComponent implements OnInit{
     private activatedRoute: ActivatedRoute,
     private fb: FormBuilder,
     private router: Router
-  ) {
-  }
+  ) {}
 
   ngOnInit(): void {
      const id = this.activatedRoute.snapshot.paramMap.get('id');
     if (id){
       this.usuarioService.find(parseInt(id)).subscribe(
-        (res:HttpResponse<IUsuario>) => {
+        (res:HttpResponse<IUser>) => {
           this.updateForm(res.body!);
           this.isUpdate = true;
           let control = this.myForm.get(['clave']);
@@ -49,11 +48,6 @@ export class UpdateUsuarioComponent implements OnInit{
         }
       );
     }
-
-
-
-
-
   }
   clave() {
     this.show = !this.show;
@@ -61,11 +55,10 @@ export class UpdateUsuarioComponent implements OnInit{
   cambiarClave(id: number){
     this.router.navigate([`/${id}`]);
   }
-  updateForm(usuario: IUsuario){
+  updateForm(usuario: IUser){
     this.myForm.patchValue({
       id: usuario.id,
       usuario: usuario.usuario,
-      clave: usuario.clave,
       rol: usuario.rol,
       activo: usuario.activo
     });
@@ -78,13 +71,11 @@ export class UpdateUsuarioComponent implements OnInit{
   save(): void{
     this.isSaving = true;
     const usuario = this.createFromForm();
-
     if (usuario.id){
       this.subscribeToSaveResponse(this.usuarioService.update(usuario));
     }else{
       this.subscribeToSaveResponse(this.usuarioService.create(usuario));
     }
-
   }
 
   private createFromForm(): IUsuario{
@@ -96,10 +87,20 @@ export class UpdateUsuarioComponent implements OnInit{
       activo: this.myForm.get(['activo'])!.value
     }
   }
+
   private subscribeToSaveResponse(result: Observable<HttpResponse<IUsuario>>): void {
     result.subscribe(
       () => this.previousState(),
-      () => this.isSaving = false
+      (error) => {
+        this.isSaving = false;
+
+        if(error.status = 412){
+          console.log('error: ', error);
+        }else{
+          console.log('NO');
+        }
+        this.mensaje = error.error.msg;
+      }
     );
   }
 

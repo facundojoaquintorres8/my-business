@@ -6,12 +6,14 @@ import {usuariosRoute} from './usuarios.route';
 import {UsuariosComponent} from './usuarios.component';
 import {UpdateUsuarioComponent} from "./update-usuario.component";
 import {DeleteUsuariosModalComponent} from './delete-usuarios-modal.component';
+import {DetailUsuarioComponent} from "./detail-usuario.component";
 
 
 @NgModule({
   declarations: [ UsuariosComponent,
                   UpdateUsuarioComponent,
-                  DeleteUsuariosModalComponent
+                  DeleteUsuariosModalComponent,
+                  DetailUsuarioComponent
   ],
 
   imports: [

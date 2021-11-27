@@ -28,8 +28,6 @@ export class ClientesComponent implements OnInit {
   rows: ICliente[] = [];
   loading = false;
 
-
-
   constructor(
     private router: Router,
     private activatedRoute: ActivatedRoute,
@@ -40,7 +38,7 @@ export class ClientesComponent implements OnInit {
     {
       this.activatedRoute.data.subscribe(data => {
         this.page = data.pagingParams ? data.pagingParams : newPage({activo: true, esMayorista: true}, ['nombre', 'ASC']);
-      }); //¿Que es el pagingParams??
+      });
     }
 
   ngOnInit(): void {
@@ -60,18 +58,13 @@ export class ClientesComponent implements OnInit {
     if (this.page.filter.esMayorista) {
       this.myForm.get(['esMayorista'])!.setValue(true);
     }
-
-
-
-
   }
-
 
   findAll(): void {
     this.transition();
     this.loading = true;
     this.clientesService.findAll({
-      ...this.page.filter, //¿Porque pone tres puntos?
+      ...this.page.filter,
       ...{
         offset: this.page.offset,
         order: this.page.order
@@ -82,11 +75,10 @@ export class ClientesComponent implements OnInit {
       this.page.totalElements = res.body.count;
       this.page.totalPages = totalPages(this.page.size, this.page.totalElements);
     },() => this.loading = false);
-
   }
+
   onFilter(): void{
     this.page.filter = {};
-
     if (this.myForm.get(['dni'])!.value){
       Object.assign(this.page.filter, {
         dni: this.myForm.get(['dni'])!.value.toLowerCase()
@@ -112,17 +104,19 @@ export class ClientesComponent implements OnInit {
         esMayorista: true
       });
     }
-
     this.findAll();
   }
-  onSort(event: any): void { //¿ que hace aca?
+
+  onSort(event: any): void {
     this.page.order = [event.sorts[0].prop, event.sorts[0].dir];
     this.findAll();
   }
-  setPage(pageInfo: any): void { // ¿que hace aca?
+
+  setPage(pageInfo: any): void {
     this.page.offset = pageInfo.offset;
     this.findAll();
   }
+
   clearFilter(): void{
     this.page.filter = {activa: true};
     this.page = newPage(this.page.filter, this.page.order);
@@ -131,9 +125,10 @@ export class ClientesComponent implements OnInit {
     this.myForm.get(['verInactivos'])!.setValue(false);
     this.findAll();
   }
+
   delete(dni: string): void {
     this.ngbModalRef = this.modelService.open(DeleteClientesModalComponent, { size: 'lg', backdrop: 'static'});
-    this.ngbModalRef.componentInstance.dni = dni; // //¿que hace aca?
+    this.ngbModalRef.componentInstance.dni = dni;
     this.ngbModalRef.result.then(
       () => {
         this.ngbModalRef = undefined;
@@ -144,7 +139,8 @@ export class ClientesComponent implements OnInit {
       }
     );
   }
-  transition():void { // ¿¿para que sirve este metodo?
+
+  transition():void {
     this.router.navigate(['/clientes'],{
       queryParams:{
         page: JSON.stringify(this.page)

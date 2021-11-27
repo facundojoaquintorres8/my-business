@@ -5,6 +5,7 @@ import {UpdateUsuarioComponent} from "./update-usuario.component";
 import {DeleteUsuariosModalComponent} from "./delete-usuarios-modal.component";
 import {CambiarClaveComponent} from "../cuenta/cambiar-clave.component";
 import {LoginComponent} from "../auth/login.component";
+import {DetailUsuarioComponent} from "./detail-usuario.component";
 
 export const usuariosRoute: Routes = [
   {
@@ -55,6 +56,16 @@ export const usuariosRoute: Routes = [
     },
     data: {
       title: 'Eliminar Usuarios'
+    }
+  },
+  {
+    path: ':id/view',
+    component: DetailUsuarioComponent,
+    resolve: {
+      paginParams: PagingParamsResolve
+    },
+    data: {
+      title: 'Detalle Usuario'
     }
   }
 ];
