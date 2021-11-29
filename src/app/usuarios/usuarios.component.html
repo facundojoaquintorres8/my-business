@@ -1,12 +1,48 @@
 <div class="container">
-
   <h2>
     <button type="button" [routerLink]="['new']" class="btn btn-primary btn-icon" title="Dar de Alta un Usuario">
       <fa-icon icon="plus"></fa-icon>
     </button> Usuarios
   </h2>
-
-
+  <div class="card">
+    <form class="form-filter" name="myForm" role="form" novalidate (ngSubmit)="onFilter()" [formGroup]="myForm" >
+      <fa-icon *ngIf="collapsedFilter" icon="chevron-up" class="pointer filter-icon"
+               (click)="collapsedFilter = !collapsedFilter">
+      </fa-icon>
+      <fa-icon *ngIf="!collapsedFilter" icon="chevron-down" class="pointer filter-icon"
+               (click)="collapsedFilter = !collapsedFilter">
+      </fa-icon>
+      <ng-container *ngIf="!collapsedFilter" >
+        <div class="row">
+          <div class="col-lg-4" >
+            <label for="usuario" class="form-label">Usuario</label>
+            <input type="text" class="form-control" name="usuario" id="usuario" formControlName="usuario">
+          </div>
+          <div class="col-lg-4">
+            <label for="rol" class="form-label">Rol</label>
+            <select class="form-select" name="rol" id="rol" formControlName="rol" >
+              <option value="administrador">administrador</option>
+              <option value="usuario">usuario</option>
+            </select>
+          </div>
+          <div class="col-lg-1" >
+            <div class="form-check form-switch">
+              <label class="form-check-label" for="verInactivos" >Inactivos</label>
+              <input class="form-check-input" type="checkbox" name="verInactivos" id="verInactivos" formControlName="verInactivos" >
+            </div>
+          </div>
+        </div>
+        <div class="button-form-filter">
+          <button type="button" class="btn btn-secondary" (click)="clearFilter()" title="Limpiar" >
+            <fa-icon icon="broom"></fa-icon>&nbsp;Limpiar
+          </button>
+          <button type="submit" [disabled]="loading" class="btn btn-primary" title="Filtrar">
+            <fa-icon icon="filter"></fa-icon>&nbsp;Filtrar
+          </button>
+        </div>
+      </ng-container>
+    </form>
+  </div>
   <ngx-datatable
     class="material striped"
     [rows]="rows"
@@ -16,17 +52,15 @@
     rowHeight="auto"
     [loadingIndicator]="loading"
     [externalSorting]="true"
-
+    (sort)="onSort($event)"
     [externalPaging]="true"
     [count]="page.totalElements"
     [offset]="page.offset"
     [limit]="page.size"
-
-
+    (page)="setPage($event)"
   >
-    <ngx-datatable-column name="id" prop="id"></ngx-datatable-column>
-    <ngx-datatable-column name="usuario" prop="usuario"></ngx-datatable-column>
-    <ngx-datatable-column name="rol" prop="rol"></ngx-datatable-column>
+    <ngx-datatable-column name="Usuario" prop="usuario"></ngx-datatable-column>
+    <ngx-datatable-column name="Rol" prop="rol"></ngx-datatable-column>
     <ngx-datatable-column  name="Activo" prop="activo" >
       <ng-template   let-value="value" let-row="row" ngx-datatable-cell-template >
         <fa-icon *ngIf="value" icon="check-square" class="text-success"></fa-icon>
@@ -47,6 +81,4 @@
       </ng-template>
     </ngx-datatable-column>
   </ngx-datatable>
-
-
 </div>

@@ -3,8 +3,8 @@ import { PagingParamsResolve } from '../util/paging-params-resolve';
 import {UsuariosComponent} from './usuarios.component';
 import {UpdateUsuarioComponent} from "./update-usuario.component";
 import {DeleteUsuariosModalComponent} from "./delete-usuarios-modal.component";
-import {CambiarClaveComponent} from "./cambiar-clave.component";
-import {LoginComponent} from "./login.component";
+import {DetailUsuarioComponent} from "./detail-usuario.component";
+import {AuthGuards} from "../security/auth-guards";
 
 export const usuariosRoute: Routes = [
   {
@@ -15,7 +15,8 @@ export const usuariosRoute: Routes = [
     },
     data: {
       title: 'Usuarios'
-    }
+    },
+    canActivate: [AuthGuards]
   },
   {
     path: 'new',
@@ -25,27 +26,8 @@ export const usuariosRoute: Routes = [
     },
     data: {
       title: 'Nuevo Usuarios'
-    }
-  },
-  {
-    path: 'login',
-    component: LoginComponent,
-    resolve: {
-      paginParams: PagingParamsResolve
     },
-    data: {
-      title: 'Login'
-    }
-  },
-  {
-    path: 'cambiarclave/:id',
-    component: CambiarClaveComponent,
-    resolve: {
-      paginParams: PagingParamsResolve
-    },
-    data: {
-      title: 'Cambio de Contraseña'
-    }
+    canActivate: [AuthGuards]
   },
   {
     path: ':id/edit',
@@ -55,7 +37,8 @@ export const usuariosRoute: Routes = [
     },
     data: {
       title: 'Editar Usuarios'
-    }
+    },
+    canActivate: [AuthGuards]
   },
   {
     path: ':id/delete',
@@ -65,6 +48,18 @@ export const usuariosRoute: Routes = [
     },
     data: {
       title: 'Eliminar Usuarios'
-    }
+    },
+    canActivate: [AuthGuards]
+  },
+  {
+    path: ':id/view',
+    component: DetailUsuarioComponent,
+    resolve: {
+      paginParams: PagingParamsResolve
+    },
+    data: {
+      title: 'Detalle Usuario'
+    },
+    canActivate: [AuthGuards]
   }
 ];

@@ -3,6 +3,7 @@ import { DetailProductoComponent } from './detail-productos.component';
 import { UpdateProductoComponent } from './update-productos.component';
 import { ProductoComponent } from './productos.component';
 import { PagingParamsResolve } from '../util/paging-params-resolve';
+import {AuthGuards} from "../security/auth-guards";
 
 export const productoRoutes: Routes = [
   {
@@ -14,6 +15,7 @@ export const productoRoutes: Routes = [
     data: {
       title: 'Productos',
     },
+    canActivate: [AuthGuards]
   },
   {
     path: 'new',
@@ -21,6 +23,7 @@ export const productoRoutes: Routes = [
     data: {
       title: 'Crear Producto',
     },
+    canActivate: [AuthGuards]
   },
   {
     path: ':id/edit',
@@ -28,6 +31,7 @@ export const productoRoutes: Routes = [
     data: {
       title: 'Actualizar Producto',
     },
+    canActivate: [AuthGuards]
   },
   {
     path: ':id/view',
@@ -35,5 +39,6 @@ export const productoRoutes: Routes = [
     data: {
       title: 'Detalle de Producto',
     },
+    canActivate: [AuthGuards]
   }
 ];

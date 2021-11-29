@@ -1,21 +1,36 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { LayoutComponent } from './layout/layout.component';
+import { PublicLayoutComponent } from './layout/public/public-layout.component';
 import {UsuariosModule} from "./usuarios/usuarios.module";
+import {CuentaModule} from "./cuenta/cuenta.module";
+import {AuthModule} from "./auth/auth.module";
+import {PrivateLayoutComponent} from "./layout/private/private-layout.component";
 
 export const routes: Routes = [
   {
     path: '',
-    component: LayoutComponent,
+    component: PublicLayoutComponent,
     data: {
       title: 'Mi Negocio'
     },
     children: [
-      // {
-      //   path: '',
-      //   component: HomeComponent,
-      //   pathMatch: 'full'
-      // },
+      {
+        path: '',
+        loadChildren: () => import('./auth/auth.module').then(m => AuthModule)
+      },
+      {
+        path: 'login',
+        loadChildren: () => import('./auth/auth.module').then(m => AuthModule)
+      }
+    ],
+  },
+  {
+    path:'',
+    component: PrivateLayoutComponent,
+    data: {
+      title: 'Turnera'
+    },
+    children: [
       {
         path: 'categorias-productos',
         loadChildren: () => import('./categorias-productos/categorias-productos.module').then(m => m.CategoriaProductoModule)
@@ -39,10 +54,14 @@ export const routes: Routes = [
       {
         path: 'usuarios',
         loadChildren: () => import('./usuarios/usuarios.module').then(m => UsuariosModule)
-      }
-    ],
+      },
+      {
+        path: 'cuenta',
+        loadChildren: () => import('./cuenta/cuenta.module').then(m => CuentaModule)
+      },
+    ]
   },
-  { path: '**', redirectTo: '/' },
+  { path: '**', redirectTo: '/login' },
 ];
 
 @NgModule({
@@ -50,3 +69,5 @@ export const routes: Routes = [
   exports: [RouterModule]
 })
 export class AppRoutingModule {}
+
+

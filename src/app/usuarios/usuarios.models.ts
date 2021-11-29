@@ -6,6 +6,12 @@ export interface IUsuario{
   activo: string;
 }
 
+export interface IUser{
+  id: number;
+  usuario: string;
+  rol: string;
+  activo: string;
+}
 
 export interface IUsuarioClave{
   id: number,

@@ -6,7 +6,6 @@ import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import {HttpResponse} from '@angular/common/http';
 import {DeleteClientesModalComponent} from './delete-clientes-modal.component';
 
-
 @Component({
   selector: 'app-detail-clientes',
   templateUrl: './detail-clientes.component.html'
@@ -29,11 +28,11 @@ export class DetailClientesComponent implements  OnInit {
     }
   }
   previousState(): void{
-    window.history.back(); // ¿ Aprovecha una propiedad del DOM?
+    window.history.back();
   }
   delete(dni: string): void {
     this.ngbModalRef = this.modalService.open(DeleteClientesModalComponent, { size: 'lg', backdrop: 'static'});
-    this.ngbModalRef.componentInstance.dni = dni; // careful here
+    this.ngbModalRef.componentInstance.dni = dni;
     this.ngbModalRef.result.then(
       () => {
         this.previousState();

@@ -1,6 +1,4 @@
 <div class="container" >
-
-
   <form name="myForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="myForm">
     <h2 *ngIf="!myForm.get('id')!.value">Crear Usuario</h2>
     <h2 *ngIf="myForm.get('id')!.value">Editar Usuario</h2>
@@ -64,6 +62,12 @@
             </div>
           </div>
         </div>
+        <div
+          *ngIf="mensaje">
+          <small class="form-text text-danger">
+            {{mensaje}}
+          </small>
+        </div>
         <div class="button-form mt-4">
           <button type="button" class="btn btn-secondary" (click)="previousState()" title="Cancelar">
             <fa-icon icon="ban"></fa-icon>&nbsp;Cancelar
@@ -73,10 +77,5 @@
           </button>
         </div>
       </div>
-
   </form>
-  <button type="button" (click)="cambiarClave(myForm.get('id')!.value)"  class="btn btn-secondary" title="Cambiar Clave" >
-    Cambiar Clave
-  </button>
-
 </div>

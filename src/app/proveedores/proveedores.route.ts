@@ -3,6 +3,7 @@ import { DetailProveedorComponent } from './detail-proveedores.component';
 import { UpdateProveedorComponent } from './update-proveedores.component';
 import { ProveedorComponent } from './proveedores.component';
 import { PagingParamsResolve } from '../util/paging-params-resolve';
+import {AuthGuards} from "../security/auth-guards";
 
 export const productoRoutes: Routes = [
   {
@@ -14,6 +15,7 @@ export const productoRoutes: Routes = [
     data: {
       title: 'Proveedores',
     },
+    canActivate: [AuthGuards]
   },
   {
     path: 'new',
@@ -21,6 +23,7 @@ export const productoRoutes: Routes = [
     data: {
       title: 'Crear Proveedor',
     },
+    canActivate: [AuthGuards]
   },
   {
     path: ':id/edit',
@@ -28,6 +31,7 @@ export const productoRoutes: Routes = [
     data: {
       title: 'Actualizar Proveedor',
     },
+    canActivate: [AuthGuards]
   },
   {
     path: ':id/view',
@@ -35,5 +39,6 @@ export const productoRoutes: Routes = [
     data: {
       title: 'Detalle de Proveedor',
     },
+    canActivate: [AuthGuards]
   }
 ];

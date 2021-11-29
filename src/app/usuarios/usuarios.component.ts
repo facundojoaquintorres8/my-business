@@ -34,32 +34,67 @@ export class UsuariosComponent implements OnInit {
   {
     this.activatedRoute.data.subscribe(data => {
       this.page = data.pagingParams ? data.pagingParams : newPage({activo: true}, ['id', 'ASC']);
-    }); //¿Que es el pagingParams??
+    });
   }
 
   ngOnInit(): void {
     this.findAll();
   }
 
-
   findAll(): void {
     this.transition();
     this.loading = true;
     this.usuariosService.findAll({
-      ...this.page.filter, //¿Porque pone tres puntos?
+      ...this.page.filter,
       ...{
         offset: this.page.offset,
         order: this.page.order
       }
     }).subscribe(res => {
       this.rows = res.body.rows;
-      console.log('body rows: ',res.body.rows);
-      console.log('rows', this.rows);
       this.loading = false;
       this.page.totalElements = res.body.count;
       this.page.totalPages = totalPages(this.page.size, this.page.totalElements);
     },() => this.loading = false);
+  }
 
+  onFilter(): void{
+    this.page.filter = {};
+    if (this.myForm.get(['usuario'])!.value){
+      Object.assign(this.page.filter, {
+        usuario: this.myForm.get(['usuario'])!.value.toLowerCase()
+      });
+    }
+    if (this.myForm.get(['rol'])!.value){
+      Object.assign(this.page.filter, {
+        rol: this.myForm.get(['rol'])!.value.toLowerCase()
+      });
+    }
+    if(!this.myForm.get(['verInactivos'])!.value){
+      Object.assign(this.page.filter,{
+        activo: true
+      });
+    }
+    this.findAll();
+  }
+
+  clearFilter(): void{
+    this.page.filter = {activa: true};
+    this.page = newPage(this.page.filter, this.page.order);
+    this.myForm.get(['usuario'])!.setValue('');
+    this.myForm.get(['rol'])!.setValue('');
+    this.myForm.get(['verInactivos'])!.setValue(false);
+    this.findAll();
+  }
+
+  onSort(event: any): void {
+    this.page.order = [event.sorts[0].prop, event.sorts[0].dir];
+    this.findAll();
+  }
+
+  setPage(pageInfo: any): void {
+    this.page.offset = pageInfo.offset;
+    this.findAll();
   }
 
   transition():void { // ¿¿para que sirve este metodo?
@@ -69,7 +104,6 @@ export class UsuariosComponent implements OnInit {
       },
       replaceUrl: true
     });
-
   }
   delete(id: number){
     this.ngbModalRef = this.modalService.open(DeleteUsuariosModalComponent, {size: 'lg', backdrop: 'static'});
@@ -83,7 +117,6 @@ export class UsuariosComponent implements OnInit {
         this.ngbModalRef = undefined;
       }
     )
-
   }
 
 }
