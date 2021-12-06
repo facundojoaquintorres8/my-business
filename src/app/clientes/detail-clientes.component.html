@@ -13,8 +13,8 @@
       <dt>direcion</dt>
       <dd>{{cliente.direccion}}</dd>
       <dt>Es mayorista</dt>
-      <dd *ngIf="cliente.esMayorista">Si</dd>
-      <dd *ngIf="!cliente.esMayorista">No</dd>
+      <dd *ngIf="cliente.tipoCliente">Si</dd>
+      <dd *ngIf="!cliente.tipoCliente">No</dd>
     </dl>
     <div class="button-form">
       <button type="button" class="btn btn-secondary" (click)="previousState()" title="Volver">
