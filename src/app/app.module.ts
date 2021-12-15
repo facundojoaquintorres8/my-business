@@ -5,7 +5,6 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HomeComponent } from './home/home.component';
 import { PublicLayoutComponent } from './layout/public/public-layout.component';
 import {PrivateLayoutComponent} from './layout/private/private-layout.component';
 import { NavbarComponent } from './layout/navbar/navbar.component';
@@ -23,7 +22,6 @@ const APP_CONTAINERS = [
     AppComponent,
     ...APP_CONTAINERS,
     NavbarComponent,
-    HomeComponent,
     ToastComponent
   ],
   imports: [

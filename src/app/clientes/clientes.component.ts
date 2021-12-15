@@ -23,7 +23,7 @@ export class ClientesComponent implements OnInit {
     nombre: [null],
     apellido: [null],
     verInactivos: [null],
-    esMayorista: [null]
+    tipoCliente: [null]
   });
   rows: ICliente[] = [];
   loading = false;
@@ -37,7 +37,7 @@ export class ClientesComponent implements OnInit {
   )
     {
       this.activatedRoute.data.subscribe(data => {
-        this.page = data.pagingParams ? data.pagingParams : newPage({activo: true, esMayorista: true}, ['nombre', 'ASC']);
+        this.page = data.pagingParams ? data.pagingParams : newPage({activo: true}, ['nombre', 'ASC']);
       });
     }
 
@@ -55,8 +55,8 @@ export class ClientesComponent implements OnInit {
     }else{
       this.myForm.get(['verInactivos'])!.setValue(true);
     }
-    if (this.page.filter.esMayorista) {
-      this.myForm.get(['esMayorista'])!.setValue(true);
+    if (this.page.filter.tipoCliente) {
+      this.myForm.get(['tipoCliente'])!.setValue(true);
     }
   }
 
@@ -99,11 +99,11 @@ export class ClientesComponent implements OnInit {
         activo: true
       });
     }
-    if(this.myForm.get(['esMayorista'])!.value){
-      Object.assign(this.page.filter,{
-        esMayorista: true
-      });
-    }
+    if(this.myForm.get(['tipoCliente'])!.value){
+        Object.assign(this.page.filter,{
+          tipoCliente: this.myForm.get(['tipoCliente'])!.value
+        });
+      }
     this.findAll();
   }
 
@@ -147,7 +147,5 @@ export class ClientesComponent implements OnInit {
       },
       replaceUrl: true
     });
-
   }
-
 }

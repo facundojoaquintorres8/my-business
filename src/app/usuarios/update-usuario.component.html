@@ -7,7 +7,7 @@
           <div class="col-lg-4">
             <div class="form-group">
               <label class="form-control-label required" for="usuario">Nombre Usuario</label>
-              <input type="text" class="form-control" name="usuario" id="usuario"
+              <input type="text" class="form-control" name="usuario" id="usuario" [readOnly]="isUpdate"
                      formControlName="usuario" />
               <div
                 *ngIf="myForm.get('usuario')!.invalid && (myForm.get('usuario')!.dirty || myForm.get('usuario')!.touched)">
@@ -43,8 +43,8 @@
             <div class="form-group">
               <label class="form-control-label required" for="rol">Rol</label>
               <select class="form-select" name="rol" id="rol" formControlName="rol" >
-                <option value="administrador">administrador</option>
-                <option value="usuario">usuario</option>
+                <option value="" [selected]="true">Elija Rol</option>
+                <option *ngFor="let r of roles" value={{r}} >{{r}}</option>
               </select>
               <div
                 *ngIf="myForm.get('rol')!.invalid && (myForm.get('rol')!.dirty || myForm.get('rol')!.touched)">

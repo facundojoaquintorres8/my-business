@@ -39,8 +39,8 @@
           <dt>Direccion:</dt>
           <dd>{{venta.Cliente.direccion}}</dd>
           <dt>Es mayorista:</dt>
-          <dd *ngIf="venta.Cliente.esMayorista">Si</dd>
-          <dd *ngIf="!cliente.esMayorista">No</dd>
+          <dd *ngIf="venta.Cliente.tipoCliente">Si</dd>
+          <dd *ngIf="!cliente.tipoCliente">No</dd>
         </dl>
       </div>
     </div>

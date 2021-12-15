@@ -41,11 +41,14 @@ export class LoginComponent implements OnInit{
     result.subscribe(
       (res) =>{
         this.auth.onLoginSuccess(res.body!);
-        this.router.navigate(['/categorias-productos']);
+        this.router.navigate(['/home']);
       },
       (err) => {
         this.isSaving = false;
-        this.mensaje = err.error.msg;
+        console.log(err.error.mensaje);
+        if(err.status === 403 || err.status === 401){
+          this.mensaje = err.error.mensaje;
+        }
       }
     );
   }

@@ -25,3 +25,4 @@ export interface IUsuarioLogin{
   usuario: string,
   clave: string
 }
+

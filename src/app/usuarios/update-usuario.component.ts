@@ -5,10 +5,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import { Observable } from 'rxjs';
 import {IUser, IUsuario} from './usuarios.models';
 import {UsuariosService} from './usuarios.service';
-import {toNumbers} from "@angular/compiler-cli/src/diagnostics/typescript_version";
-import {IProducto} from "../productos/productos.models";
-import {ValidarClaveRepetida} from "../shared/custom-validators";
-import {error} from "protractor";
+import {Roles} from "../util/rolesUsuarios";
 
 @Component({
   selector: 'app-update-usuario',
@@ -21,10 +18,12 @@ export class UpdateUsuarioComponent implements OnInit{
   show = false;
   idd: number = 0;
   mensaje? : string;
+  value = '';
+  roles = Roles;
   myForm = this.fb.group({
     id: [],
     usuario: [null,[Validators.required]],
-    clave: [null,[Validators.required,Validators.pattern('^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z]).{8,32}$')]],
+    clave: [null,[Validators.required,Validators.pattern('^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[*.!@$%^&(){}:;<>,.?/~_+-\]).{8,32}$')]],
     rol: [null,[Validators.required]],
     activo: []
   });
@@ -45,6 +44,7 @@ export class UpdateUsuarioComponent implements OnInit{
           this.isUpdate = true;
           let control = this.myForm.get(['clave']);
           control?.disabled ? control?.enable() : control?.disable();
+          this.value = res.body!.rol;
         }
       );
     }
@@ -93,13 +93,10 @@ export class UpdateUsuarioComponent implements OnInit{
       () => this.previousState(),
       (error) => {
         this.isSaving = false;
-
-        if(error.status = 412){
-          console.log('error: ', error);
-        }else{
-          console.log('NO');
+        if(error.status === 412){
+          console.log('error ',error);
+          this.mensaje = 'El nombre de usuario ya existe.';
         }
-        this.mensaje = error.error.msg;
       }
     );
   }

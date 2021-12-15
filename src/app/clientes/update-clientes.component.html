@@ -59,10 +59,13 @@
               </div>
             </div>
           </div>
-          <div class="col-lg-1">
+          <div class="col-lg-3">
             <div class="form-check form-switch">
-              <label class="form-check-label" for="esMayorista">Mayorista</label>
-              <input type="checkbox" class="form-check-input" id="esMayorista" name="esMayorista" formControlName="esMayorista">
+              <label class="form-check-label" for="tipoCliente">Tipo Cliente</label>
+              <select class="form-select" name="tipoCliente" id="tipoCliente" formControlName="tipoCliente" >
+                <option value="MAYORISTA" [selected]="value === 'MAYORISTA'">MAYORISTA</option>
+                <option value="MINORISTA" [selected]="value === 'MINORISTA'">MINORISTA</option>
+              </select>
             </div>
           </div>
           <div class="col-lg-1" *ngIf="isUpdate">
