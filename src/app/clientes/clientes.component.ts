@@ -100,14 +100,10 @@ export class ClientesComponent implements OnInit {
       });
     }
     if(this.myForm.get(['tipoCliente'])!.value){
-      let value = this.myForm.get(['tipoCliente'])!.value;
-      if (value != 'todos'){
         Object.assign(this.page.filter,{
-          tipoCliente: value.toLowerCase()
+          tipoCliente: this.myForm.get(['tipoCliente'])!.value
         });
       }
-
-    }
     this.findAll();
   }
 

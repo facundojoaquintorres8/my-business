@@ -6,6 +6,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import {IUsuario} from './usuarios.models';
 import {UsuariosService} from './usuarios.service';
 import {DeleteUsuariosModalComponent} from "./delete-usuarios-modal.component";
+import {Roles} from "../util/rolesUsuarios";
 
 @Component({
   selector: 'app-usuarios',
@@ -24,6 +25,7 @@ export class UsuariosComponent implements OnInit {
   });
   rows: IUsuario[] = [];
   loading = false;
+  roles = Roles;
 
   constructor(
     private router: Router,

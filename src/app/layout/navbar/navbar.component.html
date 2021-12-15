@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-white mb-2" style="border-bottom: 0.1rem solid grey;">
   <div class="container-fluid">
-    <a class="navbar-brand" href="#"><img src="/assets/images/icon-32x32.png" alt="image"> Mi Negocio</a>
+    <a class="navbar-brand" href="/home"><img src="/assets/images/icon-32x32.png" alt="image"> Mi Negocio</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -25,11 +25,12 @@
         <li class="nav-item">
           <a class="nav-link" href="/usuarios">Usuarios</a>
         </li>
+      </ul>
+    </div>
+    <div class="d-flex flex-row-reverse" id="navbarSupportedContent2">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link" href="/cuenta/cambiarclave">Cambiar Clave</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="/cuenta/cambiarclave">Cambiar Contraseña</a>
+          <a class="nav-link" href="/cuenta/cambiarclave">Cambiar Contraseña</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="#" (click)="logOut()">Cerrar Sesión</a>
