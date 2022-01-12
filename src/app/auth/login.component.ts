@@ -7,6 +7,7 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {IUsuarioLogin, IUsuarioClave} from "../usuarios/usuarios.models";
 import {Observable} from "rxjs";
 import {ILoginUser} from "./auth.models";
+import {ToastService} from '../toast/toast.service';
 
 
 @Component({
@@ -25,12 +26,12 @@ export class LoginComponent implements OnInit{
     private activatedRoute: ActivatedRoute,
     private fb: FormBuilder,
     private auth: AuthService,
-    private router: Router
+    private router: Router,
+    private toastService: ToastService
   ) {}
   ngOnInit() {
     this.auth.logout();
   }
-
   private getUserData():IUsuarioLogin {
     return{
       usuario: this.myForm.get(['usuario'])!.value,
@@ -48,6 +49,12 @@ export class LoginComponent implements OnInit{
         console.log(err.error.mensaje);
         if(err.status === 403 || err.status === 401){
           this.mensaje = err.error.mensaje;
+          this.toastService.changeMessage(
+            {
+              showErrorToast: true,
+              errorMessage: err.error.mensaje,
+            }
+          );
         }
       }
     );

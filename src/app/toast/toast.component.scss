@@ -1,4 +1,4 @@
-.toast {
+.toastd {
   position: fixed;
   right: 2%;
   opacity: 1;
@@ -12,8 +12,12 @@
   text-shadow: none;
   color: white;
 }
+.close :hover{
+  background-color: #dc3545;
+}
 
 .toast-header {
   background-color: darkslategrey;
   color: white;
 }
+

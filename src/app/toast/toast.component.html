@@ -1,33 +1,34 @@
-<div *ngIf="showErrorToast" class="toast bg-danger text-white" role="alert" aria-live="assertive" aria-atomic="true">
+
+<div *ngIf="showErrorToast" class="toastd bg-danger text-white" role="alert" aria-live="assertive" aria-atomic="true">
   <div class="toast-header">
-    <strong class="mr-auto">Error <fa-icon icon="square"></fa-icon></strong>
-    <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close" (click)="closeAllToast()" title="Cerrar">
-      <span aria-hidden="true">&times;</span>
+    <button type="button" class="btn btn-danger" data-dismiss="toast" aria-label="Close" (click)="closeAllToast()" title="Cerrar">
+      X
     </button>
+    <strong class="ms-2 mr-auto"> Error </strong>
   </div>
   <div class="toast-body">
     {{ errorMessage }}
   </div>
 </div>
 
-<div *ngIf="showSuccessToast" class="toast bg-success text-white" role="alert" aria-live="assertive" aria-atomic="true">
+<div *ngIf="showSuccessToast" class="toastd bg-success text-white" role="alert" aria-live="assertive" aria-atomic="true">
   <div class="toast-header">
-    <strong class="mr-auto">Éxito <fa-icon icon="square"></fa-icon></strong>
-    <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close" (click)="closeAllToast()" title="Cerrar">
-      <span aria-hidden="true">&times;</span>
+    <button type="button" class="btn btn-primary" data-dismiss="toast" aria-label="Close" (click)="closeAllToast()" title="Cerrar">
+      X
     </button>
+    <strong class="ms-2 mr-auto"> Éxito </strong>
   </div>
   <div class="toast-body">
     {{ successMessage }}
   </div>
 </div>
 
-<div *ngIf="showInfoToast" class="toast bg-info text-white" role="alert" aria-live="assertive" aria-atomic="true">
+<div *ngIf="showInfoToast" class="toastd bg-info text-white" role="alert" aria-live="assertive" aria-atomic="true">
   <div class="toast-header">
-    <strong class="mr-auto">Info <fa-icon icon="square"></fa-icon></strong>
-    <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close" (click)="closeAllToast()" title="Cerrar">
-      <span aria-hidden="true">&times;</span>
+    <button type="button" class="btn btn-secondary" data-dismiss="toast" aria-label="Close" (click)="closeAllToast()" title="Cerrar">
+      X
     </button>
+    <strong class="ms-2 mr-auto"> Info </strong>
   </div>
   <div class="toast-body">
     {{ infoMessage }}
