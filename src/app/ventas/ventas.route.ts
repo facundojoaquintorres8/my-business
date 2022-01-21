@@ -10,10 +10,11 @@ export const ventasRoute: Routes = [
     path: '',
     component: VentaComponent,
     resolve: {
-      paginParams: PagingParamsResolve // ¿ Que es esto ?
+      paginParams: PagingParamsResolve
     },
     data: {
-      title: 'Ventas'
+      title: 'Ventas',
+      permissions: ['administrador','ventas','supervisor']
     },
     canActivate: [AuthGuards]
   },
@@ -21,10 +22,11 @@ export const ventasRoute: Routes = [
     path: ':id/view',
     component: DetailVentasComponent,
     resolve: {
-      paginParams: PagingParamsResolve // ¿ Que es esto ?
+      paginParams: PagingParamsResolve
     },
     data: {
-      title: 'Detalle Venta'
+      title: 'Detalle Venta',
+      permissions: ['administrador','ventas','supervisor']
     },
     canActivate: [AuthGuards]
   }

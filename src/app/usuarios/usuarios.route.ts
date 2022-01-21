@@ -14,7 +14,8 @@ export const usuariosRoute: Routes = [
       paginParams: PagingParamsResolve
     },
     data: {
-      title: 'Usuarios'
+      title: 'Usuarios',
+      permissions: ['administrador']
     },
     canActivate: [AuthGuards]
   },
@@ -25,7 +26,8 @@ export const usuariosRoute: Routes = [
       paginParams: PagingParamsResolve
     },
     data: {
-      title: 'Nuevo Usuarios'
+      title: 'Nuevo Usuarios',
+      permissions: ['administrador']
     },
     canActivate: [AuthGuards]
   },
@@ -36,7 +38,8 @@ export const usuariosRoute: Routes = [
       paginParams: PagingParamsResolve
     },
     data: {
-      title: 'Editar Usuarios'
+      title: 'Editar Usuarios',
+      permissions: ['administrador']
     },
     canActivate: [AuthGuards]
   },
@@ -47,7 +50,8 @@ export const usuariosRoute: Routes = [
       paginParams: PagingParamsResolve
     },
     data: {
-      title: 'Eliminar Usuarios'
+      title: 'Eliminar Usuarios',
+      permissions: ['administrador']
     },
     canActivate: [AuthGuards]
   },
@@ -58,7 +62,8 @@ export const usuariosRoute: Routes = [
       paginParams: PagingParamsResolve
     },
     data: {
-      title: 'Detalle Usuario'
+      title: 'Detalle Usuario',
+      permissions: ['administrador']
     },
     canActivate: [AuthGuards]
   }

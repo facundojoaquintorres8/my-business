@@ -30,12 +30,26 @@ export class TokenInterceptor implements HttpInterceptor {
                 showInfoToast: true,
               }
             );
-          } else if (request.method === 'POST' || request.method === 'PUT' || request.method === 'DELETE') {
+          } else if (request.method === 'POST') {
+            this.toastService.changeMessage(
+              {
+                showSuccessToast: true
+              }
+            );
+          } else if(request.method === 'PUT'){
             this.toastService.changeMessage(
               {
                 showSuccessToast: true,
+              successMessage: 'Datos modificados correctamente'
               }
-            );
+            )
+          } else if(request.method === 'DELETE'){
+            this.toastService.changeMessage(
+              {
+                showSuccessToast: true,
+                successMessage: 'Datos eliminados correctamente'
+              }
+            )
           }
         }
       },

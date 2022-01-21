@@ -11,7 +11,8 @@ export const cuentaRoute = [
       paginParams: PagingParamsResolve
     },
     data: {
-      title: 'Cambiar Clave'
+      title: 'Cambiar Clave',
+      permissions: ['administrador']
     },
     canActivate: [AuthGuards]
   }

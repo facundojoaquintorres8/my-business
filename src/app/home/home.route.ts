@@ -12,6 +12,10 @@ export const homeRoute: Routes = [
     resolve: {
       pagingParams: PagingParamsResolve
     },
+    data:{
+      title: 'Home',
+      permissions: ['administrador','compras','ventas','supervisor']
+    },
     canActivate: [AuthGuards]
   }
 ];

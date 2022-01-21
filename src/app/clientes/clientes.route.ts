@@ -14,7 +14,8 @@ export const clientesRoutes: Routes = [
        paginParams: PagingParamsResolve
    },
    data: {
-       title: 'Clientes'
+       title: 'Clientes',
+     permissions: ['administrador','ventas','supervisor']
    },
     canActivate: [AuthGuards]
   },
@@ -25,7 +26,8 @@ export const clientesRoutes: Routes = [
       paginParams: PagingParamsResolve
     },
     data: {
-      title: 'Clientes-New'
+      title: 'Clientes-New',
+      permissions: ['administrador','ventas','supervisor']
     },
     canActivate: [AuthGuards]
   },
@@ -36,7 +38,8 @@ export const clientesRoutes: Routes = [
       paginParams: PagingParamsResolve
     },
     data: {
-      title: 'Clientes-Edit'
+      title: 'Clientes-Edit',
+      permissions: ['administrador','ventas','supervisor']
     },
     canActivate: [AuthGuards]
   },
@@ -44,7 +47,8 @@ export const clientesRoutes: Routes = [
     path: ':dni/view',
     component: DetailClientesComponent,
     data: {
-      title: 'Detalle del Cliente.'
+      title: 'Detalle del Cliente.',
+      permissions: ['administrador','ventas','supervisor']
     },
     canActivate: [AuthGuards]
   }

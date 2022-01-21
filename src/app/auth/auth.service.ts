@@ -34,9 +34,10 @@ export class AuthService {
   public getToken(): string | null {
     return localStorage.getItem('token');
   }
-  // SE USARA PARA ADMINISTRAR LOS PERMISOS DE LOS ROLES
-  public getPermissions(): string[] {
-    let sessionUserPermission: string[] = [];
+  public getPermissions(): string {
+    let sessionUserPermission: string;
+
+    sessionUserPermission = this.getSessionUser().rol;
 
     return sessionUserPermission;
   }

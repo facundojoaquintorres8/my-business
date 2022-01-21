@@ -14,6 +14,7 @@ export const productoRoutes: Routes = [
   },
     data: {
       title: 'Proveedores',
+      permissions: ['administrador','compras','supervisor']
     },
     canActivate: [AuthGuards]
   },
@@ -22,6 +23,7 @@ export const productoRoutes: Routes = [
     component: UpdateProveedorComponent,
     data: {
       title: 'Crear Proveedor',
+      permissions: ['administrador','compras','supervisor']
     },
     canActivate: [AuthGuards]
   },
@@ -30,6 +32,7 @@ export const productoRoutes: Routes = [
     component: UpdateProveedorComponent,
     data: {
       title: 'Actualizar Proveedor',
+      permissions: ['administrador','compras','supervisor']
     },
     canActivate: [AuthGuards]
   },
@@ -38,6 +41,7 @@ export const productoRoutes: Routes = [
     component: DetailProveedorComponent,
     data: {
       title: 'Detalle de Proveedor',
+      permissions: ['administrador','compras','supervisor']
     },
     canActivate: [AuthGuards]
   }
