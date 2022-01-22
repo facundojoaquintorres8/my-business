@@ -9,7 +9,7 @@
           <div class="col-sm-12">
           <div class="form-group">
             <label class="form-control-label required" for="claveVieja">Contraseña anterior</label>
-            <input type="password" class="form-control" name="claveVieja" id="claveVieja" (focus)="mensaje=''"
+            <input type="password" class="form-control" name="claveVieja" id="claveVieja"
                    formControlName="claveVieja"/>
             <div
               *ngIf="myForm.get('claveVieja')!.invalid && (myForm.get('claveVieja')!.dirty || myForm.get('claveVieja')!.touched)">
@@ -24,7 +24,7 @@
           <div class="col-sm-12">
           <div class="form-group">
             <label class="form-control-label required" for="claveNueva">Contraseña Nueva</label>
-            <input type="password" class="form-control" name="claveNueva" id="claveNueva" (focus)="mensaje=''"
+            <input type="password" class="form-control" name="claveNueva" id="claveNueva"
                    formControlName="claveNueva"/>
             <div
               *ngIf="myForm.get('claveNueva')!.invalid && (myForm.get('claveNueva')!.dirty || myForm.get('claveNueva')!.touched)">
@@ -49,7 +49,7 @@
           <div class="form-group">
             <label class="form-control-label required" for="claveNuevaRepetida">Repita Contraseña Nueva</label>
             <input type="password" class="form-control" name="claveNuevaRepetida" id="claveNuevaRepetida"
-                   (focus)="mensaje=''"
+
                    formControlName="claveNuevaRepetida"/>
             <div
               *ngIf="myForm.get('claveNuevaRepetida')!.invalid && (myForm.get('claveNuevaRepetida')!.dirty || myForm.get('claveNuevaRepetida')!.touched)">
@@ -65,12 +65,6 @@
           </div>
         </div>
 
-          <div
-            *ngIf="mensaje">
-            <small class="form-text text-danger">
-              <h4>{{mensaje}}</h4>
-            </small>
-          </div>
 
           <div class="button-form mt-4">
             <button type="submit" [disabled]="!myForm.valid" class="btn btn-primary" title="Confirmar">

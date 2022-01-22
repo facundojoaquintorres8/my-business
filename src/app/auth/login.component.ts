@@ -31,6 +31,15 @@ export class LoginComponent implements OnInit{
   ) {}
   ngOnInit() {
     this.auth.logout();
+    const mode = this.activatedRoute.snapshot.paramMap.get('mode');
+    if (mode === 'cambioclave'){
+      this.toastService.changeMessage(
+        {
+          showSuccessToast: true,
+          successMessage: 'Cambio de Clave Realizado Correctamente'
+        }
+      );
+    }
   }
   private getUserData():IUsuarioLogin {
     return{
@@ -46,9 +55,7 @@ export class LoginComponent implements OnInit{
       },
       (err) => {
         this.isSaving = false;
-        console.log(err.error.mensaje);
         if(err.status === 403 || err.status === 401){
-          this.mensaje = err.error.mensaje;
           this.toastService.changeMessage(
             {
               showErrorToast: true,

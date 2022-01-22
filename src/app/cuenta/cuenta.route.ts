@@ -12,7 +12,7 @@ export const cuentaRoute = [
     },
     data: {
       title: 'Cambiar Clave',
-      permissions: ['administrador']
+      permissions: ['administrador','ventas','compras','supervisor']
     },
     canActivate: [AuthGuards]
   }

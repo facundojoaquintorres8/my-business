@@ -63,6 +63,10 @@ export const routes: Routes = [
         path: 'cuenta',
         loadChildren: () => import('./cuenta/cuenta.module').then(m => CuentaModule)
       },
+      {
+        path:'#',
+        redirectTo:'/home'
+      }
     ]
   },
   { path: '**', redirectTo: '/login' },

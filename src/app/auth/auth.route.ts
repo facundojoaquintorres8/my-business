@@ -12,5 +12,15 @@ export const authRoute = [
     data: {
       title: 'Iniciar Sesion'
     }
+  },
+  {
+    path:'login/:mode',
+    component: LoginComponent,
+    resolve: {
+      paginParams: PagingParamsResolve
+    },
+    data:{
+      title:'Iniciar Sesion'
+    }
   }
 ]

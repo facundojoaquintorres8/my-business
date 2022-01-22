@@ -8,6 +8,7 @@ import {Observable} from "rxjs";
 import {HttpResponse} from "@angular/common/http"
 import {ValidarClaveRepetida} from "../shared/custom-validators";
 import {AuthService} from "../auth/auth.service";
+import {ToastService} from '../toast/toast.service';
 
 @Component({
   selector: 'app-cambiar-clave',
@@ -18,7 +19,6 @@ export class CambiarClaveComponent implements  OnInit{
   isSaving = false;
   usuarioClave!: IUsuarioClave
   expresion : string = '^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z]){8,32}$';
-  mensaje? : string;
   user!: IUser;
 
   myForm = this.fb.group({
@@ -31,7 +31,9 @@ export class CambiarClaveComponent implements  OnInit{
     private activatedRoute: ActivatedRoute,
     private fb: FormBuilder,
     private cuentaService: CuentaService,
-    private authService: AuthService
+    private authService: AuthService,
+    private toastService: ToastService,
+    private router: Router
   )
   {}
 
@@ -46,7 +48,7 @@ export class CambiarClaveComponent implements  OnInit{
     this.isSaving = true;
     this.usuarioClave = this.getUserData();
     this.subscribeToSaveResponse(this.cuentaService.updatePassword(this.usuarioClave))
-    this.clearFormInput();
+
   }
   private getUserData():IUsuarioClave {
     return{
@@ -58,10 +60,19 @@ export class CambiarClaveComponent implements  OnInit{
   }
   private subscribeToSaveResponse(result: Observable<HttpResponse<IUsuarioClave>>): void {
     result.subscribe(
-      (res) => this.previousState(),
+      (res) => {
+        let mode = 'cambioclave';
+        this.router.navigate([`../login/${mode}`]);
+      },
       (err) =>{
+        this.clearFormInput();
         this.isSaving = false;
-        this.mensaje = err.error.msg;
+        this.toastService.changeMessage(
+          {
+            showErrorToast: true,
+            errorMessage: err.error.msg,
+          }
+        );
       }
     );
   }

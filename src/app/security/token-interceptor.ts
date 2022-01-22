@@ -46,8 +46,8 @@ export class TokenInterceptor implements HttpInterceptor {
           } else if(request.method === 'DELETE'){
             this.toastService.changeMessage(
               {
-                showSuccessToast: true,
-                successMessage: 'Datos eliminados correctamente'
+                showInfoToast: true,
+                infoMessage: 'Datos eliminados correctamente'
               }
             )
           }

@@ -63,7 +63,7 @@ export const usuariosRoute: Routes = [
     },
     data: {
       title: 'Detalle Usuario',
-      permissions: ['administrador']
+      permissions: ['administrador','compras','ventas','supervisor']
     },
     canActivate: [AuthGuards]
   }
