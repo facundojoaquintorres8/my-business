@@ -3,13 +3,13 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { SERVER_API_URL } from '../app.constants';
 import { createRequestOption } from '../shared/request-util';
-import { IVentas } from './ventas.model';
+import { ICompra, ICompraCreate } from './compras.model';
 
 @Injectable({
   providedIn: 'root'
 })
-export class VentasService {
-  public resourceUrl = SERVER_API_URL + 'api/ventas';
+export class ComprasService {
+  public resourceUrl = SERVER_API_URL + 'api/compras';
 
   constructor(private http: HttpClient) { }
 
@@ -17,11 +17,10 @@ export class VentasService {
     filter['order'] = filter['order'] ? filter['order'] : ['id', 'ASC'];
     const options = createRequestOption(filter);
     return this.http.get<any>(`${this.resourceUrl}`, { params: options, observe: 'response' });
-
   }
 
-  find(id: number): Observable<HttpResponse<IVentas>> {
-    return this.http.get<IVentas>(`${this.resourceUrl}/${id}`, { observe: 'response' });
+  create(compra: ICompraCreate): Observable<HttpResponse<ICompra>> {
+    return this.http.post<ICompra>(this.resourceUrl, compra, { observe: 'response' });
   }
 
 }

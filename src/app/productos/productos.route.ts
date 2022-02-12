@@ -14,7 +14,7 @@ export const productoRoutes: Routes = [
   },
     data: {
       title: 'Productos',
-      permissions: ['administrador','ventas','compras','supervisor']
+      permissions: ['Administrador','Ventas','Compras','Supervisor']
     },
     canActivate: [AuthGuards]
   },
@@ -23,7 +23,7 @@ export const productoRoutes: Routes = [
     component: UpdateProductoComponent,
     data: {
       title: 'Crear Producto',
-      permissions: ['administrador','ventas','compras','supervisor']
+      permissions: ['Administrador','Ventas','Compras','Supervisor']
     },
     canActivate: [AuthGuards]
   },
@@ -32,7 +32,7 @@ export const productoRoutes: Routes = [
     component: UpdateProductoComponent,
     data: {
       title: 'Actualizar Producto',
-      permissions: ['administrador','ventas','compras','supervisor']
+      permissions: ['Administrador','Ventas','Compras','Supervisor']
     },
     canActivate: [AuthGuards]
   },
@@ -41,7 +41,7 @@ export const productoRoutes: Routes = [
     component: DetailProductoComponent,
     data: {
       title: 'Detalle de Producto',
-      permissions: ['administrador','ventas','compras','supervisor']
+      permissions: ['Administrador','Ventas','Compras','Supervisor']
     },
     canActivate: [AuthGuards]
   }

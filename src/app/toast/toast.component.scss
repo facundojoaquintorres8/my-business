@@ -1,4 +1,4 @@
-.toastd {
+.toast-message {
   position: fixed;
   right: 2%;
   opacity: 1;
@@ -12,7 +12,8 @@
   text-shadow: none;
   color: white;
 }
-.close :hover{
+
+.close :hover {
   background-color: #dc3545;
 }
 
@@ -21,3 +22,8 @@
   color: white;
 }
 
+.btn-toast-close {
+  position: absolute;
+  right: 0;
+  color: white;
+}

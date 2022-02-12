@@ -1,9 +1,8 @@
-<ng-container *ngIf="user.rol === 'administrador'">
 <nav class="navbar navbar-expand-lg navbar-light bg-white mb-2" style="border-bottom: 0.1rem solid grey;">
   <div class="container-fluid">
     <a class="navbar-brand" href="/home"><img src="/assets/images/icon-32x32.png" alt="image"> Mi Negocio</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -14,16 +13,19 @@
         <li class="nav-item">
           <a class="nav-link" href="/productos">Productos</a>
         </li>
-        <li class="nav-item">
+        <li class="nav-item" *ngIf="user.rol !== 'Ventas'">
           <a class="nav-link" href="/proveedores">Proveedores</a>
         </li>
-        <li class="nav-item">
+        <li class="nav-item" *ngIf="user.rol !== 'Ventas'">
+          <a class="nav-link" href="/compras">Compras</a>
+        </li>
+        <li class="nav-item" *ngIf="user.rol !== 'Compras'">
           <a class="nav-link" href="/clientes">Clientes</a>
         </li>
-        <li class="nav-item">
+        <li class="nav-item" *ngIf="user.rol !== 'Compras'">
           <a class="nav-link" href="/ventas">Ventas</a>
         </li>
-        <li class="nav-item">
+        <li class="nav-item" *ngIf="user.rol === 'Administrador'">
           <a class="nav-link" href="/usuarios">Usuarios</a>
         </li>
       </ul>
@@ -32,146 +34,16 @@
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
           <div class="userSquare">
-            <a class="nav-link" href="usuarios/{{user.id}}/view">Usuario: {{user.usuario}}   |   Rol: {{user.rol}}</a>
+            <a class="nav-link" href="usuarios/{{user.id}}/view">Usuario: {{user.usuario}} | Rol: {{user.rol}}</a>
           </div>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/cuenta/cambiarclave">Cambiar Contraseña</a>
+          <a class="nav-link" href="/cuenta/cambiar-clave">Cambiar Contraseña</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#" (click)="logOut()">Cerrar Sesión</a>
+          <a class="nav-link" href="#" (click)="logout()">Cerrar Sesión</a>
         </li>
       </ul>
     </div>
   </div>
 </nav>
-</ng-container>
-
-<ng-container *ngIf="user.rol === 'compras'">
-  <nav class="navbar navbar-expand-lg navbar-light bg-white mb-2" style="border-bottom: 0.1rem solid grey;">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="/home"><img src="/assets/images/icon-32x32.png" alt="image"> Mi Negocio</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-              aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarCompras">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <li class="nav-item">
-            <a class="nav-link" href="/categorias-productos">Categorías</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/productos">Productos</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/proveedores">Proveedores</a>
-          </li>
-        </ul>
-      </div>
-      <div class="d-flex flex-row-reverse" id="navbarCompras2">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <li class="nav-item">
-            <div class="userSquare">
-            <a class="nav-link" href="usuarios/{{user.id}}/view">Usuario: {{user.usuario}}   |   Rol: {{user.rol}}</a>
-            </div>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/cuenta/cambiarclave">Cambiar Contraseña</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#" (click)="logOut()">Cerrar Sesión</a>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </nav>
-</ng-container>
-
-<ng-container *ngIf="user.rol === 'ventas'">
-  <nav class="navbar navbar-expand-lg navbar-light bg-white mb-2" style="border-bottom: 0.1rem solid grey;">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="/home"><img src="/assets/images/icon-32x32.png" alt="image"> Mi Negocio</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-              aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarVentas">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <li class="nav-item">
-            <a class="nav-link" href="/categorias-productos">Categorías</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/productos">Productos</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/clientes">Clientes</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/ventas">Ventas</a>
-          </li>
-        </ul>
-      </div>
-      <div class="d-flex flex-row-reverse" id="navbarVentas2">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <li class="nav-item">
-            <div class="userSquare">
-              <a class="nav-link" href="usuarios/{{user.id}}/view">Usuario: {{user.usuario}}   |   Rol: {{user.rol}}</a>
-            </div>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/cuenta/cambiarclave">Cambiar Contraseña</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#" (click)="logOut()">Cerrar Sesión</a>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </nav>
-</ng-container>
-
-<ng-container *ngIf="user.rol === 'supervisor'">
-  <nav class="navbar navbar-expand-lg navbar-light bg-white mb-2" style="border-bottom: 0.1rem solid grey;">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="/home"><img src="/assets/images/icon-32x32.png" alt="image"> Mi Negocio</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-              aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarSupervisor">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <li class="nav-item">
-            <a class="nav-link" href="/categorias-productos">Categorías</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/productos">Productos</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/proveedores">Proveedores</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/clientes">Clientes</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/ventas">Ventas</a>
-          </li>
-        </ul>
-      </div>
-      <div class="d-flex flex-row-reverse" id="navbarSupervisor2">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <li class="nav-item">
-            <div class="userSquare">
-              <a class="nav-link" href="usuarios/{{user.id}}/view">Usuario: {{user.usuario}}   |   Rol: {{user.rol}}</a>
-            </div>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/cuenta/cambiarclave">Cambiar Contraseña</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#" (click)="logOut()">Cerrar Sesión</a>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </nav>
-</ng-container>

@@ -1,4 +1,5 @@
 import { ICategoriaProducto } from "../categorias-productos/categorias-productos.models";
+import { IProveedor } from "../proveedores/proveedores.models";
 
 export interface IProducto {
   id: number;
@@ -6,8 +7,8 @@ export interface IProducto {
   stock: number;
   cantidadMinima: number;
   precioVenta: number;
-  activo: boolean;
   categoria: ICategoriaProducto;
+  activo: boolean;
 }
 
 export interface IProductoUpdate {
@@ -16,6 +17,14 @@ export interface IProductoUpdate {
   stock: number;
   cantidadMinima: number;
   precioVenta: number;
-  activo: boolean;
   categoriaId: number;
+  activo: boolean;
+}
+
+export interface IPrecios {
+  id: number;
+  fecha: Date;
+  precio: number;
+  producto: IProducto;
+  proveedor: IProveedor;
 }

@@ -24,7 +24,7 @@ export class UpdateProveedorComponent implements OnInit {
   });
 
   constructor(
-    private productoService: ProveedorService,
+    private proveedorService: ProveedorService,
     private activatedRoute: ActivatedRoute,
     private fb: FormBuilder,
   ) { }
@@ -32,7 +32,7 @@ export class UpdateProveedorComponent implements OnInit {
   ngOnInit(): void {
     const id = this.activatedRoute.snapshot.paramMap.get("id");
     if (id) {
-      this.productoService.find(parseInt(id)).subscribe(
+      this.proveedorService.find(parseInt(id)).subscribe(
         (res: HttpResponse<IProveedor>) => this.updateForm(res.body!)
       );
     }
@@ -58,9 +58,9 @@ export class UpdateProveedorComponent implements OnInit {
     this.isSaving = true;
     const proveedor = this.createFromForm();
     if (proveedor.id) {
-      this.subscribeToSaveResponse(this.productoService.update(proveedor));
+      this.subscribeToSaveResponse(this.proveedorService.update(proveedor));
     } else {
-      this.subscribeToSaveResponse(this.productoService.create(proveedor));
+      this.subscribeToSaveResponse(this.proveedorService.create(proveedor));
     }
   }
 

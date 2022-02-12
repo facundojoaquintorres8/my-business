@@ -3,10 +3,10 @@ import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { FormBuilder } from '@angular/forms';
 import { IPage, newPage, totalPages } from '../shared/page.models';
 import { ActivatedRoute, Router } from '@angular/router';
-import {IUsuario} from './usuarios.models';
-import {UsuariosService} from './usuarios.service';
-import {DeleteUsuariosModalComponent} from "./delete-usuarios-modal.component";
-import {Roles} from "../util/rolesUsuarios";
+import { IUsuario } from './usuarios.models';
+import { UsuariosService } from './usuarios.service';
+import { DeleteUsuariosModalComponent } from "./delete-usuarios-modal.component";
+import { Roles } from "../util/rolesUsuarios";
 
 @Component({
   selector: 'app-usuarios',
@@ -32,10 +32,9 @@ export class UsuariosComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private usuariosService: UsuariosService,
     private modalService: NgbModal,
-    private fb: FormBuilder)
-  {
+    private fb: FormBuilder) {
     this.activatedRoute.data.subscribe(data => {
-      this.page = data.pagingParams ? data.pagingParams : newPage({activo: true}, ['id', 'ASC']);
+      this.page = data.pagingParams ? data.pagingParams : newPage({ activo: true }, ['id', 'ASC']);
     });
   }
 
@@ -57,31 +56,31 @@ export class UsuariosComponent implements OnInit {
       this.loading = false;
       this.page.totalElements = res.body.count;
       this.page.totalPages = totalPages(this.page.size, this.page.totalElements);
-    },() => this.loading = false);
+    }, () => this.loading = false);
   }
 
-  onFilter(): void{
+  onFilter(): void {
     this.page.filter = {};
-    if (this.myForm.get(['usuario'])!.value){
+    if (this.myForm.get(['usuario'])!.value) {
       Object.assign(this.page.filter, {
         usuario: this.myForm.get(['usuario'])!.value.toLowerCase()
       });
     }
-    if (this.myForm.get(['rol'])!.value){
+    if (this.myForm.get(['rol'])!.value) {
       Object.assign(this.page.filter, {
         rol: this.myForm.get(['rol'])!.value.toLowerCase()
       });
     }
-    if(!this.myForm.get(['verInactivos'])!.value){
-      Object.assign(this.page.filter,{
+    if (!this.myForm.get(['verInactivos'])!.value) {
+      Object.assign(this.page.filter, {
         activo: true
       });
     }
     this.findAll();
   }
 
-  clearFilter(): void{
-    this.page.filter = {activa: true};
+  clearFilter(): void {
+    this.page.filter = { activa: true };
     this.page = newPage(this.page.filter, this.page.order);
     this.myForm.get(['usuario'])!.setValue('');
     this.myForm.get(['rol'])!.setValue('');
@@ -99,23 +98,24 @@ export class UsuariosComponent implements OnInit {
     this.findAll();
   }
 
-  transition():void { // ¿¿para que sirve este metodo?
-    this.router.navigate(['/usuarios'],{
+  transition(): void { // ¿¿para que sirve este metodo?
+    this.router.navigate(['/usuarios'], {
       queryParams: {
         page: JSON.stringify(this.page)
       },
       replaceUrl: true
     });
   }
-  delete(id: number){
-    this.ngbModalRef = this.modalService.open(DeleteUsuariosModalComponent, {size: 'lg', backdrop: 'static'});
+
+  delete(id: number) {
+    this.ngbModalRef = this.modalService.open(DeleteUsuariosModalComponent, { size: 'lg', backdrop: 'static' });
     this.ngbModalRef.componentInstance.id = id;
     this.ngbModalRef.result.then(
-      ()=> {
+      () => {
         this.ngbModalRef = undefined;
         this.findAll();
       },
-      ()=>{
+      () => {
         this.ngbModalRef = undefined;
       }
     )

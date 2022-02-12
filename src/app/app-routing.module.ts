@@ -1,7 +1,8 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { CompraModule } from './compras/compras.module';
+import { UsuariosModule } from "./usuarios/usuarios.module";
 import { PublicLayoutComponent } from './layout/public/public-layout.component';
-import {UsuariosModule} from "./usuarios/usuarios.module";
 import {CuentaModule} from "./cuenta/cuenta.module";
 import {AuthModule} from "./auth/auth.module";
 import {PrivateLayoutComponent} from "./layout/private/private-layout.component";
@@ -60,6 +61,10 @@ export const routes: Routes = [
         loadChildren: () => import('./usuarios/usuarios.module').then(m => UsuariosModule)
       },
       {
+        path: 'compras',
+        loadChildren: () => import('./compras/compras.module').then(m => CompraModule)
+      },
+      {
         path: 'cuenta',
         loadChildren: () => import('./cuenta/cuenta.module').then(m => CuentaModule)
       },
@@ -76,6 +81,4 @@ export const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
-export class AppRoutingModule {}
-
-
+export class AppRoutingModule { }

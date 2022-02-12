@@ -1,10 +1,10 @@
 import { Routes } from '@angular/router';
 import { PagingParamsResolve } from '../util/paging-params-resolve';
-import {UsuariosComponent} from './usuarios.component';
-import {UpdateUsuarioComponent} from "./update-usuario.component";
-import {DeleteUsuariosModalComponent} from "./delete-usuarios-modal.component";
-import {DetailUsuarioComponent} from "./detail-usuario.component";
-import {AuthGuards} from "../security/auth-guards";
+import { UsuariosComponent } from './usuarios.component';
+import { UpdateUsuarioComponent } from "./update-usuario.component";
+import { DeleteUsuariosModalComponent } from "./delete-usuarios-modal.component";
+import { DetailUsuarioComponent } from "./detail-usuario.component";
+import { AuthGuards } from "../security/auth-guards";
 
 export const usuariosRoute: Routes = [
   {
@@ -15,7 +15,7 @@ export const usuariosRoute: Routes = [
     },
     data: {
       title: 'Usuarios',
-      permissions: ['administrador']
+      permissions: ['Administrador']
     },
     canActivate: [AuthGuards]
   },
@@ -27,7 +27,7 @@ export const usuariosRoute: Routes = [
     },
     data: {
       title: 'Nuevo Usuarios',
-      permissions: ['administrador']
+      permissions: ['Administrador']
     },
     canActivate: [AuthGuards]
   },
@@ -39,7 +39,7 @@ export const usuariosRoute: Routes = [
     },
     data: {
       title: 'Editar Usuarios',
-      permissions: ['administrador']
+      permissions: ['Administrador']
     },
     canActivate: [AuthGuards]
   },
@@ -51,7 +51,7 @@ export const usuariosRoute: Routes = [
     },
     data: {
       title: 'Eliminar Usuarios',
-      permissions: ['administrador']
+      permissions: ['Administrador']
     },
     canActivate: [AuthGuards]
   },
@@ -63,7 +63,7 @@ export const usuariosRoute: Routes = [
     },
     data: {
       title: 'Detalle Usuario',
-      permissions: ['administrador','compras','ventas','supervisor']
+      permissions: ['Administrador', 'Compras', 'Ventas', 'Supervisor']
     },
     canActivate: [AuthGuards]
   }

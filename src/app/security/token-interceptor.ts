@@ -1,11 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpRequest, HttpHandler, HttpEvent, HttpInterceptor, HttpErrorResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import {AuthService} from "../auth/auth.service";
+import { AuthService } from "../auth/auth.service";
 import { tap } from 'rxjs/operators';
 import { Router } from '@angular/router';
-import {ToastService} from "../toast/toast.service";
-
+import { ToastService } from "../toast/toast.service";
 
 @Injectable()
 export class TokenInterceptor implements HttpInterceptor {
@@ -24,30 +23,25 @@ export class TokenInterceptor implements HttpInterceptor {
     return next.handle(request).pipe(tap(
       (ok: any) => {
         if (token && ok.type !== 0) {
-          if (request.method === 'POST' && ok.status === 204) {
+           if (request.method === 'POST') {
             this.toastService.changeMessage(
               {
-                showInfoToast: true,
+                isSuccess: true,
+                message: 'Datos creados correctamente.'
               }
             );
-          } else if (request.method === 'POST') {
+          } else if (request.method === 'PUT') {
             this.toastService.changeMessage(
               {
-                showSuccessToast: true
-              }
-            );
-          } else if(request.method === 'PUT'){
-            this.toastService.changeMessage(
-              {
-                showSuccessToast: true,
-              successMessage: 'Datos modificados correctamente'
+                isSuccess: true,
+                message: 'Datos modificados correctamente.'
               }
             )
-          } else if(request.method === 'DELETE'){
+          } else if (request.method === 'DELETE') {
             this.toastService.changeMessage(
               {
-                showInfoToast: true,
-                infoMessage: 'Datos eliminados correctamente'
+                isSuccess: true,
+                message: 'Datos eliminados correctamente.'
               }
             )
           }
@@ -58,16 +52,16 @@ export class TokenInterceptor implements HttpInterceptor {
           if (err.status === 500) {
             this.toastService.changeMessage(
               {
-                showErrorToast: true,
-                errorMessage: err.error.message,
+                isError: true,
+                message: err.error.message,
               }
             );
           }
           if (err.status === 403) {
             this.toastService.changeMessage(
               {
-                showErrorToast: true,
-                errorMessage: 'No tiene permisos.',
+                isError: true,
+                message: 'No tiene permisos.',
               }
             );
             this.router.navigate(['login']);

@@ -1,75 +1,68 @@
 import { Component, OnInit } from '@angular/core';
-import {AbstractControl, FormBuilder, FormGroup, Validators} from '@angular/forms';
-import { IPage, newPage, totalPages } from '../shared/page.models';
-import {AuthService} from './auth.service'
-import {HttpResponse} from "@angular/common/http"
-import {ActivatedRoute, Router} from "@angular/router";
-import {IUsuarioLogin, IUsuarioClave} from "../usuarios/usuarios.models";
-import {Observable} from "rxjs";
-import {ILoginUser} from "./auth.models";
-import {ToastService} from '../toast/toast.service';
-
+import { AuthService } from './auth.service';
+import { HttpResponse } from "@angular/common/http";
+import { Router } from "@angular/router";
+import { IUsuarioLogin } from "../usuarios/usuarios.models";
+import { Observable } from "rxjs";
+import { ILoginUser } from "./auth.models";
+import { ToastService } from '../toast/toast.service';
+import { FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html'
 })
-export class LoginComponent implements OnInit{
+export class LoginComponent implements OnInit {
 
   isSaving = false;
-  mensaje? : string;
+  mensaje?: string;
   myForm = this.fb.group({
     usuario: [null],
     clave: []
   });
   constructor(
-    private activatedRoute: ActivatedRoute,
     private fb: FormBuilder,
     private auth: AuthService,
     private router: Router,
     private toastService: ToastService
-  ) {}
-  ngOnInit() {
+  ) { }
+
+  ngOnInit(): void {
     this.auth.logout();
-    const mode = this.activatedRoute.snapshot.paramMap.get('mode');
-    if (mode === 'cambioclave'){
-      this.toastService.changeMessage(
-        {
-          showSuccessToast: true,
-          successMessage: 'Cambio de Clave Realizado Correctamente'
-        }
-      );
-    }
   }
-  private getUserData():IUsuarioLogin {
-    return{
+
+  private getUserData(): IUsuarioLogin {
+    return {
       usuario: this.myForm.get(['usuario'])!.value,
       clave: this.myForm.get(['clave'])!.value
     };
   }
+
   private subscribeToSaveResponse(result: Observable<HttpResponse<ILoginUser>>): void {
     result.subscribe(
-      (res) =>{
+      (res) => {
         this.auth.onLoginSuccess(res.body!);
         this.router.navigate(['/home']);
       },
       (err) => {
         this.isSaving = false;
-        if(err.status === 403 || err.status === 401){
+        if (err.status === 403 || err.status === 401) {
           this.toastService.changeMessage(
             {
-              showErrorToast: true,
-              errorMessage: err.error.mensaje,
+              isError: true,
+              message: err.error.mensaje,
             }
           );
         }
       }
     );
   }
-  previousState():void{
+
+  previousState(): void {
     window.history.back();
   }
-  login(){
+
+  login(): void  {
     this.isSaving = true;
     this.subscribeToSaveResponse(this.auth.login(this.getUserData()))
   }

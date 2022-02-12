@@ -1,36 +1,28 @@
-
-<div *ngIf="showErrorToast" class="toastd bg-danger text-white" role="alert" aria-live="assertive" aria-atomic="true">
+<div
+  *ngIf="message"
+  class="toast-message text-white"
+  [class.bg-danger]="isError"
+  [class.bg-success]="isSuccess"
+  [class.bg-info]="isInfo"
+  role="alert"
+  aria-live="assertive"
+  aria-atomic="true">
   <div class="toast-header">
-    <button type="button" class="btn btn-danger" data-dismiss="toast" aria-label="Close" (click)="closeAllToast()" title="Cerrar">
+    <strong class="ms-2 mr-auto"> {{ isError ? 'Error' : isSuccess ? 'Éxito' : 'Info' }} </strong>
+    <button
+      type="button"
+      class="btn btn-toast-close"
+      [class.btn-danger-outline]="isError"
+      [class.btn-success-outline]="isSuccess"
+      [class.btn-info-outline]="isInfo"
+      data-dismiss="toast"
+      aria-label="Close"
+      (click)="closeAllToast()"
+      title="Cerrar">
       X
     </button>
-    <strong class="ms-2 mr-auto"> Error </strong>
   </div>
   <div class="toast-body">
-    {{ errorMessage }}
-  </div>
-</div>
-
-<div *ngIf="showSuccessToast" class="toastd bg-success text-white" role="alert" aria-live="assertive" aria-atomic="true">
-  <div class="toast-header">
-    <button type="button" class="btn btn-primary" data-dismiss="toast" aria-label="Close" (click)="closeAllToast()" title="Cerrar">
-      X
-    </button>
-    <strong class="ms-2 mr-auto"> Éxito </strong>
-  </div>
-  <div class="toast-body">
-    {{ successMessage }}
-  </div>
-</div>
-
-<div *ngIf="showInfoToast" class="toastd bg-info text-white" role="alert" aria-live="assertive" aria-atomic="true">
-  <div class="toast-header">
-    <button type="button" class="btn btn-secondary" data-dismiss="toast" aria-label="Close" (click)="closeAllToast()" title="Cerrar">
-      X
-    </button>
-    <strong class="ms-2 mr-auto"> Info </strong>
-  </div>
-  <div class="toast-body">
-    {{ infoMessage }}
+    {{ message }}
   </div>
 </div>

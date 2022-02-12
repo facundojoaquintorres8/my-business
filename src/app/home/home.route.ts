@@ -14,7 +14,7 @@ export const homeRoute: Routes = [
     },
     data:{
       title: 'Home',
-      permissions: ['administrador','compras','ventas','supervisor']
+      permissions: ['Administrador','Compras','Ventas','Supervisor']
     },
     canActivate: [AuthGuards]
   }
