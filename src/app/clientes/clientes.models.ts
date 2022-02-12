@@ -1,5 +1,4 @@
-import {TipoCliente} from '../util/tipoCliente';
-export interface ICliente{
+export interface ICliente {
     dni: string;
     nombre: string;
     apellido: string;

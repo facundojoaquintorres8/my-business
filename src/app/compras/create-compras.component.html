@@ -42,7 +42,7 @@
                 </button>
             </h4>
 
-            <div formArrayName="items">
+            <div formArrayName="itemsCompras">
                 <div *ngFor="let item of getControls(); let i=index" class="row">
                     <div class="col-lg-3 form-group">
                         <!-- <input formControlName="email"
@@ -61,7 +61,7 @@
                                       *ngIf="hasError(i)">Invalid email address
                                 </span>
                             </span> -->
-                        <!-- <div *ngIf="myForm.get('items').controls[i].get('cantidad').touched)">
+                        <!-- <div *ngIf="myForm.get('itemsCompras').controls[i].get('cantidad').touched)">
                                 <small class="form-text text-danger">
                                     El campo es requerido.
                                 </small>
@@ -100,7 +100,7 @@
                 </div>
             </div>
             <!--
-            <div class="row" *ngFor="let item of items">
+            <div class="row" *ngFor="let item of itemsCompras">
                 <div class="col-lg-3">
 
                 </div>

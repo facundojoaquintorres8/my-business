@@ -15,7 +15,7 @@ export const clientesRoutes: Routes = [
    },
    data: {
        title: 'Clientes',
-     permissions: ['administrador','ventas','supervisor']
+     permissions: ['Administrador','Ventas','Supervisor']
    },
     canActivate: [AuthGuards]
   },
@@ -27,7 +27,7 @@ export const clientesRoutes: Routes = [
     },
     data: {
       title: 'Clientes-New',
-      permissions: ['administrador','ventas','supervisor']
+      permissions: ['Administrador','Ventas','Supervisor']
     },
     canActivate: [AuthGuards]
   },
@@ -39,7 +39,7 @@ export const clientesRoutes: Routes = [
     },
     data: {
       title: 'Clientes-Edit',
-      permissions: ['administrador','ventas','supervisor']
+      permissions: ['Administrador','Ventas','Supervisor']
     },
     canActivate: [AuthGuards]
   },
@@ -48,7 +48,7 @@ export const clientesRoutes: Routes = [
     component: DetailClientesComponent,
     data: {
       title: 'Detalle del Cliente.',
-      permissions: ['administrador','ventas','supervisor']
+      permissions: ['Administrador','Ventas','Supervisor']
     },
     canActivate: [AuthGuards]
   }

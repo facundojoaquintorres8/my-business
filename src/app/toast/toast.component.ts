@@ -8,33 +8,32 @@ import { IToast, ToastService } from './toast.service';
 })
 export class ToastComponent implements OnInit {
 
-  errorMessage!: string;
-  successMessage!: string;
-  infoMessage!: string;
-  showErrorToast: boolean = false;
-  showSuccessToast: boolean = false;
-  showInfoToast: boolean = false;
+  message!: string;
+  isError: boolean = false;
+  isSuccess: boolean = false;
+  isInfo: boolean = false;
 
   constructor(private toastService: ToastService) { }
 
   ngOnInit(): void {
     this.toastService.currentMessage.subscribe(
       (message: IToast) => {
-        this.errorMessage = message?.errorMessage ? message.errorMessage : "Hubo un problema al procesar la información. Por favor reintente nuevamente.";
-        this.successMessage = message?.successMessage ? message.successMessage : "Datos guardados con éxito.";
-        this.infoMessage = message?.infoMessage ? message.infoMessage : "No se ha guardado información.";
-        this.showErrorToast = message?.showErrorToast!;
-        this.showSuccessToast = message?.showSuccessToast!;
-        this.showInfoToast = message?.showInfoToast!;
+        if (message) {
+          this.message = message.message!;
+          this.isError = message.isError!;
+          this.isSuccess = message.isSuccess!;
+          this.isInfo = message.isInfo!;
+        }
       }
     );
   }
+
   closeAllToast(): void {
     this.toastService.changeMessage(
       {
-        showErrorToast: false,
-        showSuccessToast: false,
-        showInfoToast: false,
+        isError: false,
+        isSuccess: false,
+        isInfo: false
       }
     );
   }

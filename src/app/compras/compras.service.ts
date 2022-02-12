@@ -9,7 +9,7 @@ import { ICompra, ICompraCreate } from './compras.model';
   providedIn: 'root'
 })
 export class ComprasService {
-  public resourceUrl = SERVER_API_URL + 'api/compra';
+  public resourceUrl = SERVER_API_URL + 'api/compras';
 
   constructor(private http: HttpClient) { }
 

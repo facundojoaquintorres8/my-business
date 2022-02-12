@@ -16,23 +16,23 @@ import { IProducto } from '../productos/productos.models';
 export class CreateCompraComponent implements OnInit {
   isSaving = false;
 
-  // items: ICompraItem[] = [];
+  // itemsCompras: ICompraItem[] = [];
   proveedores: IProveedor[] = [];
   productos: IProducto[] = [];
-  // items: FormArray = new FormArray([]);
+  // itemsCompras: FormArray = new FormArray([]);
 
   myForm = this.fb.group({
     fecha: [new Date(), [Validators.required]], // TODO: set today
     proveedorId: [null, [Validators.required]],
-    // items: this.fb.array([]),
-      items: new FormArray([
+    // itemsCompras: this.fb.array([]),
+    itemsCompras: new FormArray([
         this.fb.group({
           producto: [null, [Validators.required]],
           cantidad: [null, [Validators.required, Validators.min(0)]],
           precio: [null, [Validators.required, Validators.min(0)]]
         })
      ])
-    // items: this.fb.array(
+    // itemsCompras: this.fb.array(
     //   [
     //     this.fb.group({
     //       producto: [null, [Validators.required]],
@@ -52,15 +52,13 @@ export class CreateCompraComponent implements OnInit {
 
   ngOnInit(): void {
     this.proveedorService.findAll({
-      limit: 0,
-      activa: true
+      limit: 0
     }).subscribe(
       (res) => this.proveedores = res.body.rows
     );
 
     this.productoService.findAll({
-      limit: 0,
-      activa: true
+      limit: 0
     }).subscribe(
       (res) => this.productos = res.body.rows
     );
@@ -73,7 +71,7 @@ export class CreateCompraComponent implements OnInit {
   }
 
   // addItem1() {
-  //   this.items.push(new FormControl(
+  //   this.itemsCompras.push(new FormControl(
   //     this.fb.group({
   //       producto: [null, [Validators.required]],
   //       cantidad: [null, [Validators.required, Validators.min(0)]]
@@ -83,67 +81,67 @@ export class CreateCompraComponent implements OnInit {
   // }
 
   // deleteItem2(i: number) {
-  //   this.items.controls = this.items.controls.filter(x => x !== this.items.controls[i]);
+  //   this.itemsCompras.controls = this.itemsCompras.controls.filter(x => x !== this.itemsCompras.controls[i]);
   // }
 
-  get items() {
-    return this.myForm.get('items') as FormArray;
+  get itemsCompras() {
+    return this.myForm.get('itemsCompras') as FormArray;
   }
 
   addItem() {
     const producto = new FormControl('producto', [Validators.required]);
     const cantidad = new FormControl('cantidad', [Validators.required, Validators.min(0)]);
     const stock = new FormControl('stock', [Validators.required, Validators.min(0)]);
-    this.items.controls.push(
+    this.itemsCompras.controls.push(
       new FormGroup({
         producto, cantidad, stock
       })
     );
-    // this.items.patchValue(
+    // this.itemsCompras.patchValue(
     //   [producto, cantidad, stock]
     // )
-    // this.items.push(
+    // this.itemsCompras.push(
     //   this.fb.group({
     //     cantidad: [null, Validators.required]
     //   })
     // );
 
-    //  this.items.controls.push(this.fb.group({
+    //  this.itemsCompras.controls.push(this.fb.group({
     //    cantidad: [null, Validators.required]
     //  }));
 
-    //  this.items.controls = [...this.items.controls];
+    //  this.itemsCompras.controls = [...this.itemsCompras.controls];
   }
 
   deleteItem(index: any) {
     // console.log(index);
-    this.items.removeAt(index);
+    this.itemsCompras.removeAt(index);
   }
 
   // addItem2() {
-  //   const it = (this.myForm.get('items') as FormArray);
+  //   const it = (this.myForm.get('itemsCompras') as FormArray);
   //   it.push(this.fb.group({
   //     cantidad: [null, Validators.required]
   //   }));
   // }
 
   // deleteItem2(i: number) {
-  //   const fa = (this.myForm.get('items') as FormArray);
+  //   const fa = (this.myForm.get('itemsCompras') as FormArray);
   //   console.log(fa);
   //   // fa.removeAt(i);
   //   // if(fa.length===0) this.addItem();
   // }
 
   getControls() {
-    return (<FormArray>this.myForm.get('items')).controls;
+    return (<FormArray>this.myForm.get('itemsCompras')).controls;
   }
 
   // hasError(i: number):boolean {
   //   // const control = <FormArray>this.form.controls['emailsArray'];
-  //   return this.items.controls[i].get('cantidad')!.hasError('invalidEmail');
+  //   return this.itemsCompras.controls[i].get('cantidad')!.hasError('invalidEmail');
   // }
   // isTouched(i: number):boolean {
-  //   const control = this.items.controls[i].get('cantidad');
+  //   const control = this.itemsCompras.controls[i].get('cantidad');
   //   return control !== null && control.touched;
   // }
 
@@ -156,7 +154,7 @@ export class CreateCompraComponent implements OnInit {
     return {
       fecha: this.myForm.get(['fecha'])!.value,
       proveedorId: this.myForm.get(['proveedorId'])!.value,
-      items: this.myForm.get(['items'])!.value,
+      itemsCompras: this.myForm.get(['itemsCompras'])!.value,
     };
   }
 

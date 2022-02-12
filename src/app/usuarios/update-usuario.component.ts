@@ -1,30 +1,30 @@
-import {Component, OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { HttpResponse } from '@angular/common/http';
 import { FormBuilder, Validators } from '@angular/forms';
-import {ActivatedRoute, Router} from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
-import {IUser, IUsuario} from './usuarios.models';
-import {UsuariosService} from './usuarios.service';
-import {Roles} from "../util/rolesUsuarios";
+import { IUser, IUsuario } from './usuarios.models';
+import { UsuariosService } from './usuarios.service';
+import { Roles } from "../util/rolesUsuarios";
 
 @Component({
   selector: 'app-update-usuario',
   templateUrl: './update-usuario.component.html'
 })
-export class UpdateUsuarioComponent implements OnInit{
+export class UpdateUsuarioComponent implements OnInit {
 
   isSaving = false;
   isUpdate = false;
   show = false;
   idd: number = 0;
-  mensaje? : string;
+  mensaje?: string;
   value = '';
   roles = Roles;
   myForm = this.fb.group({
     id: [],
-    usuario: [null,[Validators.required]],
-    clave: [null,[Validators.required,Validators.pattern('^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[*.!@$%^&(){}:;<>,.?/~_+-\]).{8,32}$')]],
-    rol: [null,[Validators.required]],
+    usuario: [null, [Validators.required]],
+    clave: [null, [Validators.required, Validators.pattern('^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[*.!@$%^&(){}:;<>,.?/~_+-\]).{8,32}$')]],
+    rol: [null, [Validators.required]],
     activo: []
   });
 
@@ -33,13 +33,13 @@ export class UpdateUsuarioComponent implements OnInit{
     private activatedRoute: ActivatedRoute,
     private fb: FormBuilder,
     private router: Router
-  ) {}
+  ) { }
 
   ngOnInit(): void {
-     const id = this.activatedRoute.snapshot.paramMap.get('id');
-    if (id){
+    const id = this.activatedRoute.snapshot.paramMap.get('id');
+    if (id) {
       this.usuarioService.find(parseInt(id)).subscribe(
-        (res:HttpResponse<IUser>) => {
+        (res: HttpResponse<IUser>) => {
           this.updateForm(res.body!);
           this.isUpdate = true;
           let control = this.myForm.get(['clave']);
@@ -49,13 +49,16 @@ export class UpdateUsuarioComponent implements OnInit{
       );
     }
   }
+
   clave() {
     this.show = !this.show;
   }
-  cambiarClave(id: number){
+
+  cambiarClave(id: number) {
     this.router.navigate([`/${id}`]);
   }
-  updateForm(usuario: IUser){
+
+  updateForm(usuario: IUser) {
     this.myForm.patchValue({
       id: usuario.id,
       usuario: usuario.usuario,
@@ -68,17 +71,17 @@ export class UpdateUsuarioComponent implements OnInit{
     window.history.back();
   }
 
-  save(): void{
+  save(): void {
     this.isSaving = true;
     const usuario = this.createFromForm();
-    if (usuario.id){
+    if (usuario.id) {
       this.subscribeToSaveResponse(this.usuarioService.update(usuario));
-    }else{
+    } else {
       this.subscribeToSaveResponse(this.usuarioService.create(usuario));
     }
   }
 
-  private createFromForm(): IUsuario{
+  private createFromForm(): IUsuario {
     return {
       id: this.myForm.get(['id'])!.value,
       usuario: this.myForm.get(['usuario'])!.value,
@@ -93,8 +96,8 @@ export class UpdateUsuarioComponent implements OnInit{
       () => this.previousState(),
       (error) => {
         this.isSaving = false;
-        if(error.status === 412){
-          console.log('error ',error);
+        if (error.status === 412) {
+          console.log('error ', error);
           this.mensaje = 'El nombre de usuario ya existe.';
         }
       }

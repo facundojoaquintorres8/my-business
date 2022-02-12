@@ -1,7 +1,7 @@
 export interface IProveedor {
   id: number;
-  razonSocial: string;
   cuitDni: number;
+  razonSocial: string;
   telefono?: string;
   email?: string;
   direccion?: string;

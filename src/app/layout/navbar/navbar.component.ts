@@ -18,7 +18,7 @@ export class NavbarComponent implements OnInit{
     this.user = this.authService.getSessionUser()!;
   }
 
-  logOut(): void {
+  logout(): void {
     this.authService.logout();
     this.router.navigate(['login']);
   }

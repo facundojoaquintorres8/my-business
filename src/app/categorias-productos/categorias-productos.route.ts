@@ -14,7 +14,7 @@ export const categoriaProductoRoutes: Routes = [
   },
     data: {
       title: 'Categorías de Productos',
-      permissions: ['administrador','compras','ventas','supervisor']
+      permissions: ['Administrador','Compras','Ventas','Supervisor']
     },
     canActivate: [AuthGuards]
   },
@@ -23,7 +23,7 @@ export const categoriaProductoRoutes: Routes = [
     component: UpdateCategoriaProductoComponent,
     data: {
       title: 'Crear Categoría de Producto',
-      permissions: ['administrador','compras','ventas','supervisor']
+      permissions: ['Administrador','Compras','Ventas','Supervisor']
     },
   },
   {
@@ -31,7 +31,7 @@ export const categoriaProductoRoutes: Routes = [
     component: UpdateCategoriaProductoComponent,
     data: {
       title: 'Actualizar Categoría de Producto',
-      permissions: ['administrador','compras','ventas','supervisor']
+      permissions: ['Administrador','Compras','Ventas','Supervisor']
     },
   },
   {
@@ -39,7 +39,7 @@ export const categoriaProductoRoutes: Routes = [
     component: DetailCategoriaProductoComponent,
     data: {
       title: 'Detalle de Categoría de Producto',
-      permissions: ['administrador','compras','ventas','supervisor']
+      permissions: ['Administrador','Compras','Ventas','Supervisor']
     },
   }
 ];

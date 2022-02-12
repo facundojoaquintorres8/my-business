@@ -9,7 +9,7 @@ import {ICliente} from './clientes.models';
   providedIn: 'root'
 })
 export class ClientesService {
-  public resourceUrl = SERVER_API_URL + 'api/cliente';
+  public resourceUrl = SERVER_API_URL + 'api/clientes';
 
   constructor(private http: HttpClient) { }
 

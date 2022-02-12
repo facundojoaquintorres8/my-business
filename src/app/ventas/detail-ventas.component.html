@@ -18,7 +18,7 @@
           <dt>Cuotas</dt>
           <dd>{{venta.cantCuotas}}</dd>
           <dt>fecha venta</dt>
-          <dd>{{venta.fechaVenta}}</dd>
+          <dd>{{venta.fecha}}</dd>
         </dl>
       </div>
     </div>
@@ -29,27 +29,26 @@
         </div>
         <dl *ngIf="venta">
           <dt>DNI:</dt>
-          <dd>{{venta.Cliente.dni}}</dd>
+          <dd>{{venta.cliente.dni}}</dd>
           <dt>Nombre:</dt>
-          <dd>{{venta.Cliente.nombre}}</dd>
+          <dd>{{venta.cliente.nombre}}</dd>
           <dt>Apellido:</dt>
-          <dd>{{venta.Cliente.apellido}}</dd>
+          <dd>{{venta.cliente.apellido}}</dd>
           <dt>Telefono:</dt>
-          <dd>{{venta.Cliente.telefono}}</dd>
+          <dd>{{venta.cliente.telefono}}</dd>
           <dt>Direccion:</dt>
-          <dd>{{venta.Cliente.direccion}}</dd>
-          <dt>Es mayorista:</dt>
-          <dd *ngIf="venta.Cliente.tipoCliente">Si</dd>
-          <dd *ngIf="!cliente.tipoCliente">No</dd>
+          <dd>{{venta.cliente.direccion}}</dd>
+          <dt>Tipo cliente:</dt>
+          <dd>{{ venta.cliente.tipoCliente }}</dd>
         </dl>
       </div>
     </div>
 
   </div>
-  <ng-container *ngIf="items?.length ==0 " >
+  <ng-container *ngIf="itemsVentas?.length ==0 " >
     <h3>No hay items asociados a esta venta</h3>
   </ng-container>
-    <div *ngFor="let item of items" class="card">
+    <div *ngFor="let item of itemsVentas" class="card">
       <dl>
         <div class="card-header">
           <h3>Item / Producto</h3>
@@ -57,11 +56,11 @@
         <dt>Item Nro:</dt>
         <dd>{{item.id}}</dd>
         <dt>Cantidad Solicitada:</dt>
-        <dd>{{item.cantPedida}}</dd>
+        <dd>{{item.cantidad}}</dd>
         <dt>Descripcion Producto:</dt>
-        <dd>{{item.Producto.descripcion}}</dd>
+        <dd>{{item.producto.descripcion}}</dd>
         <dt>Precio Producto:</dt>
-        <dd>{{item.Producto.precioVenta}}</dd>
+        <dd>{{item.producto.precioVenta}}</dd>
       </dl>
     </div>
   <div class="button-form">

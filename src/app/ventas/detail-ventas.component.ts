@@ -1,35 +1,34 @@
-import {Component, OnInit} from '@angular/core';
-import {IDetailVenta} from './ventas.model';
-import {ActivatedRoute} from '@angular/router';
-import {HttpResponse} from '@angular/common/http';
-import {VentasService} from './ventas.service';
-import {ICliente} from '../clientes/clientes.models';
-import {Items} from "./items.model";
+import { Component, OnInit } from '@angular/core';
+import { ItemsVentas, IVentas } from './ventas.model';
+import { ActivatedRoute } from '@angular/router';
+import { HttpResponse } from '@angular/common/http';
+import { VentasService } from './ventas.service';
+import { ICliente } from '../clientes/clientes.models';
 
 @Component({
   selector: 'app-ventas',
   templateUrl: './detail-ventas.component.html'
 })
-export class DetailVentasComponent implements OnInit{
-  venta!: IDetailVenta;
+export class DetailVentasComponent implements OnInit {
+  venta!: IVentas;
   cliente!: ICliente;
-  items!: Items[];
+  itemsVentas!: ItemsVentas[];
 
   constructor(
     private activatedRoute: ActivatedRoute,
     private ventasService: VentasService
-  ) {}
+  ) { }
   ngOnInit() {
     const id = this.activatedRoute.snapshot.paramMap.get('id');
-    if (id){
-      this.ventasService.find(parseInt(id)).subscribe((res: HttpResponse<IDetailVenta>) => {
+    if (id) {
+      this.ventasService.find(parseInt(id)).subscribe((res: HttpResponse<IVentas>) => {
         this.venta = res.body!;
-        this.cliente = this.venta.Cliente;
-        this.items = this.venta.Items;
+        this.cliente = this.venta.cliente;
+        this.itemsVentas = this.venta.itemsVentas;
       });
     }
   }
-  previousState(): void{
+  previousState(): void {
     window.history.back();
   }
 }

@@ -26,7 +26,7 @@ export class CompraComponent implements OnInit {
     private comprasService: ComprasService,
   ) {
     this.activatedRoute.data.subscribe(data => {
-      this.page = data.pagingParams ? data.pagingParams : newPage({ activa: true }, ['id', 'ASC']);
+      this.page = data.pagingParams ? data.pagingParams : newPage({}, ['id', 'ASC']);
     });
   }
 
@@ -73,7 +73,7 @@ export class CompraComponent implements OnInit {
   }
 
   clearFilter(): void {
-    this.page.filter = { activa: true };
+    this.page.filter = {};
     this.page = newPage(this.page.filter, this.page.order);
     // this.myForm.get(['ClienteDni'])!.setValue('');
     this.findAll();

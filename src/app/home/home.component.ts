@@ -14,9 +14,9 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
     this.toastService.changeMessage(
       {
-        showErrorToast: false,
-        showSuccessToast: false,
-        showInfoToast: false,
+        isError: false,
+        isSuccess: false,
+        isInfo: false
       }
     );
   }

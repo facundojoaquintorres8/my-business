@@ -1,1 +1,1 @@
-export const Roles: string[] = ['administrador', 'compras','ventas','supervisor'];
+export const Roles: string[] = ['Administrador', 'Compras','Ventas','Supervisor'];
