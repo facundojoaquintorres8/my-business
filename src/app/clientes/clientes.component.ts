@@ -4,9 +4,9 @@ import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { FormBuilder } from '@angular/forms';
 import { IPage, newPage, totalPages } from '../shared/page.models';
 import { ActivatedRoute, Router } from '@angular/router';
-import {ClientesService} from './clientes.service';
-import {ICliente} from './clientes.models';
-import {DeleteClientesModalComponent} from './delete-clientes-modal.component';
+import { ClientesService } from './clientes.service';
+import { ICliente } from './clientes.models';
+import { DeleteClientesModalComponent } from './delete-clientes-modal.component';
 
 @Component({
   selector: 'app-clientes',
@@ -34,25 +34,24 @@ export class ClientesComponent implements OnInit {
     private clientesService: ClientesService,
     private modelService: NgbModal,
     private fb: FormBuilder,
-  )
-    {
-      this.activatedRoute.data.subscribe(data => {
-        this.page = data.pagingParams ? data.pagingParams : newPage({activo: true}, ['nombre', 'ASC']);
-      });
-    }
+  ) {
+    this.activatedRoute.data.subscribe(data => {
+      this.page = data.pagingParams ? data.pagingParams : newPage({ activo: true }, ['nombre', 'ASC']);
+    });
+  }
 
   ngOnInit(): void {
     this.findAll();
 
-    if (this.page.filter.nombre){
+    if (this.page.filter.nombre) {
       this.myForm.get(['nombre'])!.setValue(this.page.filter.nombre);
     }
-    if(this.page.filter.apellido){
+    if (this.page.filter.apellido) {
       this.myForm.get(['apellido'])!.setValue(this.page.filter.apellido);
     }
-    if(this.page.filter.activo){
+    if (this.page.filter.activo) {
       this.myForm.get(['verInactivos'])!.setValue(false);
-    }else{
+    } else {
       this.myForm.get(['verInactivos'])!.setValue(true);
     }
     if (this.page.filter.tipoCliente) {
@@ -74,36 +73,36 @@ export class ClientesComponent implements OnInit {
       this.loading = false;
       this.page.totalElements = res.body.count;
       this.page.totalPages = totalPages(this.page.size, this.page.totalElements);
-    },() => this.loading = false);
+    }, () => this.loading = false);
   }
 
-  onFilter(): void{
+  onFilter(): void {
     this.page.filter = {};
-    if (this.myForm.get(['dni'])!.value){
+    if (this.myForm.get(['dni'])!.value) {
       Object.assign(this.page.filter, {
         dni: this.myForm.get(['dni'])!.value.toLowerCase()
       });
     }
-    if (this.myForm.get(['nombre'])!.value){
+    if (this.myForm.get(['nombre'])!.value) {
       Object.assign(this.page.filter, {
         nombre: this.myForm.get(['nombre'])!.value.toLowerCase()
       });
     }
-    if (this.myForm.get(['apellido'])!.value){
+    if (this.myForm.get(['apellido'])!.value) {
       Object.assign(this.page.filter, {
         apellido: this.myForm.get(['apellido'])!.value.toLowerCase()
       });
     }
-    if(!this.myForm.get(['verInactivos'])!.value){
-      Object.assign(this.page.filter,{
+    if (!this.myForm.get(['verInactivos'])!.value) {
+      Object.assign(this.page.filter, {
         activo: true
       });
     }
-    if(this.myForm.get(['tipoCliente'])!.value){
-        Object.assign(this.page.filter,{
-          tipoCliente: this.myForm.get(['tipoCliente'])!.value
-        });
-      }
+    if (this.myForm.get(['tipoCliente'])!.value) {
+      Object.assign(this.page.filter, {
+        tipoCliente: this.myForm.get(['tipoCliente'])!.value
+      });
+    }
     this.findAll();
   }
 
@@ -117,8 +116,8 @@ export class ClientesComponent implements OnInit {
     this.findAll();
   }
 
-  clearFilter(): void{
-    this.page.filter = {activa: true};
+  clearFilter(): void {
+    this.page.filter = { activo: true };
     this.page = newPage(this.page.filter, this.page.order);
     this.myForm.get(['dni'])!.setValue('');
     this.myForm.get(['nombre'])!.setValue('');
@@ -127,7 +126,7 @@ export class ClientesComponent implements OnInit {
   }
 
   delete(dni: string): void {
-    this.ngbModalRef = this.modelService.open(DeleteClientesModalComponent, { size: 'lg', backdrop: 'static'});
+    this.ngbModalRef = this.modelService.open(DeleteClientesModalComponent, { size: 'lg', backdrop: 'static' });
     this.ngbModalRef.componentInstance.dni = dni;
     this.ngbModalRef.result.then(
       () => {
@@ -140,9 +139,9 @@ export class ClientesComponent implements OnInit {
     );
   }
 
-  transition():void {
-    this.router.navigate(['/clientes'],{
-      queryParams:{
+  transition(): void {
+    this.router.navigate(['/clientes'], {
+      queryParams: {
         page: JSON.stringify(this.page)
       },
       replaceUrl: true

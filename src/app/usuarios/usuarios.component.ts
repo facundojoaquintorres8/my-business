@@ -80,7 +80,7 @@ export class UsuariosComponent implements OnInit {
   }
 
   clearFilter(): void {
-    this.page.filter = { activa: true };
+    this.page.filter = { activo: true };
     this.page = newPage(this.page.filter, this.page.order);
     this.myForm.get(['usuario'])!.setValue('');
     this.myForm.get(['rol'])!.setValue('');
@@ -98,7 +98,7 @@ export class UsuariosComponent implements OnInit {
     this.findAll();
   }
 
-  transition(): void { // ¿¿para que sirve este metodo?
+  transition(): void {
     this.router.navigate(['/usuarios'], {
       queryParams: {
         page: JSON.stringify(this.page)

@@ -6,9 +6,8 @@
       <dd>{{user.usuario}}</dd>
       <dt>Rol</dt>
       <dd>{{user.rol}}</dd>
-      <dt>Actualmente activo</dt>
-      <dd *ngIf="user.activo">Si</dd>
-      <dd *ngIf="!user.activo">No</dd>
+      <dt>Activo</dt>
+      <dd>{{ user.activo ? 'Si' : 'No' }}</dd>
     </dl>
     <div class="button-form">
       <button type="button" class="btn btn-secondary" (click)="previousState()" title="Volver">

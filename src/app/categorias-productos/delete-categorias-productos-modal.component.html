@@ -1,12 +1,12 @@
 <form *ngIf="categoriaProducto" name="deleteForm" (ngSubmit)="confirmDelete(categoriaProducto?.id!)">
     <div class="modal-header">
         <h4 class="modal-title">Confirmar operación</h4>
-        <!-- <button type="button" class="close" data-dismiss="modal" aria-hidden="true" (click)="cancel()" title="Cancelar">&times;</button> -->
     </div>
 
     <div class="modal-body">
         <p>
-            ¿Está seguro que desea eliminar la Categoría de Producto <strong>{{ categoriaProducto.descripcion }}</strong>?
+            ¿Está seguro que desea eliminar la Categoría de Producto <strong>{{ categoriaProducto.descripcion
+                }}</strong>?
         </p>
     </div>
 

@@ -1,7 +1,6 @@
-<form *ngIf="cliente" name="deleteForm" (ngSubmit)="confirmDelete(cliente?.dni!)" >
+<form *ngIf="cliente" name="deleteForm" (ngSubmit)="confirmDelete(cliente?.dni!)">
   <div class="modal-header">
-    <h4 class="model-title">Confirmar operacion</h4>
-
+    <h4 class="model-title">Confirmar operación</h4>
   </div>
 
   <div class="modal-body">
@@ -14,7 +13,7 @@
     <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="cancel()" title="Cancelar">
       <fa-icon icon="ban"></fa-icon>Cancelar
     </button>
-    <button type="submit" class="btn btn-danger"  title="Eliminar">
+    <button type="submit" class="btn btn-danger" title="Eliminar">
       <fa-icon icon="times"></fa-icon>Eliminar
     </button>
   </div>

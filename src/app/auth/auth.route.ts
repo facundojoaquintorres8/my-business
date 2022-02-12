@@ -1,6 +1,5 @@
-import { Routes } from '@angular/router';
 import { PagingParamsResolve } from '../util/paging-params-resolve';
-import {LoginComponent} from "./login.component";
+import { LoginComponent } from "./login.component";
 
 export const authRoute = [
   {
@@ -10,17 +9,7 @@ export const authRoute = [
       paginParams: PagingParamsResolve
     },
     data: {
-      title: 'Iniciar Sesion'
-    }
-  },
-  {
-    path:'login/:mode',
-    component: LoginComponent,
-    resolve: {
-      paginParams: PagingParamsResolve
-    },
-    data:{
-      title:'Iniciar Sesion'
+      title: 'Iniciar Sesión'
     }
   }
 ]

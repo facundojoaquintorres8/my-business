@@ -1,10 +1,11 @@
-import {IUsuario} from '../usuarios/usuarios.models'
+import { IUsuario } from '../usuarios/usuarios.models'
 
-export interface ILoginUser{
+export interface ILoginUser {
   user: IUsuario;
   token: string;
 }
-export interface ITokenUser{
+
+export interface ITokenUser {
   id: number;
   usuario: string;
   rol: string;

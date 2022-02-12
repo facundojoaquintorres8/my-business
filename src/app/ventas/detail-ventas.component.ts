@@ -18,7 +18,8 @@ export class DetailVentasComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private ventasService: VentasService
   ) { }
-  ngOnInit() {
+
+  ngOnInit(): void {
     const id = this.activatedRoute.snapshot.paramMap.get('id');
     if (id) {
       this.ventasService.find(parseInt(id)).subscribe((res: HttpResponse<IVentas>) => {
@@ -28,6 +29,7 @@ export class DetailVentasComponent implements OnInit {
       });
     }
   }
+
   previousState(): void {
     window.history.back();
   }

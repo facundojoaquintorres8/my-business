@@ -54,7 +54,11 @@
     <ngx-datatable-column name="Tarjeta" prop="nomTarjeta"></ngx-datatable-column>
     <ngx-datatable-column name="Num. Tarjeta" prop="numTarjeta"></ngx-datatable-column>
     <ngx-datatable-column name="Cant. Cuotas" prop="cantCuotas"></ngx-datatable-column>
-    <ngx-datatable-column name="Fecha Venta" prop="fechaVenta"></ngx-datatable-column>
+    <ngx-datatable-column name="Fecha" prop="fecha">
+      <ng-template let-value="value" ngx-datatable-cell-template>
+        {{value | date: 'dd/MM/yyyy HH:mm'}}
+      </ng-template>
+    </ngx-datatable-column>
     <ngx-datatable-column name="Cliente Dni" prop="ClienteDni"></ngx-datatable-column>
     <ngx-datatable-column name="" prop="id" [sortable]="false" [cellClass]="'column-actions'" >
       <ng-template let-value="value" let-row="row" ngx-datatable-cell-template>
