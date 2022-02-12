@@ -1,22 +1,41 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { CompraModule } from './compras/compras.module';
-import { LayoutComponent } from './layout/layout.component';
 import { UsuariosModule } from "./usuarios/usuarios.module";
+import { PublicLayoutComponent } from './layout/public/public-layout.component';
+import {CuentaModule} from "./cuenta/cuenta.module";
+import {AuthModule} from "./auth/auth.module";
+import {PrivateLayoutComponent} from "./layout/private/private-layout.component";
 
 export const routes: Routes = [
   {
     path: '',
-    component: LayoutComponent,
+    component: PublicLayoutComponent,
     data: {
       title: 'Mi Negocio'
     },
     children: [
-      // {
-      //   path: '',
-      //   component: HomeComponent,
-      //   pathMatch: 'full'
-      // },
+      {
+        path: '',
+        loadChildren: () => import('./auth/auth.module').then(m => AuthModule)
+      },
+      {
+        path: 'login',
+        loadChildren: () => import('./auth/auth.module').then(m => AuthModule)
+      }
+    ],
+  },
+  {
+    path:'',
+    component: PrivateLayoutComponent,
+    data: {
+      title: 'Turnera'
+    },
+    children: [
+      {
+        path: 'home',
+        loadChildren: () => import('./home/home.module').then(m => m.HomeModule)
+      },
       {
         path: 'categorias-productos',
         loadChildren: () => import('./categorias-productos/categorias-productos.module').then(m => m.CategoriaProductoModule)
@@ -44,10 +63,18 @@ export const routes: Routes = [
       {
         path: 'compras',
         loadChildren: () => import('./compras/compras.module').then(m => CompraModule)
+      },
+      {
+        path: 'cuenta',
+        loadChildren: () => import('./cuenta/cuenta.module').then(m => CuentaModule)
+      },
+      {
+        path:'#',
+        redirectTo:'/home'
       }
-    ],
+    ]
   },
-  { path: '**', redirectTo: '/' },
+  { path: '**', redirectTo: '/login' },
 ];
 
 @NgModule({

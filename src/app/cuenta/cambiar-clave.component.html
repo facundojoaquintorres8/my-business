@@ -1,0 +1,77 @@
+<div class="form-public">
+  <div class="card text-black bg-light">
+    <div class="card-header">
+      <h2>Cambiar contraseña</h2>
+    </div>
+    <div class="card-body">
+      <form name="myForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="myForm">
+        <div class="row">
+          <div class="col-sm-12">
+          <div class="form-group">
+            <label class="form-control-label required" for="claveVieja">Contraseña anterior</label>
+            <input type="password" class="form-control" name="claveVieja" id="claveVieja"
+                   formControlName="claveVieja"/>
+            <div
+              *ngIf="myForm.get('claveVieja')!.invalid && (myForm.get('claveVieja')!.dirty || myForm.get('claveVieja')!.touched)">
+              <small class="form-text text-danger" *ngIf="myForm.get('claveVieja')?.errors?.required">
+                El campo es requerido.
+              </small>
+            </div>
+          </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-12">
+          <div class="form-group">
+            <label class="form-control-label required" for="claveNueva">Contraseña Nueva</label>
+            <input type="password" class="form-control" name="claveNueva" id="claveNueva"
+                   formControlName="claveNueva"/>
+            <div
+              *ngIf="myForm.get('claveNueva')!.invalid && (myForm.get('claveNueva')!.dirty || myForm.get('claveNueva')!.touched)">
+              <small class="form-text text-danger" *ngIf="myForm.get('claveNueva')?.errors?.required">
+                El campo es requerido.
+              </small>
+              <small class="form-text text-danger" *ngIf="myForm.get('claveNueva')?.errors?.pattern ">
+                <p>
+                  La contraseña debe tener:<br>
+                  - Debe ser entre 8 y 32 caracteres<br>
+                  - Debe tener al menos una minuscula<br>
+                  - Debe tener al menos una mayuscula<br>
+                  - Debe tener al menos un numero<br>
+                </p>
+              </small>
+            </div>
+          </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-12">
+          <div class="form-group">
+            <label class="form-control-label required" for="claveNuevaRepetida">Repita Contraseña Nueva</label>
+            <input type="password" class="form-control" name="claveNuevaRepetida" id="claveNuevaRepetida"
+
+                   formControlName="claveNuevaRepetida"/>
+            <div
+              *ngIf="myForm.get('claveNuevaRepetida')!.invalid && (myForm.get('claveNuevaRepetida')!.dirty || myForm.get('claveNuevaRepetida')!.touched)">
+              <small class="form-text text-danger" *ngIf="myForm.get('claveNuevaRepetida')?.errors?.required">
+                El campo es requerido.
+              </small>
+              <small class="form-text text-danger"
+                     *ngIf="myForm.get('claveNuevaRepetida')?.errors?.errorClaveNevaRepetida">
+                Las Contraseñas no coinciden.
+              </small>
+            </div>
+          </div>
+          </div>
+        </div>
+
+
+          <div class="button-form mt-4">
+            <button type="submit" [disabled]="!myForm.valid" class="btn btn-primary" title="Confirmar">
+              &nbsp;Confirmar
+            </button>
+          </div>
+      </form>
+    </div>
+  </div>
+</div>

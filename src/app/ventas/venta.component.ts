@@ -17,7 +17,9 @@ export class VentaComponent implements  OnInit{
   page!: IPage;
   myForm = this.fb.group({
     ClienteDni : [null],
-    verInactivas: [null]
+    verInactivas: [null],
+    nomTarjeta:[null],
+    numTarjeta:[null],
   });
   rows: IVentas[] = [];
   loading = false;
@@ -58,12 +60,24 @@ export class VentaComponent implements  OnInit{
         dni: this.myForm.get(['ClienteDni'])!.value.toLowerCase()
       });
     }
+    if (this.myForm.get(['nomTarjeta'])!.value){
+      Object.assign(this.page.filter, {
+        nomTarjeta: this.myForm.get(['nomTarjeta'])!.value.toLowerCase()
+      });
+    }
+    if (this.myForm.get(['numTarjeta'])!.value){
+      Object.assign(this.page.filter, {
+        numTarjeta: this.myForm.get(['numTarjeta'])!.value.toLowerCase()
+      });
+    }
+    console.log(this.myForm.get(['nomTarjeta'])!.value);
+    console.log(this.myForm.get(['numTarjeta'])!.value);
+    console.log(this.myForm.get(['ClienteDni'])!.value);
     this.findAll();
   }
   findAll(): void {
     this.transition();
     this.loading = true;
-    console.log('Asi viajan en en findAll--> ', this.page.filter.activa);
     this.ventasService.findAll({
       ...this.page.filter,
       ...{
@@ -71,20 +85,18 @@ export class VentaComponent implements  OnInit{
         order: this.page.order
       }
     }).subscribe(res => {
-      console.log('Antes de findAll en service', res.body.rows);
       this.rows = res.body.rows;
-      console.log('Despues de findAll en service', this.rows);
       this.loading = false;
       this.page.totalElements = res.body.count;
       this.page.totalPages = totalPages(this.page.size, this.page.totalElements);
     }, () => this.loading = false );
 
   }
-  onSort(event: any): void { // ¿ que hace aca?
+  onSort(event: any): void {
     this.page.order = [event.sorts[0].prop, event.sorts[0].dir];
     this.findAll();
   }
-  setPage(pageInfo: any): void { // ¿que hace aca?
+  setPage(pageInfo: any): void {
     this.page.offset = pageInfo.offset;
     this.findAll();
   }
@@ -93,6 +105,8 @@ export class VentaComponent implements  OnInit{
     this.page = newPage(this.page.filter, this.page.order);
     this.myForm.get(['ClienteDni'])!.setValue('');
     this.myForm.get(['verInactivas'])!.setValue(false);
+    this.myForm.get(['nomTarjeta'])!.setValue('');
+    this.myForm.get(['numTarjeta'])!.setValue('');
     this.findAll();
   }
   transition(): void {

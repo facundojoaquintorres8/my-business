@@ -23,12 +23,10 @@ export class ClientesComponent implements OnInit {
     nombre: [null],
     apellido: [null],
     verInactivos: [null],
-    esMayorista: [null]
+    tipoCliente: [null]
   });
   rows: ICliente[] = [];
   loading = false;
-
-
 
   constructor(
     private router: Router,
@@ -39,8 +37,8 @@ export class ClientesComponent implements OnInit {
   )
     {
       this.activatedRoute.data.subscribe(data => {
-        this.page = data.pagingParams ? data.pagingParams : newPage({activo: true, esMayorista: true}, ['nombre', 'ASC']);
-      }); //¿Que es el pagingParams??
+        this.page = data.pagingParams ? data.pagingParams : newPage({activo: true}, ['nombre', 'ASC']);
+      });
     }
 
   ngOnInit(): void {
@@ -57,21 +55,16 @@ export class ClientesComponent implements OnInit {
     }else{
       this.myForm.get(['verInactivos'])!.setValue(true);
     }
-    if (this.page.filter.esMayorista) {
-      this.myForm.get(['esMayorista'])!.setValue(true);
+    if (this.page.filter.tipoCliente) {
+      this.myForm.get(['tipoCliente'])!.setValue(true);
     }
-
-
-
-
   }
-
 
   findAll(): void {
     this.transition();
     this.loading = true;
     this.clientesService.findAll({
-      ...this.page.filter, //¿Porque pone tres puntos?
+      ...this.page.filter,
       ...{
         offset: this.page.offset,
         order: this.page.order
@@ -82,11 +75,10 @@ export class ClientesComponent implements OnInit {
       this.page.totalElements = res.body.count;
       this.page.totalPages = totalPages(this.page.size, this.page.totalElements);
     },() => this.loading = false);
-
   }
+
   onFilter(): void{
     this.page.filter = {};
-
     if (this.myForm.get(['dni'])!.value){
       Object.assign(this.page.filter, {
         dni: this.myForm.get(['dni'])!.value.toLowerCase()
@@ -107,22 +99,24 @@ export class ClientesComponent implements OnInit {
         activo: true
       });
     }
-    if(this.myForm.get(['esMayorista'])!.value){
-      Object.assign(this.page.filter,{
-        esMayorista: true
-      });
-    }
-
+    if(this.myForm.get(['tipoCliente'])!.value){
+        Object.assign(this.page.filter,{
+          tipoCliente: this.myForm.get(['tipoCliente'])!.value
+        });
+      }
     this.findAll();
   }
-  onSort(event: any): void { //¿ que hace aca?
+
+  onSort(event: any): void {
     this.page.order = [event.sorts[0].prop, event.sorts[0].dir];
     this.findAll();
   }
-  setPage(pageInfo: any): void { // ¿que hace aca?
+
+  setPage(pageInfo: any): void {
     this.page.offset = pageInfo.offset;
     this.findAll();
   }
+
   clearFilter(): void{
     this.page.filter = {activa: true};
     this.page = newPage(this.page.filter, this.page.order);
@@ -131,9 +125,10 @@ export class ClientesComponent implements OnInit {
     this.myForm.get(['verInactivos'])!.setValue(false);
     this.findAll();
   }
+
   delete(dni: string): void {
     this.ngbModalRef = this.modelService.open(DeleteClientesModalComponent, { size: 'lg', backdrop: 'static'});
-    this.ngbModalRef.componentInstance.dni = dni; // //¿que hace aca?
+    this.ngbModalRef.componentInstance.dni = dni;
     this.ngbModalRef.result.then(
       () => {
         this.ngbModalRef = undefined;
@@ -144,14 +139,13 @@ export class ClientesComponent implements OnInit {
       }
     );
   }
-  transition():void { // ¿¿para que sirve este metodo?
+
+  transition():void {
     this.router.navigate(['/clientes'],{
       queryParams:{
         page: JSON.stringify(this.page)
       },
       replaceUrl: true
     });
-
   }
-
 }

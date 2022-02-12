@@ -16,7 +16,7 @@ export class UpdateClientesComponent implements OnInit{
 
   isSaving = false;
   isUpdate = false;
-
+  value = '';
 
   myForm = this.fb.group({
     dni: [null, [Validators.required]],
@@ -24,7 +24,7 @@ export class UpdateClientesComponent implements OnInit{
     apellido: [null, [Validators.required]],
     telefono: [null, [Validators.required]],
     direccion: [null, [Validators.required]],
-    esMayorista: [null],
+    tipoCliente: [null],
     activo: [null],
   });
 
@@ -40,7 +40,11 @@ export class UpdateClientesComponent implements OnInit{
     const dni = this.activatedRoute.snapshot.paramMap.get('dni');
     if (dni){
       this.isUpdate = true;
-      this.clienteService.find(dni).subscribe((res: HttpResponse<ICliente>) => this.updateForm(res.body!));
+      this.clienteService.find(dni).subscribe((res: HttpResponse<ICliente>) => {
+        this.updateForm(res.body!)
+        this.value = res.body!.tipoCliente.toString()
+      });
+
     }
   }
   updateForm(cliente: ICliente): void{
@@ -50,7 +54,7 @@ export class UpdateClientesComponent implements OnInit{
       apellido: cliente.apellido,
       telefono: cliente.telefono,
       direccion: cliente.direccion,
-      esMayorista: cliente.esMayorista,
+      tipoCliente: cliente.tipoCliente.toString(),
       activo: cliente.activo,
     });
   }
@@ -60,15 +64,9 @@ export class UpdateClientesComponent implements OnInit{
   save(): void{
     this.isSaving = true;
     const cliente = this.createFromForm();
-    if (!cliente.esMayorista){
+  /*  if (!cliente.esMayorista){
       cliente.esMayorista = false;
-      /*
-      * CONSULTA:
-      * Es la unica forma que encontre de que me asigne por
-      * defecto falso en esMayorista
-      * */
-    }
-    console.log('Valor de esMayorista: ', cliente.esMayorista);
+    }*/
     if (this.isUpdate){
       this.subscribeToSaveResponse(this.clienteService.update(cliente));
       this.isUpdate = false;
@@ -83,14 +81,17 @@ export class UpdateClientesComponent implements OnInit{
       apellido: this.myForm.get(['apellido'])!.value,
       telefono: this.myForm.get(['telefono'])!.value,
       direccion: this.myForm.get(['direccion'])!.value,
-      esMayorista: this.myForm.get(['esMayorista'])!.value,
+      tipoCliente: this.myForm.get(['tipoCliente'])!.value,
       activo: this.myForm.get(['activo'])!.value,
     };
   }
   private subscribeToSaveResponse(result: Observable<HttpResponse<ICliente>>): void{
     result.subscribe(
       () => this.previousState(),
-      () => this.isSaving = false
+      (err) =>{
+        this.isSaving = false
+        console.log(err)
+      }
     );
   }
 }

@@ -4,6 +4,7 @@ import {ActivatedRoute} from '@angular/router';
 import {HttpResponse} from '@angular/common/http';
 import {VentasService} from './ventas.service';
 import {ICliente} from '../clientes/clientes.models';
+import {Items} from "./items.model";
 
 @Component({
   selector: 'app-ventas',
@@ -12,6 +13,7 @@ import {ICliente} from '../clientes/clientes.models';
 export class DetailVentasComponent implements OnInit{
   venta!: IDetailVenta;
   cliente!: ICliente;
+  items!: Items[];
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -23,12 +25,11 @@ export class DetailVentasComponent implements OnInit{
       this.ventasService.find(parseInt(id)).subscribe((res: HttpResponse<IDetailVenta>) => {
         this.venta = res.body!;
         this.cliente = this.venta.Cliente;
-        console.log('Venta encontrada: ', this.venta);
-        console.log('Cliente encontrado: ', this.cliente);
+        this.items = this.venta.Items;
       });
     }
   }
   previousState(): void{
-    window.history.back(); // ¿ Aprovecha una propiedad del DOM?
+    window.history.back();
   }
 }

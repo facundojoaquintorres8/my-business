@@ -95,3 +95,19 @@ button {
   margin-left: -35px;
   display: block;
 }
+
+.form-public {
+  margin-left: auto;
+  margin-right: auto;
+  width: 40%;
+}
+
+@media screen and (max-width: 600px) {
+  .form-public {
+    width: 100% !important;
+  }
+
+  .input-group {
+    min-width: 120px;
+  }
+}

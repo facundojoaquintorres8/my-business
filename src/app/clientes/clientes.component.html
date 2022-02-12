@@ -1,11 +1,9 @@
 <div class="container" >
-
   <h2>
     <button type="button" [routerLink]="['new']" class="btn btn-primary btn-icon" title="Dar de Alta un Cliente">
       <fa-icon icon="plus"></fa-icon>
     </button> Clientes
   </h2>
-
   <div class="card">
     <form class="form-filter" name="myForm" role="form" novalidate (ngSubmit)="onFilter()" [formGroup]="myForm" >
       <fa-icon *ngIf="collapsedFilter" icon="chevron-up" class="pointer filter-icon"
@@ -14,7 +12,6 @@
     <fa-icon *ngIf="!collapsedFilter" icon="chevron-down" class="pointer filter-icon"
       (click)="collapsedFilter = !collapsedFilter">
     </fa-icon>
-
     <ng-container *ngIf="!collapsedFilter" >
       <div class="row">
         <div class="col-lg-2" >
@@ -29,18 +26,19 @@
           <label for="apellido" class="form-label">Apellido</label>
           <input type="text" class="form-control" name="apellido" id="apellido" formControlName="apellido">
         </div>
-
       <div class="col-lg-1" >
         <div class="form-check form-switch">
           <label class="form-check-label" for="verInactivos" >Inactivos</label>
           <input class="form-check-input" type="checkbox" name="verInactivos" id="verInactivos" formControlName="verInactivos" >
         </div>
       </div>
-        <div class="col-lg-1" >
-          <div class="form-check form-switch">
-            <label class="form-check-label" for="esMayorista" >Mayorista</label>
-            <input class="form-check-input" type="checkbox" name="esMayorista" id="esMayorista" formControlName="esMayorista" >
-          </div>
+        <div class="col-lg-4">
+          <label for="tipoCliente" class="form-label">Tipo Cliente</label>
+          <select class="form-select" name="tipoCliente" id="tipoCliente" formControlName="tipoCliente" >
+            <option value="" [selected]="true" >TODOS</option>
+            <option value="mayorista">MAYORISTA</option>
+            <option value="minorista">MINORISTA</option>
+          </select>
         </div>
       </div>
       <div class="button-form-filter">
@@ -51,14 +49,9 @@
           <fa-icon icon="filter"></fa-icon>&nbsp;Filtrar
         </button>
       </div>
-
     </ng-container>
-
     </form>
-
   </div>
-
-
   <ngx-datatable
     class="material striped"
     [rows]="rows"
@@ -74,25 +67,18 @@
     [offset]="page.offset"
     [limit]="page.size"
     (page)="setPage($event)"
-
     >
-    <ngx-datatable-column name="dni" prop="dni"></ngx-datatable-column>
-    <ngx-datatable-column name="nombre" prop="nombre"></ngx-datatable-column>
-    <ngx-datatable-column name="apellido" prop="apellido"></ngx-datatable-column>
+    <ngx-datatable-column name="Dni" prop="dni"></ngx-datatable-column>
+    <ngx-datatable-column name="Nombre" prop="nombre"></ngx-datatable-column>
+    <ngx-datatable-column name="Apellido" prop="apellido"></ngx-datatable-column>
     <ngx-datatable-column  name="Activo" prop="activo" >
       <ng-template   let-value="value" let-row="row" ngx-datatable-cell-template >
         <fa-icon *ngIf="value" icon="check-square" class="text-success"></fa-icon>
         <fa-icon *ngIf="!value" icon="square" class="text-danger"></fa-icon>
       </ng-template>
     </ngx-datatable-column>
-    <ngx-datatable-column  name="Mayorista" prop="esMayorista" >
-      <ng-template   let-value="value" let-row="row" ngx-datatable-cell-template >
-        <fa-icon *ngIf="value" icon="check-square" class="text-success"></fa-icon>
-        <fa-icon *ngIf="!value" icon="square" class="text-danger"></fa-icon>
-      </ng-template>
-    </ngx-datatable-column>
-    <ngx-datatable-column  name="telefono" prop="telefono" ></ngx-datatable-column>
-    <ngx-datatable-column  name="direccion" prop="direccion" ></ngx-datatable-column>
+    <ngx-datatable-column name="Tipo Cliente" prop="tipoCliente"></ngx-datatable-column>
+    <ngx-datatable-column  name="Telefono" prop="telefono" ></ngx-datatable-column>
     <ngx-datatable-column name="" prop="dni" [sortable]="false" [cellClass]="'column-actions'">
       <ng-template let-value="value" let-row="row" ngx-datatable-cell-template>
         <button type="button" [routerLink]="['./',value,'edit']" class="btn btn-primary" title="Editar" >
@@ -105,8 +91,6 @@
           <fa-icon icon="times"></fa-icon>
         </button>
       </ng-template>
-
     </ngx-datatable-column>
   </ngx-datatable>
-
 </div>

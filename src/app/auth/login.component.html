@@ -1,0 +1,38 @@
+<div class="form-public">
+  <div class="card text-black bg-light">
+    <div class="card-header">
+      <h2>Iniciar Sesion</h2>
+    </div>
+    <div class="card-body">
+      <form name="myForm" role="form" novalidate (ngSubmit)="login()" [formGroup]="myForm">
+        <div class="row">
+          <div class="col-sm-12">
+            <div class="form-group">
+              <label class="form-control-label required" for="usuario">Usuario</label>
+              <input type="text" class="form-control" name="usuario" id="usuario" formControlName="usuario"/>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-12">
+            <div class="form-group">
+              <label class="form-control-label required" for="clave">Contraseña</label>
+              <input type="password" class="form-control" name="clave" id="clave" formControlName="clave"/>
+              <div
+                *ngIf="mensaje">
+                <small class="form-text text-danger">
+                  {{mensaje}}
+                </small>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="button-form mt-4">
+          <button type="submit" [disabled]="!myForm.valid" class="btn btn-primary" title="Confirmar">
+            &nbsp;Confirmar
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

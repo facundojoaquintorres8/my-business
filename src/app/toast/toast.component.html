@@ -1,0 +1,36 @@
+
+<div *ngIf="showErrorToast" class="toastd bg-danger text-white" role="alert" aria-live="assertive" aria-atomic="true">
+  <div class="toast-header">
+    <button type="button" class="btn btn-danger" data-dismiss="toast" aria-label="Close" (click)="closeAllToast()" title="Cerrar">
+      X
+    </button>
+    <strong class="ms-2 mr-auto"> Error </strong>
+  </div>
+  <div class="toast-body">
+    {{ errorMessage }}
+  </div>
+</div>
+
+<div *ngIf="showSuccessToast" class="toastd bg-success text-white" role="alert" aria-live="assertive" aria-atomic="true">
+  <div class="toast-header">
+    <button type="button" class="btn btn-primary" data-dismiss="toast" aria-label="Close" (click)="closeAllToast()" title="Cerrar">
+      X
+    </button>
+    <strong class="ms-2 mr-auto"> Éxito </strong>
+  </div>
+  <div class="toast-body">
+    {{ successMessage }}
+  </div>
+</div>
+
+<div *ngIf="showInfoToast" class="toastd bg-info text-white" role="alert" aria-live="assertive" aria-atomic="true">
+  <div class="toast-header">
+    <button type="button" class="btn btn-secondary" data-dismiss="toast" aria-label="Close" (click)="closeAllToast()" title="Cerrar">
+      X
+    </button>
+    <strong class="ms-2 mr-auto"> Info </strong>
+  </div>
+  <div class="toast-body">
+    {{ infoMessage }}
+  </div>
+</div>
