@@ -17,6 +17,6 @@ export interface ICompraItem {
 
 export interface ICompraCreate {
   fecha: Date;
-  proveedorId: number;
+  proveedor: IProveedor;
   itemsCompras: ICompraItem[];
 }
