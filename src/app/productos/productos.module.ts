@@ -6,10 +6,16 @@ import { SharedModule } from '../shared/shared.module';
 import { DetailProductoComponent } from './detail-productos.component';
 import { UpdateProductoComponent } from './update-productos.component';
 import { DeleteProductoModalComponent } from './delete-productos-modal.component';
+import { AddQuickProductoModalComponent } from './add-quick-productos-modal.component';
 
 @NgModule({
-  declarations: [ProductoComponent, DetailProductoComponent, UpdateProductoComponent, DeleteProductoModalComponent],
+  declarations: [
+    ProductoComponent,
+    DetailProductoComponent,
+    UpdateProductoComponent,
+    DeleteProductoModalComponent,
+    AddQuickProductoModalComponent],
   imports: [SharedModule, RouterModule.forChild(productoRoutes)],
-  entryComponents: [DeleteProductoModalComponent]
+  entryComponents: [DeleteProductoModalComponent, AddQuickProductoModalComponent]
 })
 export class ProductoModule {}

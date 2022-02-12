@@ -1,0 +1,79 @@
+<div class="container">
+    <form name="myForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="myForm">
+        <h2>Crear Producto</h2>
+        <div class="card">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="form-group">
+                        <label class="form-control-label required" for="descripcion">Descripción</label>
+                        <input type="text" class="form-control" name="descripcion" id="descripcion"
+                            formControlName="descripcion" />
+                        <div
+                            *ngIf="myForm.get('descripcion')!.invalid && (myForm.get('descripcion')!.dirty || myForm.get('descripcion')!.touched)">
+                            <small class="form-text text-danger" *ngIf="myForm.get('descripcion')?.errors?.required">
+                                El campo es requerido.
+                            </small>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="form-group">
+                        <label class="form-control-label required" for="categoriaId">Categoría</label>
+                        <select type="text" class="form-control" name="categoriaId" id="categoriaId"
+                            formControlName="categoriaId">
+                            <option [ngValue]="null">Seleccione</option>
+                            <option [value]="categoria.id" *ngFor="let categoria of categorias">{{categoria.descripcion}}</option>
+                        </select>
+                        <div
+                            *ngIf="myForm.get('categoriaId')!.invalid && (myForm.get('categoriaId')!.dirty || myForm.get('categoriaId')!.touched)">
+                            <small class="form-text text-danger" *ngIf="myForm.get('categoriaId')?.errors?.required">
+                                El campo es requerido.
+                            </small>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="form-group">
+                        <label class="form-control-label required" for="cantidadMinima">Cantidad mínima</label>
+                        <input type="number" class="form-control" name="cantidadMinima" id="cantidadMinima"
+                            formControlName="cantidadMinima" />
+                        <div
+                            *ngIf="myForm.get('cantidadMinima')!.invalid && (myForm.get('cantidadMinima')!.dirty || myForm.get('cantidadMinima')!.touched)">
+                            <small class="form-text text-danger" *ngIf="myForm.get('cantidadMinima')?.errors?.required">
+                                El campo es requerido.
+                            </small>
+                            <small class="form-text text-danger" *ngIf="myForm.get('cantidadMinima')?.errors?.min">
+                                Debe ingresar un número mayor o igual a 0.
+                            </small>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="form-group">
+                        <label class="form-control-label required" for="precioVenta">Precio Venta</label>
+                        <input type="number" class="form-control" name="precioVenta" id="precioVenta"
+                            formControlName="precioVenta"/>
+                        <div
+                            *ngIf="myForm.get('precioVenta')!.invalid && (myForm.get('precioVenta')!.dirty || myForm.get('precioVenta')!.touched)">
+                            <small class="form-text text-danger" *ngIf="myForm.get('precioVenta')?.errors?.required">
+                                El campo es requerido.
+                            </small>
+                            <small class="form-text text-danger" *ngIf="myForm.get('precioVenta')?.errors?.min">
+                                Debe ingresar un número mayor o igual a 0.
+                            </small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="button-form mt-4">
+                <button type="button" class="btn btn-secondary" (click)="cancel()" title="Cancelar">
+                    <fa-icon icon="ban"></fa-icon>&nbsp;Cancelar
+                </button>
+                <button type="submit" [disabled]="myForm.invalid" class="btn btn-primary" title="Guardar">
+                    <fa-icon icon="save"></fa-icon>&nbsp;Guardar
+                </button>
+            </div>
+        </div>
+    </form>
+</div>

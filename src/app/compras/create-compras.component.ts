@@ -1,46 +1,34 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpResponse } from '@angular/common/http';
-import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { ComprasService } from './compras.service';
-import { ICompra, ICompraCreate, ICompraItem } from './compras.model';
+import { ICompra, ICompraCreate } from './compras.model';
 import { IProveedor } from '../proveedores/proveedores.models';
 import { ProveedorService } from '../proveedores/proveedores.service';
 import { ProductoService } from '../productos/productos.service';
 import { IProducto } from '../productos/productos.models';
+import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
+import { AddQuickProductoModalComponent } from '../productos/add-quick-productos-modal.component';
+import { AddQuickProveedorModalComponent } from '../proveedores/add-quick-proveedores-modal.component';
 
 @Component({
   selector: 'app-create-compras',
   templateUrl: './create-compras.component.html'
 })
 export class CreateCompraComponent implements OnInit {
+  private ngbModalRef: NgbModalRef | undefined;
   isSaving = false;
 
-  // itemsCompras: ICompraItem[] = [];
   proveedores: IProveedor[] = [];
   productos: IProducto[] = [];
-  // itemsCompras: FormArray = new FormArray([]);
 
   myForm = this.fb.group({
-    fecha: [new Date(), [Validators.required]], // TODO: set today
-    proveedorId: [null, [Validators.required]],
-    // itemsCompras: this.fb.array([]),
-    itemsCompras: new FormArray([
-        this.fb.group({
-          producto: [null, [Validators.required]],
-          cantidad: [null, [Validators.required, Validators.min(0)]],
-          precio: [null, [Validators.required, Validators.min(0)]]
-        })
-     ])
-    // itemsCompras: this.fb.array(
-    //   [
-    //     this.fb.group({
-    //       producto: [null, [Validators.required]],
-    //       cantidad: [null, [Validators.required, Validators.min(0)]]
-    //       // precio: [null, [Validators.required, Validators.min(0)]],
-    //     })
-    //   ]
-    // )
+    fecha: [new Date().toISOString().substring(0, 10), [Validators.required]],
+    proveedor: [null, [Validators.required]],
+    itemsCompras: this.fb.array([
+      this.initItems()
+    ])
   });
 
   constructor(
@@ -48,104 +36,96 @@ export class CreateCompraComponent implements OnInit {
     private comprasService: ComprasService,
     private proveedorService: ProveedorService,
     private productoService: ProductoService,
+    private modelService: NgbModal
   ) { }
 
   ngOnInit(): void {
-    this.proveedorService.findAll({
-      limit: 0
-    }).subscribe(
+    this.proveedorService.findAll({ limit: 0, activo: true }).subscribe(
       (res) => this.proveedores = res.body.rows
     );
 
-    this.productoService.findAll({
-      limit: 0
-    }).subscribe(
+    this.productoService.findAll({ limit: 0, activo: true }).subscribe(
       (res) => this.productos = res.body.rows
     );
+  }
 
-    // this.addItem();
+  initItems(): FormGroup {
+    return this.fb.group({
+      producto: [null, [Validators.required]],
+      cantidad: [null, [Validators.required, Validators.min(0.00001)]],
+      precio: [null, [Validators.required, Validators.min(0)]],
+    });
+  }
+
+  addItem(): void {
+    const control = <FormArray>this.myForm.controls['itemsCompras'];
+    control.push(this.initItems());
+  }
+
+  deleteItem(index: any): void  {
+    this.itemsCompras.removeAt(index);
+  }
+
+  get itemsCompras() {
+    return this.myForm.get('itemsCompras') as FormArray;
+  }
+
+  getControls(): AbstractControl[] {
+    return (<FormArray>this.myForm.get('itemsCompras')).controls;
+  }
+
+  addProveedor(): void {
+    this.ngbModalRef = this.modelService.open(AddQuickProveedorModalComponent, { size: 'md', backdrop: 'static' });
+    this.ngbModalRef.result.then(
+      res => {
+        this.ngbModalRef = undefined;
+        this.proveedores.push(res);
+        this.proveedores.sort((n1, n2) => {
+          if (n1.razonSocial.toLowerCase() > n2.razonSocial.toLowerCase()) {
+            return 1;
+          }
+          if (n1.razonSocial.toLowerCase() < n2.razonSocial.toLowerCase()) {
+            return -1;
+          }
+          return 0;
+        });
+        this.myForm.get(['proveedor'])!.setValue(res);
+      },
+      () => {
+        this.ngbModalRef = undefined;
+      }
+    );
+  }
+
+  addProducto(index: any): void {
+    this.ngbModalRef = this.modelService.open(AddQuickProductoModalComponent, { size: 'md', backdrop: 'static' });
+    this.ngbModalRef.result.then(
+      res => {
+        this.ngbModalRef = undefined;
+        this.productos.push(res);
+        this.productos.sort((n1, n2) => {
+          if (n1.descripcion.toLowerCase() > n2.descripcion.toLowerCase()) {
+            return 1;
+          }
+          if (n1.descripcion.toLowerCase() < n2.descripcion.toLowerCase()) {
+            return -1;
+          }
+          return 0;
+        });
+        this.myForm.get('itemsCompras.' + index)?.get(['producto'])!.setValue(res);
+      },
+      () => {
+        this.ngbModalRef = undefined;
+      }
+    );
   }
 
   previousState(): void {
     window.history.back();
   }
 
-  // addItem1() {
-  //   this.itemsCompras.push(new FormControl(
-  //     this.fb.group({
-  //       producto: [null, [Validators.required]],
-  //       cantidad: [null, [Validators.required, Validators.min(0)]]
-  //       // precio: [null, [Validators.required, Validators.min(0)]],
-  //     })
-  //   ));
-  // }
-
-  // deleteItem2(i: number) {
-  //   this.itemsCompras.controls = this.itemsCompras.controls.filter(x => x !== this.itemsCompras.controls[i]);
-  // }
-
-  get itemsCompras() {
-    return this.myForm.get('itemsCompras') as FormArray;
-  }
-
-  addItem() {
-    const producto = new FormControl('producto', [Validators.required]);
-    const cantidad = new FormControl('cantidad', [Validators.required, Validators.min(0)]);
-    const stock = new FormControl('stock', [Validators.required, Validators.min(0)]);
-    this.itemsCompras.controls.push(
-      new FormGroup({
-        producto, cantidad, stock
-      })
-    );
-    // this.itemsCompras.patchValue(
-    //   [producto, cantidad, stock]
-    // )
-    // this.itemsCompras.push(
-    //   this.fb.group({
-    //     cantidad: [null, Validators.required]
-    //   })
-    // );
-
-    //  this.itemsCompras.controls.push(this.fb.group({
-    //    cantidad: [null, Validators.required]
-    //  }));
-
-    //  this.itemsCompras.controls = [...this.itemsCompras.controls];
-  }
-
-  deleteItem(index: any) {
-    // console.log(index);
-    this.itemsCompras.removeAt(index);
-  }
-
-  // addItem2() {
-  //   const it = (this.myForm.get('itemsCompras') as FormArray);
-  //   it.push(this.fb.group({
-  //     cantidad: [null, Validators.required]
-  //   }));
-  // }
-
-  // deleteItem2(i: number) {
-  //   const fa = (this.myForm.get('itemsCompras') as FormArray);
-  //   console.log(fa);
-  //   // fa.removeAt(i);
-  //   // if(fa.length===0) this.addItem();
-  // }
-
-  getControls() {
-    return (<FormArray>this.myForm.get('itemsCompras')).controls;
-  }
-
-  // hasError(i: number):boolean {
-  //   // const control = <FormArray>this.form.controls['emailsArray'];
-  //   return this.itemsCompras.controls[i].get('cantidad')!.hasError('invalidEmail');
-  // }
-  // isTouched(i: number):boolean {
-  //   const control = this.itemsCompras.controls[i].get('cantidad');
-  //   return control !== null && control.touched;
-  // }
-
   save(): void {
+    console.log(this.createFromForm());
     this.isSaving = true;
     this.subscribeToSaveResponse(this.comprasService.create(this.createFromForm()));
   }
@@ -153,19 +133,10 @@ export class CreateCompraComponent implements OnInit {
   private createFromForm(): ICompraCreate {
     return {
       fecha: this.myForm.get(['fecha'])!.value,
-      proveedorId: this.myForm.get(['proveedorId'])!.value,
+      proveedor: this.myForm.get(['proveedor'])!.value,
       itemsCompras: this.myForm.get(['itemsCompras'])!.value,
     };
   }
-
-  // private createFromFormItems(): IComprasItems {
-  //   return {
-  //     id: this.myForm.get(['id'])!.value,
-  //     precio: this.myForm.get(['precio'])!.value,
-  //     cantidad: this.myForm.get(['cantidad'])!.value,
-  //     producto: this.myForm.get(['producto'])!.value, // TODO: object 
-  //   };
-  // }
 
   private subscribeToSaveResponse(result: Observable<HttpResponse<ICompra>>): void {
     result.subscribe(
