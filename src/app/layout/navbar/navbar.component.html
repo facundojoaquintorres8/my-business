@@ -31,6 +31,14 @@
       </ul>
     </div>
     <div class="d-flex flex-row-reverse" id="navbarSupportedContent2">
+    <form class="form-filter" name="myForm" role="form" novalidate [formGroup]="myForm" >
+      <select class="form-select" name="rol" id="rol" (change)="onChangeValue($event)"
+              formControlName="select" >
+        <option [ngValue]="null" >Usuario</option>
+        <option value="2">Cambiar Contraseña</option>
+        <option value="3">Cerrar Sesion</option>
+      </select>
+    </form>
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
           <div class="userSquare">

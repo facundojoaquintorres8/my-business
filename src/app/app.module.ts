@@ -11,6 +11,7 @@ import { NavbarComponent } from './layout/navbar/navbar.component';
 import {AuthGuards} from "./security/auth-guards";
 import {TokenInterceptor} from "./security/token-interceptor";
 import {ToastComponent} from "./toast/toast.component";
+import {ReactiveFormsModule} from "@angular/forms";
 
 const APP_CONTAINERS = [
   PublicLayoutComponent,
@@ -29,6 +30,7 @@ const APP_CONTAINERS = [
     AppRoutingModule,
     HttpClientModule,
     FontAwesomeModule,
+    ReactiveFormsModule,
   ],
   exports: [ToastComponent],
   providers: [{
