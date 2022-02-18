@@ -25,18 +25,18 @@ export class NavbarComponent implements OnInit{
 
   ngOnInit(): void {
     this.user = this.authService.getSessionUser()!;
+    console.log('iniciando');
   }
   onChangeValue(event: any){
-    console.log('Entrando en change pass',event.target.value );
-    console.log('algo',this.myForm.get(['select']));
-
     let valor = event.target.value;
     if(valor === '2'){
-      console.log('Elegiste la opcion 2');
+      this.myForm.setValue({select:'1'});
       this.router.navigate(['cuenta/cambiar-clave'])
     }else if(valor ==='3'){
+      this.myForm.setValue({select:'1'});
       this.logout();
     }
+
   }
   logout(): void {
     this.authService.logout();
