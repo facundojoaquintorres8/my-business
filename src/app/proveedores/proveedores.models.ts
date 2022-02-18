@@ -7,3 +7,11 @@ export interface IProveedor {
   direccion?: string;
   activo: boolean;
 }
+
+export interface IQuickProveedor {
+  cuitDni: number;
+  razonSocial: string;
+  telefono?: string;
+  email?: string;
+}
+

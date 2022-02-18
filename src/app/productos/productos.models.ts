@@ -21,6 +21,13 @@ export interface IProductoUpdate {
   activo: boolean;
 }
 
+export interface IQuickProducto {
+  descripcion: string;
+  cantidadMinima: number;
+  precioVenta: number;
+  categoriaId: number;
+}
+
 export interface IPrecios {
   id: number;
   fecha: Date;

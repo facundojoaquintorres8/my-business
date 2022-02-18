@@ -1,22 +1,22 @@
 import { Routes } from '@angular/router';
-import {ClientesComponent} from './clientes.component';
+import { ClientesComponent } from './clientes.component';
 import { PagingParamsResolve } from '../util/paging-params-resolve';
-import {UpdateClientesComponent} from './update-clientes.component';
-import {DetailClientesComponent} from './detail-clientes.component';
-import {AuthGuards} from "../security/auth-guards";
+import { UpdateClientesComponent } from './update-clientes.component';
+import { DetailClientesComponent } from './detail-clientes.component';
+import { AuthGuards } from "../security/auth-guards";
 
 
 export const clientesRoutes: Routes = [
   {
-   path: '',
-   component: ClientesComponent,
-   resolve: {
-       paginParams: PagingParamsResolve
-   },
-   data: {
-       title: 'Clientes',
-     permissions: ['Administrador','Ventas','Supervisor']
-   },
+    path: '',
+    component: ClientesComponent,
+    resolve: {
+      paginParams: PagingParamsResolve
+    },
+    data: {
+      title: 'Clientes',
+      permissions: ['Administrador', 'Ventas', 'Supervisor']
+    },
     canActivate: [AuthGuards]
   },
   {
@@ -26,8 +26,8 @@ export const clientesRoutes: Routes = [
       paginParams: PagingParamsResolve
     },
     data: {
-      title: 'Clientes-New',
-      permissions: ['Administrador','Ventas','Supervisor']
+      title: 'Crear Cliente',
+      permissions: ['Administrador', 'Ventas', 'Supervisor']
     },
     canActivate: [AuthGuards]
   },
@@ -38,8 +38,8 @@ export const clientesRoutes: Routes = [
       paginParams: PagingParamsResolve
     },
     data: {
-      title: 'Clientes-Edit',
-      permissions: ['Administrador','Ventas','Supervisor']
+      title: 'Actualizar Cliente',
+      permissions: ['Administrador', 'Ventas', 'Supervisor']
     },
     canActivate: [AuthGuards]
   },
@@ -48,7 +48,7 @@ export const clientesRoutes: Routes = [
     component: DetailClientesComponent,
     data: {
       title: 'Detalle del Cliente.',
-      permissions: ['Administrador','Ventas','Supervisor']
+      permissions: ['Administrador', 'Ventas', 'Supervisor']
     },
     canActivate: [AuthGuards]
   }

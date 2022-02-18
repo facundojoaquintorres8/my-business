@@ -7,7 +7,7 @@
           <div class="col-lg-2">
             <div class="form-group">
               <label class="form-control-label required" for="dni">DNI</label>
-              <input type="text" class="form-control" id="dni" name="dni" formControlName="dni" [readOnly]="isUpdate">
+              <input type="text" class="form-control" id="dni" name="dni" formControlName="dni" [readOnly]="!myForm.get('id')!.value">
               <div  *ngIf="myForm.get('dni')!.invalid && (myForm.get('dni')!.dirty || myForm.get('dni')!.touched)">
                 <small class="form-text text-danger" *ngIf="myForm.get('dni')?.errors?.required">
                   El campo es requerido.
@@ -68,7 +68,7 @@
               </select>
             </div>
           </div>
-          <div class="col-lg-1" *ngIf="isUpdate">
+          <div class="col-lg-1" *ngIf="myForm.get('id')!.value">
             <div class="form-check form-switch">
               <label class="form-check-label" for="activo">Activo</label>
               <input type="checkbox" class="form-check-input" id="activo" name="activo" formControlName="activo">
