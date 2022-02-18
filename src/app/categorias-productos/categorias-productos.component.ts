@@ -60,11 +60,16 @@ export class CategoriaProductoComponent implements OnInit {
         order: this.page.order
       }
     }).subscribe(res => {
+      console.log('body', res.body );
+      console.log('rows:',res.body.rows)
       this.rows = res.body.rows;
       this.loading = false;
       this.page.totalElements = res.body.count;
       this.page.totalPages = totalPages(this.page.size, this.page.totalElements);
-    }, () => this.loading = false);
+    }, (err) => {
+      this.loading = false;
+      console.log('msg',err);
+    });
   }
 
   onSort(event: any): void {

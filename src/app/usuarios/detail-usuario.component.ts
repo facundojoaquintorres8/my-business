@@ -5,6 +5,8 @@ import { ActivatedRoute } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { HttpResponse } from '@angular/common/http';
 import { DeleteUsuariosModalComponent } from './delete-usuarios-modal.component';
+import {AuthService} from '../auth/auth.service';
+import {ITokenUser} from "../auth/auth.models";
 
 @Component({
   selector: 'app-detail-usuarios',
@@ -12,12 +14,14 @@ import { DeleteUsuariosModalComponent } from './delete-usuarios-modal.component'
 })
 export class DetailUsuarioComponent implements OnInit {
   user!: IUser;
+  tokenUser!: ITokenUser;
   ngbModalRef: any;
 
   constructor(
     private usuarioService: UsuariosService,
     private activatedRoute: ActivatedRoute,
     private modalService: NgbModal,
+    private authService: AuthService
   ) { }
 
   ngOnInit(): void {
@@ -29,6 +33,7 @@ export class DetailUsuarioComponent implements OnInit {
         }
       );
     }
+    this.tokenUser = this.authService.getSessionUser();
   }
 
   previousState(): void {
