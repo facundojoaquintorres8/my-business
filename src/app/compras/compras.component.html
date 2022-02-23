@@ -16,11 +16,21 @@
 
       <ng-container *ngIf="!collapsedFilter">
         <div class="row">
-          <!-- <div class="col-lg-2">
-            <label for="ClienteDni" class="form-label">DNI</label>
-            <input type="text" class="form-control" name="ClienteDni" id="ClienteDni" formControlName="ClienteDni">
-          </div> -->
-
+          <div class="col-lg-3">
+            <label for="proveedorId" class="form-label">Proveedor</label>
+            <select type="text" class="form-control" name="proveedorId" id="proveedorId" formControlName="proveedorId">
+              <option [ngValue]="null">Seleccione</option>
+              <option [value]="proveedor.id" *ngFor="let proveedor of proveedores">{{proveedor.razonSocial}}</option>
+            </select>
+          </div>
+          <div class="col-lg-3">
+            <label for="desde" class="form-label">Desde</label>
+            <input type="date" class="form-control" name="desde" id="desde" formControlName="desde" />
+          </div>
+          <div class="col-lg-3">
+            <label for="proveedorId" class="form-label">Hasta</label>
+            <input type="date" class="form-control" name="hasta" id="hasta" formControlName="hasta" />
+          </div>
         </div>
         <div class="button-form-filter">
           <button type="button" class="btn btn-secondary" (click)="clearFilter()" title="Limpiar">
@@ -41,9 +51,17 @@
     [externalPaging]="true" [count]="page.totalElements" [offset]="page.offset" [limit]="page.size"
     (page)="setPage($event)">
 
-    <ngx-datatable-column name="Fecha" prop="fecha"></ngx-datatable-column>
+    <ngx-datatable-column name="Fecha" prop="fecha">
+      <ng-template let-value="value" ngx-datatable-cell-template>
+        {{value | date: 'dd/MM/yyyy'}}
+      </ng-template>
+    </ngx-datatable-column>
     <ngx-datatable-column name="Proveedor" prop="proveedor.razonSocial"></ngx-datatable-column>
-    <!-- <ngx-datatable-column name="Monto" prop="calculateMonto()"></ngx-datatable-column> -->
+    <ngx-datatable-column name="Monto" prop="comprasItems" [sortable]="false">
+      <ng-template let-value="value" ngx-datatable-cell-template>
+        ${{calculateMonto(value)}}
+      </ng-template>
+    </ngx-datatable-column>
     <ngx-datatable-column name="" prop="id" [sortable]="false" [cellClass]="'column-actions'">
       <ng-template let-value="value" let-row="row" ngx-datatable-cell-template>
         <button type="button" [routerLink]="['./', value, 'view']" class="btn btn-primary" title="Ver">

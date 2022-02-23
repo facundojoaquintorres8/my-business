@@ -14,9 +14,13 @@ export class ComprasService {
   constructor(private http: HttpClient) { }
 
   findAll(filter: any): Observable<HttpResponse<any>> {
-    filter['order'] = filter['order'] ? filter['order'] : ['id', 'ASC'];
+    filter['order'] = filter['order'] ? filter['order'] : ['fecha', 'DESC'];
     const options = createRequestOption(filter);
     return this.http.get<any>(`${this.resourceUrl}`, { params: options, observe: 'response' });
+  }
+
+  find(id: number): Observable<HttpResponse<ICompra>> {
+    return this.http.get<ICompra>(`${this.resourceUrl}/${id}`, { observe: 'response' });
   }
 
   create(compra: ICompraCreate): Observable<HttpResponse<ICompra>> {

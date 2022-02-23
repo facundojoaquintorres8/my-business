@@ -2,6 +2,7 @@ import { Routes } from '@angular/router';
 import { PagingParamsResolve } from '../util/paging-params-resolve';
 import { CompraComponent } from './compras.component';
 import { CreateCompraComponent } from './create-compras.component';
+import { DetailCompraComponent } from './detail-compras.component';
 
 export const comprasRoute: Routes = [
   {
@@ -21,11 +22,11 @@ export const comprasRoute: Routes = [
       title: 'Comprar',
     },
   },
-  // {
-  //   path: ':id/view',
-  //   component: DetailProductoComponent,
-  //   data: {
-  //     title: 'Detalle de Producto',
-  //   },
-  // }
+  {
+    path: ':id/view',
+    component: DetailCompraComponent,
+    data: {
+      title: 'Detalle de Compra',
+    },
+  }
 ];

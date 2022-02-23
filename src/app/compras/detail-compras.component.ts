@@ -1,49 +1,37 @@
-// import { HttpResponse } from '@angular/common/http';
-// import { Component, OnInit } from '@angular/core';
-// import { ActivatedRoute } from '@angular/router';
-// import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
-// import { IProveedor } from './compras.models';
-// import { ProveedorService } from './compras.service';
-// import { DeleteProveedorModalComponent } from './delete-compras-modal.component';
+import { HttpResponse } from '@angular/common/http';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { IPage, newPage } from '../shared/page.models';
+import { ICompra } from './compras.model';
+import { ComprasService } from './compras.service';
 
-// @Component({
-//   selector: 'app-detail-compras',
-//   templateUrl: './detail-compras.component.html'
-// })
-// export class DetailProveedorComponent implements OnInit {
-//   private ngbModalRef: NgbModalRef | undefined;
+@Component({
+  selector: 'app-detail-compras',
+  templateUrl: './detail-compras.component.html'
+})
+export class DetailCompraComponent implements OnInit {
 
-//   proveedor!: IProveedor;
+  compra!: ICompra;
+  page!: IPage;
 
-//   constructor(
-//     private productoService: ProveedorService,
-//     private activatedRoute: ActivatedRoute,
-//     private modalService: NgbModal,
-//   ) {}
+  constructor(
+    private comprasService: ComprasService,
+    private activatedRoute: ActivatedRoute,
+  ) {}
 
-//   ngOnInit(): void {
-//     const id = this.activatedRoute.snapshot.paramMap.get("id");
-//     if (id) {
-//       this.productoService.find(parseInt(id)).subscribe(
-//         (res: HttpResponse<IProveedor>) =>  this.proveedor = res.body!
-//       );
-//     }
-//   }
+  ngOnInit(): void {
+    const id = this.activatedRoute.snapshot.paramMap.get("id");
+    if (id) {
+      this.comprasService.find(parseInt(id)).subscribe(
+        (res: HttpResponse<ICompra>) =>  this.compra = res.body!
+      );
 
-//   delete(id: number): void {
-//     this.ngbModalRef = this.modalService.open(DeleteProveedorModalComponent, { size: 'lg', backdrop: 'static' });
-//     this.ngbModalRef.componentInstance.id = id;
-//     this.ngbModalRef.result.then(
-//       () => {
-//         this.previousState();
-//       },
-//       () => {
-//         this.ngbModalRef = undefined;
-//       }
-//     );
-//   }
+      this.page = newPage({}, ['id', 'ASC']);
 
-//   previousState(): void {
-//     window.history.back();
-//   }
-// }
+    }
+  }
+
+  previousState(): void {
+    window.history.back();
+  }
+}

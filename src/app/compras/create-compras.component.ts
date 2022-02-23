@@ -112,6 +112,7 @@ export class CreateCompraComponent implements OnInit {
           }
           return 0;
         });
+        console.log(res);
         this.myForm.get('itemsCompras.' + index)?.get(['producto'])!.setValue(res);
       },
       () => {

@@ -4,11 +4,13 @@ import { SharedModule } from '../shared/shared.module';
 import { CompraComponent } from './compras.component';
 import { comprasRoute } from './compras.route';
 import { CreateCompraComponent } from './create-compras.component';
+import { DetailCompraComponent } from './detail-compras.component';
 
 @NgModule({
   declarations: [
     CompraComponent,
-    CreateCompraComponent
+    CreateCompraComponent,
+    DetailCompraComponent
   ],
   imports: [
     SharedModule,
