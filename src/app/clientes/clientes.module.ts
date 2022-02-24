@@ -8,18 +8,21 @@ import { ClientesComponent } from './clientes.component';
 import { DeleteClientesModalComponent } from './delete-clientes-modal.component';
 import { UpdateClientesComponent } from './update-clientes.component';
 import { DetailClientesComponent } from './detail-clientes.component';
+import { AddQuickClienteModalComponent } from './add-quick-clientes-modal.component';
 
 
 @NgModule({
   declarations: [ClientesComponent,
     DeleteClientesModalComponent,
     UpdateClientesComponent,
-    DetailClientesComponent],
+    DetailClientesComponent,
+    AddQuickClienteModalComponent,
+  ],
   imports: [
     CommonModule,
     SharedModule,
     RouterModule.forChild(clientesRoutes)
   ],
-  entryComponents: [DeleteClientesModalComponent]
+  entryComponents: [DeleteClientesModalComponent, AddQuickClienteModalComponent]
 })
 export class ClientesModule { }

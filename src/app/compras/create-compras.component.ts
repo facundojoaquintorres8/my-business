@@ -126,7 +126,6 @@ export class CreateCompraComponent implements OnInit {
   }
 
   save(): void {
-    console.log(this.createFromForm());
     this.isSaving = true;
     this.subscribeToSaveResponse(this.comprasService.create(this.createFromForm()));
   }

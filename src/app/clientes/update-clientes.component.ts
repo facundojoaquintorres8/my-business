@@ -20,9 +20,9 @@ export class UpdateClientesComponent implements OnInit {
     dni: [null, [Validators.required]],
     nombre: [null, [Validators.required]],
     apellido: [null, [Validators.required]],
-    telefono: [null, [Validators.required]],
-    direccion: [null, [Validators.required]],
-    tipoCliente: [null],
+    tipo: [null, [Validators.required]],
+    telefono: [null],
+    direccion: [null],
     activo: [null],
   });
 
@@ -38,11 +38,12 @@ export class UpdateClientesComponent implements OnInit {
     if (dni) {
       this.clienteService.find(dni).subscribe((res: HttpResponse<ICliente>) => {
         this.updateForm(res.body!)
-        this.value = res.body!.tipoCliente.toString()
+        this.value = res.body!.tipo.toString()
       });
 
     }
   }
+
   updateForm(cliente: ICliente): void {
     this.myForm.patchValue({
       dni: cliente.dni,
@@ -50,7 +51,7 @@ export class UpdateClientesComponent implements OnInit {
       apellido: cliente.apellido,
       telefono: cliente.telefono,
       direccion: cliente.direccion,
-      tipoCliente: cliente.tipoCliente.toString(),
+      tipo: cliente.tipo.toString(),
       activo: cliente.activo,
     });
   }
@@ -76,7 +77,7 @@ export class UpdateClientesComponent implements OnInit {
       apellido: this.myForm.get(['apellido'])!.value,
       telefono: this.myForm.get(['telefono'])!.value,
       direccion: this.myForm.get(['direccion'])!.value,
-      tipoCliente: this.myForm.get(['tipoCliente'])!.value,
+      tipo: this.myForm.get(['tipo'])!.value,
       activo: this.myForm.get(['activo'])!.value,
     };
   }

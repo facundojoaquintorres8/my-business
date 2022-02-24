@@ -1,32 +1,32 @@
 import { Routes } from '@angular/router';
 import { PagingParamsResolve } from '../util/paging-params-resolve';
-import { VentaComponent } from './venta.component';
-import { DetailVentasComponent } from './detail-ventas.component';
-import { AuthGuards } from "../security/auth-guards";
+import { VentasComponent } from './ventas.component';
+import { CreateVentaComponent } from './create-ventas.component';
+import { DetailVentaComponent } from './detail-ventas.component';
 
 export const ventasRoute: Routes = [
   {
     path: '',
-    component: VentaComponent,
+    component: VentasComponent,
     resolve: {
       paginParams: PagingParamsResolve
     },
     data: {
-      title: 'Ventas',
-      permissions: ['Administrador', 'Ventas', 'Supervisor']
+      title: 'Ventas'
+    }
+  },
+  {
+    path: 'new',
+    component: CreateVentaComponent,
+    data: {
+      title: 'Ventar',
     },
-    canActivate: [AuthGuards]
   },
   {
     path: ':id/view',
-    component: DetailVentasComponent,
-    resolve: {
-      paginParams: PagingParamsResolve
-    },
+    component: DetailVentaComponent,
     data: {
-      title: 'Detalle Venta',
-      permissions: ['Administrador', 'Ventas', 'Supervisor']
+      title: 'Detalle de Venta',
     },
-    canActivate: [AuthGuards]
   }
 ];

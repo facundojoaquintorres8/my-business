@@ -1,60 +1,74 @@
 import { Component, OnInit } from '@angular/core';
-import { IVentas } from './ventas.model';
+import { IVenta, IVentaItem } from './ventas.model';
 import { IPage, newPage, totalPages } from '../shared/page.models';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormBuilder } from '@angular/forms';
 import { VentasService } from './ventas.service';
+import { ICliente } from '../clientes/clientes.models';
+import { ClientesService } from '../clientes/clientes.service';
 
 @Component({
   selector: 'app-ventas',
   templateUrl: './ventas.component.html'
-
 })
-export class VentaComponent implements OnInit {
+export class VentasComponent implements OnInit {
 
   collapsedFilter = false;
   page!: IPage;
   myForm = this.fb.group({
-    ClienteDni: [null],
-    nomTarjeta: [null],
-    numTarjeta: [null],
+    clienteId: [null],
+    desde: [null],
+    hasta: [null]
   });
-  rows: IVentas[] = [];
+  rows: IVenta[] = [];
   loading = false;
+
+  clientes: ICliente[] = [];
 
   constructor(
     private router: Router,
     private activatedRoute: ActivatedRoute,
     private fb: FormBuilder,
     private ventasService: VentasService,
+    private clienteService: ClientesService,
   ) {
     this.activatedRoute.data.subscribe(data => {
-      this.page = data.pagingParams ? data.pagingParams : newPage({}, ['id', 'ASC']);
+      this.page = data.pagingParams ? data.pagingParams : newPage({}, ['fecha', 'DESC']);
     });
   }
 
-  ngOnInit(): void {
+  ngOnInit() {
+    this.clienteService.findAll({
+      limit: 0,
+      activo: true
+    }).subscribe(
+      (res) => this.clientes = res.body.rows
+    );
+
     this.findAll();
   }
 
-  onFilter(): void {
+  onFilter() {
     this.page.filter = {};
 
-    if (this.myForm.get(['ClienteDni'])!.value) {
+    if (this.myForm.get(['clienteId'])!.value) {
       Object.assign(this.page.filter, {
-        dni: this.myForm.get(['ClienteDni'])!.value.toLowerCase()
+        clienteId: this.myForm.get(['clienteId'])!.value
       });
     }
-    if (this.myForm.get(['nomTarjeta'])!.value) {
+
+    if (this.myForm.get(['desde'])!.value) {
       Object.assign(this.page.filter, {
-        nomTarjeta: this.myForm.get(['nomTarjeta'])!.value.toLowerCase()
+        desde: this.myForm.get(['desde'])!.value
       });
     }
-    if (this.myForm.get(['numTarjeta'])!.value) {
+
+    if (this.myForm.get(['hasta'])!.value) {
       Object.assign(this.page.filter, {
-        numTarjeta: this.myForm.get(['numTarjeta'])!.value.toLowerCase()
+        hasta: this.myForm.get(['hasta'])!.value + ' 23:59'
       });
     }
+
     this.findAll();
   }
 
@@ -73,7 +87,6 @@ export class VentaComponent implements OnInit {
       this.page.totalElements = res.body.count;
       this.page.totalPages = totalPages(this.page.size, this.page.totalElements);
     }, () => this.loading = false);
-
   }
 
   onSort(event: any): void {
@@ -89,9 +102,9 @@ export class VentaComponent implements OnInit {
   clearFilter(): void {
     this.page.filter = {};
     this.page = newPage(this.page.filter, this.page.order);
-    this.myForm.get(['ClienteDni'])!.setValue('');
-    this.myForm.get(['nomTarjeta'])!.setValue('');
-    this.myForm.get(['numTarjeta'])!.setValue('');
+    this.myForm.get(['clienteId'])!.setValue(null);
+    this.myForm.get(['desde'])!.setValue(null);
+    this.myForm.get(['hasta'])!.setValue(null);
     this.findAll();
   }
 
@@ -103,5 +116,12 @@ export class VentaComponent implements OnInit {
         },
         replaceUrl: true
       });
+  }
+
+  calculateMonto(ventasItems: IVentaItem[]): number {
+    return ventasItems.reduce(
+      (a: number, b: IVentaItem) => a + (b.precio * b.cantidad),
+      0
+    );
   }
 }

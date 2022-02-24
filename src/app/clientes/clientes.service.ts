@@ -14,7 +14,7 @@ export class ClientesService {
   constructor(private http: HttpClient) { }
 
   findAll(filter: any): Observable<HttpResponse<any>> {
-    filter['order'] = filter['order'] ? filter['order'] : ['nombre', 'ASC'];
+    filter['order'] = filter['order'] ? filter['order'] : ['apellido', 'ASC'];
     const options = createRequestOption(filter);
     return this.http.get<any>(`${this.resourceUrl}`, { params: options, observe: 'response' });
   }

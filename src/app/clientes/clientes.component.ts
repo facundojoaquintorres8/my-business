@@ -22,7 +22,7 @@ export class ClientesComponent implements OnInit {
     nombre: [null],
     apellido: [null],
     verInactivos: [null],
-    tipoCliente: [null]
+    tipo: [null]
   });
   rows: ICliente[] = [];
   loading = false;
@@ -35,7 +35,7 @@ export class ClientesComponent implements OnInit {
     private fb: FormBuilder,
   ) {
     this.activatedRoute.data.subscribe(data => {
-      this.page = data.pagingParams ? data.pagingParams : newPage({ activo: true }, ['nombre', 'ASC']);
+      this.page = data.pagingParams ? data.pagingParams : newPage({ activo: true }, ['apellido', 'ASC']);
     });
   }
 
@@ -53,8 +53,8 @@ export class ClientesComponent implements OnInit {
     } else {
       this.myForm.get(['verInactivos'])!.setValue(true);
     }
-    if (this.page.filter.tipoCliente) {
-      this.myForm.get(['tipoCliente'])!.setValue(true);
+    if (this.page.filter.tipo) {
+      this.myForm.get(['tipo'])!.setValue(true);
     }
   }
 
@@ -97,9 +97,9 @@ export class ClientesComponent implements OnInit {
         activo: true
       });
     }
-    if (this.myForm.get(['tipoCliente'])!.value) {
+    if (this.myForm.get(['tipo'])!.value) {
       Object.assign(this.page.filter, {
-        tipoCliente: this.myForm.get(['tipoCliente'])!.value
+        tipo: this.myForm.get(['tipo'])!.value
       });
     }
     this.findAll();

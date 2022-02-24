@@ -1,71 +1,31 @@
 <div class="container">
-  <h2>Detalle de Venta</h2>
-  <div class="row">
-    <div class="col-lg-6">
-      <div class="card">
-        <div class="card-header">
-          <h3>Venta</h3>
-        </div>
-        <dl *ngIf="venta">
-          <dt>Venta id</dt>
-          <dd>{{venta.id}}</dd>
-          <dt>Total</dt>
-          <dd>{{venta.total}}</dd>
-          <dt>Nombre Tarjeta</dt>
-          <dd>{{venta.nomTarjeta}}</dd>
-          <dt>Numero de tarjeta</dt>
-          <dd>{{venta.numTarjeta}}</dd>
-          <dt>Cuotas</dt>
-          <dd>{{venta.cantCuotas}}</dd>
-          <dt>fecha venta</dt>
-          <dd>{{venta.fecha | date: 'dd/MM/yyyy HH:mm'}}</dd>
-        </dl>
-      </div>
-    </div>
-    <div class="col-lg-6">
-      <div class="card">
-        <div class="card-header">
-          <h3>Cliente</h3>
-        </div>
-        <dl *ngIf="venta">
-          <dt>DNI:</dt>
-          <dd>{{venta.cliente.dni}}</dd>
-          <dt>Nombre:</dt>
-          <dd>{{venta.cliente.nombre}}</dd>
-          <dt>Apellido:</dt>
-          <dd>{{venta.cliente.apellido}}</dd>
-          <dt>Telefono:</dt>
-          <dd>{{venta.cliente.telefono}}</dd>
-          <dt>Direccion:</dt>
-          <dd>{{venta.cliente.direccion}}</dd>
-          <dt>Tipo cliente:</dt>
-          <dd>{{ venta.cliente.tipoCliente }}</dd>
-        </dl>
-      </div>
-    </div>
+  <h2>Detalle</h2>
+  <div class="card">
 
-  </div>
-  <ng-container *ngIf="itemsVentas?.length ==0 " >
-    <h3>No hay items asociados a esta venta</h3>
-  </ng-container>
-    <div *ngFor="let item of itemsVentas" class="card">
+    <ng-container *ngIf="venta">
       <dl>
-        <div class="card-header">
-          <h3>Item / Producto</h3>
-        </div>
-        <dt>Item Nro:</dt>
-        <dd>{{item.id}}</dd>
-        <dt>Cantidad Solicitada:</dt>
-        <dd>{{item.cantidad}}</dd>
-        <dt>Descripcion Producto:</dt>
-        <dd>{{item.producto.descripcion}}</dd>
-        <dt>Precio Producto:</dt>
-        <dd>{{item.producto.precioVenta}}</dd>
+        <dt>Fecha</dt>
+        <dd>{{ venta.fecha | date: 'dd/MM/yyyy' }}</dd>
+        <dt>Cliente</dt>
+        <dd>{{ venta.cliente.apellido }} {{ venta.cliente.nombre }} ({{ venta.cliente.dni }})</dd>
       </dl>
+
+      <ngx-datatable class="material striped" [rows]="venta.ventasItems" [columnMode]="'force'" [headerHeight]="50"
+        [footerHeight]="50" rowHeight="auto" [externalSorting]="true"
+        [externalPaging]="true" [count]="venta.ventasItems.length" [offset]="page.offset"
+        [limit]="page.size">
+
+        <ngx-datatable-column name="Producto" prop="producto.descripcion" [sortable]="false"></ngx-datatable-column>
+        <ngx-datatable-column name="Cantidad" prop="cantidad" [sortable]="false"></ngx-datatable-column>
+        <ngx-datatable-column name="Precio" prop="precio" [sortable]="false"></ngx-datatable-column>
+
+      </ngx-datatable>
+    </ng-container>
+
+    <div class="button-form">
+      <button type="button" class="btn btn-secondary" (click)="previousState()" title="Volver">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;Volver
+      </button>
     </div>
-  <div class="button-form">
-    <button type="button" class="btn btn-secondary" (click)="previousState()" title="Volver">
-      <fa-icon icon="arrow-left"></fa-icon> Volver
-    </button>
   </div>
 </div>

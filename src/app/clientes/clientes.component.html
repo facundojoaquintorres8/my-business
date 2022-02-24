@@ -33,8 +33,8 @@
         </div>
       </div>
         <div class="col-lg-4">
-          <label for="tipoCliente" class="form-label">Tipo Cliente</label>
-          <select class="form-select" name="tipoCliente" id="tipoCliente" formControlName="tipoCliente" >
+          <label for="tipo" class="form-label">Tipo Cliente</label>
+          <select class="form-select" name="tipo" id="tipo" formControlName="tipo" >
             <option value="" [selected]="true" >TODOS</option>
             <option value="mayorista">MAYORISTA</option>
             <option value="minorista">MINORISTA</option>
@@ -66,19 +66,18 @@
     [count]="page.totalElements"
     [offset]="page.offset"
     [limit]="page.size"
-    (page)="setPage($event)"
-    >
-    <ngx-datatable-column name="Dni" prop="dni"></ngx-datatable-column>
-    <ngx-datatable-column name="Nombre" prop="nombre"></ngx-datatable-column>
+    (page)="setPage($event)">
     <ngx-datatable-column name="Apellido" prop="apellido"></ngx-datatable-column>
-    <ngx-datatable-column  name="Activo" prop="activo" >
-      <ng-template   let-value="value" let-row="row" ngx-datatable-cell-template >
+    <ngx-datatable-column name="Nombre" prop="nombre"></ngx-datatable-column>
+    <ngx-datatable-column name="DNI" prop="dni"></ngx-datatable-column>
+    <ngx-datatable-column name="Tipo" prop="tipo"></ngx-datatable-column>
+    <ngx-datatable-column  name="Teléfono" prop="telefono" ></ngx-datatable-column>
+    <ngx-datatable-column  name="Activo" prop="activo">
+      <ng-template let-value="value" let-row="row" ngx-datatable-cell-template >
         <fa-icon *ngIf="value" icon="check-square" class="text-success"></fa-icon>
         <fa-icon *ngIf="!value" icon="square" class="text-danger"></fa-icon>
       </ng-template>
     </ngx-datatable-column>
-    <ngx-datatable-column name="Tipo Cliente" prop="tipoCliente"></ngx-datatable-column>
-    <ngx-datatable-column  name="Telefono" prop="telefono" ></ngx-datatable-column>
     <ngx-datatable-column name="" prop="dni" [sortable]="false" [cellClass]="'column-actions'">
       <ng-template let-value="value" let-row="row" ngx-datatable-cell-template>
         <button type="button" [routerLink]="['./',value,'edit']" class="btn btn-primary" title="Editar" >

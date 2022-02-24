@@ -1,18 +1,18 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { SharedModule } from '../shared/shared.module';
-import { VentaComponent } from './venta.component';
-import { DetailVentasComponent } from './detail-ventas.component';
+import { VentasComponent } from './ventas.component';
 import { ventasRoute } from './ventas.route';
+import { CreateVentaComponent } from './create-ventas.component';
+import { DetailVentaComponent } from './detail-ventas.component';
 
 @NgModule({
   declarations: [
-    VentaComponent,
-    DetailVentasComponent
+    VentasComponent,
+    CreateVentaComponent,
+    DetailVentaComponent
   ],
   imports: [
-    CommonModule,
     SharedModule,
     RouterModule.forChild(ventasRoute)
   ]

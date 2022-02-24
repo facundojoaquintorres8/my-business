@@ -1,20 +1,22 @@
-import { ICliente } from '../clientes/clientes.models';
-import { IProducto } from '../productos/productos.models';
+import { IProducto } from "../productos/productos.models";
+import { ICliente } from "../clientes/clientes.models";
 
-export interface IVentas {
+export interface IVenta {
   id: number;
-  total: number;
-  nomTarjeta: string;
-  numTarjeta: string;
-  cantCuotas: number;
   fecha: Date;
   cliente: ICliente;
-  itemsVentas: ItemsVentas[];
+  ventasItems: IVentaItem[];
 }
 
-export interface ItemsVentas {
+export interface IVentaItem {
   id: number;
+  precio: number;
   cantidad: number;
-  ventaId: number;
   producto: IProducto;
+}
+
+export interface IVentaCreate {
+  fecha: Date;
+  cliente: ICliente;
+  itemsVentas: IVentaItem[];
 }
