@@ -37,8 +37,8 @@ export class UpdateClientesComponent implements OnInit {
     const dni = this.activatedRoute.snapshot.paramMap.get('dni');
     if (dni) {
       this.clienteService.find(dni).subscribe((res: HttpResponse<ICliente>) => {
-        this.updateForm(res.body!)
-        this.value = res.body!.tipo.toString()
+        this.updateForm(res.body!);
+        this.value = res.body!.dni
       });
 
     }
@@ -63,7 +63,7 @@ export class UpdateClientesComponent implements OnInit {
   save(): void {
     this.isSaving = true;
     const cliente = this.createFromForm();
-    if (cliente.dni) {
+    if (this.value) {
       this.subscribeToSaveResponse(this.clienteService.update(cliente));
     } else {
       this.subscribeToSaveResponse(this.clienteService.create(cliente));
