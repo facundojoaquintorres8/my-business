@@ -7,6 +7,7 @@ import { HttpResponse } from "@angular/common/http"
 import { ValidarClaveRepetida } from "../shared/custom-validators";
 import { AuthService } from "../auth/auth.service";
 import { ToastService } from '../toast/toast.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-cambiar-clave',
@@ -29,7 +30,8 @@ export class CambiarClaveComponent implements OnInit {
     private fb: FormBuilder,
     private cuentaService: CuentaService,
     private authService: AuthService,
-    private toastService: ToastService
+    private toastService: ToastService,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -64,6 +66,7 @@ export class CambiarClaveComponent implements OnInit {
             message: 'Cambio de Clave Realizado Correctamente'
           }
         );
+        this.router.navigate(['login']);
       },
       (err) => {
         this.clearFormInput();

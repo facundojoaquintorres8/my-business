@@ -13,7 +13,7 @@
       <button type="button" class="btn btn-secondary" (click)="previousState()" title="Volver">
         <fa-icon icon="arrow-left"></fa-icon> Volver
       </button>
-      <ng-container *ngIf="user.rol === 'Administrador' && tokenUser.id !== user.id" >
+      <ng-container *ngIf="tokenUser?.rol === 'Administrador' && tokenUser?.id !== user?.id" >
       <button type="button" class="btn btn-primary" [routerLink]="['../../', user?.id, 'edit']" title="Editar">
         <fa-icon icon="pencil-alt"></fa-icon> Editar
       </button>

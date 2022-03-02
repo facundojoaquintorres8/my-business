@@ -29,7 +29,7 @@
           <div class="col-lg-4">
             <div class="form-group">
               <label class="form-control-label required" for="dni">DNI</label>
-              <input type="text" class="form-control" id="dni" name="dni" formControlName="dni" [readOnly]="value">
+              <input type="number" class="form-control" id="dni" name="dni" formControlName="dni" [readOnly]="value">
               <div  *ngIf="myForm.get('dni')!.invalid && (myForm.get('dni')!.dirty || myForm.get('dni')!.touched)">
                 <small class="form-text text-danger" *ngIf="myForm.get('dni')?.errors?.required">
                   El campo es requerido.

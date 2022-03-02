@@ -16,7 +16,7 @@ export class ToastService {
         isSuccess: false,
         isInfo: false
       });
-    }, 10000);
+    }, 3000);
   }
 }
 
