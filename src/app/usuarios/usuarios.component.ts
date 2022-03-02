@@ -68,7 +68,7 @@ export class UsuariosComponent implements OnInit {
     }
     if (this.myForm.get(['rol'])!.value) {
       Object.assign(this.page.filter, {
-        rol: this.myForm.get(['rol'])!.value.toLowerCase()
+        rol: this.myForm.get(['rol'])!.value
       });
     }
     if (!this.myForm.get(['verInactivos'])!.value) {

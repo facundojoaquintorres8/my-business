@@ -6,6 +6,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { ClientesService } from './clientes.service';
 import { ICliente } from './clientes.models';
+import {ToastService} from '../toast/toast.service';
 
 @Component({
   selector: 'app-update-clientes',
@@ -30,6 +31,7 @@ export class UpdateClientesComponent implements OnInit {
     private clienteService: ClientesService,
     private activatedRoute: ActivatedRoute,
     private fb: FormBuilder,
+    private toastService: ToastService
 
   ) { }
 
@@ -85,7 +87,17 @@ export class UpdateClientesComponent implements OnInit {
   private subscribeToSaveResponse(result: Observable<HttpResponse<ICliente>>): void {
     result.subscribe(
       () => this.previousState(),
-      () => this.isSaving = false
+      (error) => {
+        this.isSaving = false;
+        if (error.error.name === 'SequelizeUniqueConstraintError') {
+          this.toastService.changeMessage(
+            {
+              isError: true,
+              message: 'El DNI ingresado ya existe.',
+            }
+          );
+        }
+      }
     );
   }
 }

@@ -30,10 +30,10 @@ export class DetailUsuarioComponent implements OnInit {
       this.usuarioService.find(id).subscribe(
         (res: HttpResponse<IUser>) => {
           this.user = res.body!
+          this.tokenUser = this.authService.getSessionUser();
         }
       );
     }
-    this.tokenUser = this.authService.getSessionUser();
   }
 
   previousState(): void {

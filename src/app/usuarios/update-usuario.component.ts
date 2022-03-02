@@ -6,6 +6,7 @@ import { Observable } from 'rxjs';
 import { IUser, IUsuario } from './usuarios.models';
 import { UsuariosService } from './usuarios.service';
 import { Roles } from "../util/rolesUsuarios";
+import {ToastService} from '../toast/toast.service';
 
 @Component({
   selector: 'app-update-usuario',
@@ -17,7 +18,6 @@ export class UpdateUsuarioComponent implements OnInit {
   isUpdate = false;
   show = false;
   idd: number = 0;
-  mensaje?: string;
   value = '';
   roles = Roles;
   myForm = this.fb.group({
@@ -32,7 +32,8 @@ export class UpdateUsuarioComponent implements OnInit {
     private usuarioService: UsuariosService,
     private activatedRoute: ActivatedRoute,
     private fb: FormBuilder,
-    private router: Router
+    private router: Router,
+    private toastService: ToastService
   ) { }
 
   ngOnInit(): void {
@@ -96,9 +97,13 @@ export class UpdateUsuarioComponent implements OnInit {
       () => this.previousState(),
       (error) => {
         this.isSaving = false;
-        if (error.status === 412) {
-          console.log('error ', error);
-          this.mensaje = 'El nombre de usuario ya existe.';
+        if (error.error.name === 'SequelizeUniqueConstraintError') {
+          this.toastService.changeMessage(
+            {
+              isError: true,
+              message: 'El nombre de usuario ya existe.',
+            }
+          );
         }
       }
     );
