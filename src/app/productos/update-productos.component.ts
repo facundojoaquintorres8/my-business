@@ -54,7 +54,7 @@ export class UpdateProductoComponent implements OnInit {
     this.myForm.patchValue({
       id: producto.id,
       descripcion: producto.descripcion,
-      categoriaId: producto.categoria.id,
+      categoriaId: producto.categoria ? producto.categoria.id : null ,
       stock: producto.stock,
       cantidadMinima: producto.cantidadMinima,
       precioVenta: producto.precioVenta,
