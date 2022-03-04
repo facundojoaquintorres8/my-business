@@ -29,7 +29,7 @@ export const routes: Routes = [
     path:'',
     component: PrivateLayoutComponent,
     data: {
-      title: 'Turnera'
+      title: 'Negocio'
     },
     children: [
       {
