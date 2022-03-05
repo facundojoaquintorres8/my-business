@@ -1,84 +1,89 @@
 <div class="container">
-  <form name="myForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="myForm">
-    <h2 *ngIf="!myForm.get('dni')!.value">Crear Cliente</h2>
-    <h2 *ngIf="myForm.get('dni')!.value">Editar Cliente</h2>
-      <div class="card">
-        <div class="row">
-          <div class="col-lg-4">
-            <div class="form-group">
-              <label class="form-control-label required" for="apellido">Apellido</label>
-              <input type="text" class="form-control" id="apellido" name="apellido" formControlName="apellido">
-              <div  *ngIf="myForm.get('apellido')!.invalid && (myForm.get('apellido')!.dirty || myForm.get('apellido')!.touched)">
-                <small class="form-text text-danger" *ngIf="myForm.get('apellido')?.errors?.required">
-                  El campo es requerido.
-                </small>
-              </div>
+    <form (ngSubmit)="save()" [formGroup]="myForm" name="myForm" novalidate role="form">
+        <h2 *ngIf="!myForm.get('dni')!.value">Crear Cliente</h2>
+        <h2 *ngIf="myForm.get('dni')!.value">Editar Cliente</h2>
+        <div class="card">
+            <div class="row">
+                <div class="col-lg-4">
+                    <div class="form-group">
+                        <label class="form-control-label required" for="apellido">Apellido</label>
+                        <input class="form-control" formControlName="apellido" id="apellido" name="apellido"
+                               type="text">
+                        <div *ngIf="myForm.get('apellido')!.invalid && (myForm.get('apellido')!.dirty || myForm.get('apellido')!.touched)">
+                            <small *ngIf="myForm.get('apellido')?.errors?.required" class="form-text text-danger">
+                                El campo es requerido.
+                            </small>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="form-group">
+                        <label class="form-control-label required" for="nombre">Nombre</label>
+                        <input class="form-control" formControlName="nombre" id="nombre" name="nombre" type="text">
+                        <div *ngIf="myForm.get('nombre')!.invalid && (myForm.get('nombre')!.dirty || myForm.get('nombre')!.touched)">
+                            <small *ngIf="myForm.get('nombre')?.errors?.required" class="form-text text-danger">
+                                El campo es requerido.
+                            </small>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="form-group">
+                        <label class="form-control-label required" for="dni">DNI</label>
+                        <input [readOnly]="value" class="form-control" formControlName="dni" id="dni" name="dni"
+                               type="number">
+                        <div *ngIf="myForm.get('dni')!.invalid && (myForm.get('dni')!.dirty || myForm.get('dni')!.touched)">
+                            <small *ngIf="myForm.get('dni')?.errors?.required" class="form-text text-danger">
+                                El campo es requerido.
+                            </small>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="form-group">
+                        <label class="form-control-label required" for="tipo">Tipo</label>
+                        <select class="form-select" formControlName="tipo" id="tipo" name="tipo">
+                            <option value="MAYORISTA">MAYORISTA</option>
+                            <option value="MINORISTA">MINORISTA</option>
+                        </select>
+                        <div
+                                *ngIf="myForm.get('tipo')!.invalid && (myForm.get('tipo')!.dirty || myForm.get('tipo')!.touched)">
+                            <small *ngIf="myForm.get('tipo')?.errors?.required" class="form-text text-danger">
+                                El campo es requerido.
+                            </small>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="form-group">
+                        <label class="form-control-label" for="telefono">Teléfono</label>
+                        <input class="form-control" formControlName="telefono" id="telefono" name="telefono"
+                               type="text">
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="form-group">
+                        <label class="form-control-label" for="direccion">Dirección</label>
+                        <input class="form-control" formControlName="direccion" id="direccion" name="direccion"
+                               type="text">
+                    </div>
+                </div>
+                <div *ngIf="value" class="col-lg-1">
+                    <div class="form-check form-switch">
+                        <label class="form-check-label" for="activo">Activo</label>
+                        <input class="form-check-input" formControlName="activo" id="activo" name="activo"
+                               type="checkbox">
+                    </div>
+                </div>
             </div>
-          </div>
-          <div class="col-lg-4">
-            <div class="form-group">
-              <label class="form-control-label required" for="nombre">Nombre</label>
-              <input type="text" class="form-control" id="nombre" name="nombre" formControlName="nombre">
-              <div  *ngIf="myForm.get('nombre')!.invalid && (myForm.get('nombre')!.dirty || myForm.get('nombre')!.touched)">
-                <small class="form-text text-danger" *ngIf="myForm.get('nombre')?.errors?.required">
-                  El campo es requerido.
-                </small>
-              </div>
+            <div class="button-form mt-4">
+                <button (click)="previousState()" class="btn btn-secondary" title="Cancelar" type="button">
+                    <fa-icon icon="ban"></fa-icon>&nbsp;Cancelar
+                </button>
+                <button [disabled]="myForm.invalid || isSaving" class="btn btn-primary" title="Guardar" type="submit">
+                    <fa-icon icon="save"></fa-icon>&nbsp;Guardar
+                </button>
             </div>
-          </div>
-          <div class="col-lg-4">
-            <div class="form-group">
-              <label class="form-control-label required" for="dni">DNI</label>
-              <input type="number" class="form-control" id="dni" name="dni" formControlName="dni" [readOnly]="value">
-              <div  *ngIf="myForm.get('dni')!.invalid && (myForm.get('dni')!.dirty || myForm.get('dni')!.touched)">
-                <small class="form-text text-danger" *ngIf="myForm.get('dni')?.errors?.required">
-                  El campo es requerido.
-                </small>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-4">
-            <div class="form-group">
-              <label class="form-control-label required" for="tipo">Tipo</label>
-              <select class="form-select" name="tipo" id="tipo" formControlName="tipo" >
-                <option value="MAYORISTA">MAYORISTA</option>
-                <option value="MINORISTA">MINORISTA</option>
-              </select>
-              <div
-                *ngIf="myForm.get('tipo')!.invalid && (myForm.get('tipo')!.dirty || myForm.get('tipo')!.touched)">
-                <small class="form-text text-danger" *ngIf="myForm.get('tipo')?.errors?.required">
-                  El campo es requerido.
-                </small>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-4">
-            <div class="form-group">
-              <label class="form-control-label" for="telefono">Teléfono</label>
-              <input type="text" class="form-control" id="telefono" name="telefono" formControlName="telefono">
-            </div>
-          </div>
-          <div class="col-lg-4">
-            <div class="form-group">
-              <label class="form-control-label" for="direccion">Dirección</label>
-              <input type="text" class="form-control" id="direccion" name="direccion" formControlName="direccion">
-            </div>
-          </div>
-          <div class="col-lg-1" *ngIf="value">
-            <div class="form-check form-switch">
-              <label class="form-check-label" for="activo">Activo</label>
-              <input type="checkbox" class="form-check-input" id="activo" name="activo" formControlName="activo">
-            </div>
-          </div>
         </div>
-        <div class="button-form mt-4">
-          <button type="button" class="btn btn-secondary" (click)="previousState()" title="Cancelar">
-            <fa-icon icon="ban"></fa-icon>&nbsp;Cancelar
-          </button>
-          <button type="submit" [disabled]="myForm.invalid || isSaving" class="btn btn-primary" title="Guardar">
-            <fa-icon icon="save"></fa-icon>&nbsp;Guardar
-          </button>
-        </div>
-      </div>
-  </form>
+    </form>
 </div>

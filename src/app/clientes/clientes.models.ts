@@ -14,4 +14,4 @@ export interface IQuickCliente {
     apellido: string;
     tipo: string;
     telefono?: string;
-  }
+}

@@ -1,28 +1,28 @@
 <div class="container">
-  <h2>Detalle</h2>
-  <div class="card">
+    <h2>Detalle</h2>
+    <div class="card">
 
-    <dl *ngIf="categoriaProducto">
-      <dt>Descripción</dt>
-      <dd>{{ categoriaProducto.descripcion }}</dd>
-      <dt>Activa</dt>
-      <dd>{{ categoriaProducto.activa ? 'Si' : 'No' }}</dd>
-    </dl>
+        <dl *ngIf="categoriaProducto">
+            <dt>Descripción</dt>
+            <dd>{{ categoriaProducto.descripcion }}</dd>
+            <dt>Activa</dt>
+            <dd>{{ categoriaProducto.activa ? 'Si' : 'No' }}</dd>
+        </dl>
 
-    <div class="button-form">
-      <button type="button" class="btn btn-secondary" (click)="previousState()" title="Volver">
-        <fa-icon icon="arrow-left"></fa-icon>&nbsp;Volver
-      </button>
+        <div class="button-form">
+            <button (click)="previousState()" class="btn btn-secondary" title="Volver" type="button">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;Volver
+            </button>
 
-      <button type="button" [routerLink]="['../../', categoriaProducto?.id, 'edit']" class="btn btn-primary"
-        title="Editar">
-        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;Editar
-      </button>
+            <button [routerLink]="['../../', categoriaProducto?.id, 'edit']" class="btn btn-primary" title="Editar"
+                    type="button">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;Editar
+            </button>
 
-      <button type="button" (click)="delete(categoriaProducto.id)" class="btn btn-danger"
-        title="Eliminar">
-        <fa-icon icon="times"></fa-icon>&nbsp;Eliminar
-      </button>
+            <button (click)="delete(categoriaProducto.id)" class="btn btn-danger" title="Eliminar"
+                    type="button">
+                <fa-icon icon="times"></fa-icon>&nbsp;Eliminar
+            </button>
+        </div>
     </div>
-  </div>
 </div>

@@ -1,26 +1,30 @@
 <div class="container">
-  <h2>Detalle</h2>
-  <div class="card">
-    <dl *ngIf="user">
-      <dt>Nombre usuario</dt>
-      <dd>{{user.usuario}}</dd>
-      <dt>Rol</dt>
-      <dd>{{user.rol}}</dd>
-      <dt>Activo</dt>
-      <dd>{{ user.activo ? 'Si' : 'No' }}</dd>
-    </dl>
-    <div class="button-form">
-      <button type="button" class="btn btn-secondary" (click)="previousState()" title="Volver">
-        <fa-icon icon="arrow-left"></fa-icon> Volver
-      </button>
-      <ng-container *ngIf="tokenUser?.rol === 'Administrador' && tokenUser?.id !== user?.id" >
-      <button type="button" class="btn btn-primary" [routerLink]="['../../', user?.id, 'edit']" title="Editar">
-        <fa-icon icon="pencil-alt"></fa-icon> Editar
-      </button>
-      <button type="button" class="btn btn-danger" (click)="delete(user.id)" title="Eliminar">
-        <fa-icon icon="times"></fa-icon> Eliminar
-      </button>
-      </ng-container>
+    <h2>Detalle</h2>
+    <div class="card">
+        <dl *ngIf="user">
+            <dt>Nombre usuario</dt>
+            <dd>{{user.usuario}}</dd>
+            <dt>Rol</dt>
+            <dd>{{user.rol}}</dd>
+            <dt>Activo</dt>
+            <dd>{{ user.activo ? 'Si' : 'No' }}</dd>
+        </dl>
+        <div class="button-form">
+            <button (click)="previousState()" class="btn btn-secondary" title="Volver" type="button">
+                <fa-icon icon="arrow-left"></fa-icon>
+                Volver
+            </button>
+            <ng-container *ngIf="tokenUser?.rol === 'Administrador' && tokenUser?.id !== user?.id">
+                <button [routerLink]="['../../', user?.id, 'edit']" class="btn btn-primary" title="Editar"
+                        type="button">
+                    <fa-icon icon="pencil-alt"></fa-icon>
+                    Editar
+                </button>
+                <button (click)="delete(user.id)" class="btn btn-danger" title="Eliminar" type="button">
+                    <fa-icon icon="times"></fa-icon>
+                    Eliminar
+                </button>
+            </ng-container>
+        </div>
     </div>
-  </div>
 </div>

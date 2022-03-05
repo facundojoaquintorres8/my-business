@@ -1,73 +1,77 @@
 <div class="container">
-  <h2>
-    <button type="button" [routerLink]="['new']" class="btn btn-primary btn-icon" title="Comprar">
-      <fa-icon icon="plus"></fa-icon>
-    </button> Compras
-  </h2>
-
-  <div class="card">
-    <form class="form-filter" name="myForm" role="form" novalidate (ngSubmit)="onFilter()" [formGroup]="myForm">
-      <fa-icon *ngIf="collapsedFilter" icon="chevron-up" class="pointer filter-icon"
-        (click)="collapsedFilter = !collapsedFilter">
-      </fa-icon>
-      <fa-icon *ngIf="!collapsedFilter" icon="chevron-down" class="pointer filter-icon"
-        (click)="collapsedFilter = !collapsedFilter">
-      </fa-icon>
-
-      <ng-container *ngIf="!collapsedFilter">
-        <div class="row">
-          <div class="col-lg-3">
-            <label for="proveedorId" class="form-label">Proveedor</label>
-            <select type="text" class="form-control" name="proveedorId" id="proveedorId" formControlName="proveedorId">
-              <option [ngValue]="null">Seleccione</option>
-              <option [value]="proveedor.id" *ngFor="let proveedor of proveedores">{{proveedor.razonSocial}}</option>
-            </select>
-          </div>
-          <div class="col-lg-3">
-            <label for="desde" class="form-label">Desde</label>
-            <input type="date" class="form-control" name="desde" id="desde" formControlName="desde" />
-          </div>
-          <div class="col-lg-3">
-            <label for="proveedorId" class="form-label">Hasta</label>
-            <input type="date" class="form-control" name="hasta" id="hasta" formControlName="hasta" />
-          </div>
-        </div>
-        <div class="button-form-filter">
-          <button type="button" class="btn btn-secondary" (click)="clearFilter()" title="Limpiar">
-            <fa-icon icon="broom"></fa-icon>&nbsp;Limpiar
-          </button>
-          <button type="submit" [disabled]="loading" class="btn btn-primary" title="Filtrar">
-            <fa-icon icon="filter"></fa-icon>&nbsp;Filtrar
-          </button>
-        </div>
-
-      </ng-container>
-
-    </form>
-  </div>
-
-  <ngx-datatable class="material striped" [rows]="rows" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50"
-    rowHeight="auto" [loadingIndicator]="loading" [externalSorting]="true" (sort)="onSort($event)"
-    [externalPaging]="true" [count]="page.totalElements" [offset]="page.offset" [limit]="page.size"
-    (page)="setPage($event)">
-
-    <ngx-datatable-column name="Fecha" prop="fecha">
-      <ng-template let-value="value" ngx-datatable-cell-template>
-        {{value | date: 'dd/MM/yyyy'}}
-      </ng-template>
-    </ngx-datatable-column>
-    <ngx-datatable-column name="Proveedor" prop="proveedor.razonSocial"></ngx-datatable-column>
-    <ngx-datatable-column name="Monto" prop="comprasItems" [sortable]="false">
-      <ng-template let-value="value" ngx-datatable-cell-template>
-        ${{calculateMonto(value)}}
-      </ng-template>
-    </ngx-datatable-column>
-    <ngx-datatable-column name="" prop="id" [sortable]="false" [cellClass]="'column-actions'">
-      <ng-template let-value="value" let-row="row" ngx-datatable-cell-template>
-        <button type="button" [routerLink]="['./', value, 'view']" class="btn btn-primary" title="Ver">
-          <fa-icon icon="eye"></fa-icon>
+    <h2>
+        <button [routerLink]="['new']" class="btn btn-primary btn-icon" title="Comprar" type="button">
+            <fa-icon icon="plus"></fa-icon>
         </button>
-      </ng-template>
-    </ngx-datatable-column>
-  </ngx-datatable>
+        Compras
+    </h2>
+
+    <div class="card">
+        <form (ngSubmit)="onFilter()" [formGroup]="myForm" class="form-filter" name="myForm" novalidate role="form">
+            <fa-icon (click)="collapsedFilter = !collapsedFilter" *ngIf="collapsedFilter" class="pointer filter-icon"
+                     icon="chevron-up">
+            </fa-icon>
+            <fa-icon (click)="collapsedFilter = !collapsedFilter" *ngIf="!collapsedFilter" class="pointer filter-icon"
+                     icon="chevron-down">
+            </fa-icon>
+
+            <ng-container *ngIf="!collapsedFilter">
+                <div class="row">
+                    <div class="col-lg-3">
+                        <label class="form-label" for="proveedorId">Proveedor</label>
+                        <select class="form-control" formControlName="proveedorId" id="proveedorId" name="proveedorId"
+                                type="text">
+                            <option [ngValue]="null">Seleccione</option>
+                            <option *ngFor="let proveedor of proveedores"
+                                    [value]="proveedor.id">{{proveedor.razonSocial}}</option>
+                        </select>
+                    </div>
+                    <div class="col-lg-3">
+                        <label class="form-label" for="desde">Desde</label>
+                        <input class="form-control" formControlName="desde" id="desde" name="desde" type="date"/>
+                    </div>
+                    <div class="col-lg-3">
+                        <label class="form-label" for="proveedorId">Hasta</label>
+                        <input class="form-control" formControlName="hasta" id="hasta" name="hasta" type="date"/>
+                    </div>
+                </div>
+                <div class="button-form-filter">
+                    <button (click)="clearFilter()" class="btn btn-secondary" title="Limpiar" type="button">
+                        <fa-icon icon="broom"></fa-icon>&nbsp;Limpiar
+                    </button>
+                    <button [disabled]="loading" class="btn btn-primary" title="Filtrar" type="submit">
+                        <fa-icon icon="filter"></fa-icon>&nbsp;Filtrar
+                    </button>
+                </div>
+
+            </ng-container>
+
+        </form>
+    </div>
+
+    <ngx-datatable (page)="setPage($event)" (sort)="onSort($event)" [columnMode]="'force'" [count]="page.totalElements"
+                   [externalPaging]="true"
+                   [externalSorting]="true" [footerHeight]="50" [headerHeight]="50" [limit]="page.size"
+                   [loadingIndicator]="loading" [offset]="page.offset" [rows]="rows" class="material striped"
+                   rowHeight="auto">
+
+        <ngx-datatable-column name="Fecha" prop="fecha">
+            <ng-template let-value="value" ngx-datatable-cell-template>
+                {{value | date: 'dd/MM/yyyy'}}
+            </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="Proveedor" prop="proveedor.razonSocial"></ngx-datatable-column>
+        <ngx-datatable-column [sortable]="false" name="Monto" prop="comprasItems">
+            <ng-template let-value="value" ngx-datatable-cell-template>
+                ${{calculateMonto(value)}}
+            </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column [cellClass]="'column-actions'" [sortable]="false" name="" prop="id">
+            <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                <button [routerLink]="['./', value, 'view']" class="btn btn-primary" title="Ver" type="button">
+                    <fa-icon icon="eye"></fa-icon>
+                </button>
+            </ng-template>
+        </ngx-datatable-column>
+    </ngx-datatable>
 </div>

@@ -1,31 +1,33 @@
 <div class="container">
-  <h2>Detalle</h2>
-  <div class="card">
+    <h2>Detalle</h2>
+    <div class="card">
 
-    <ng-container *ngIf="compra">
-      <dl>
-        <dt>Fecha</dt>
-        <dd>{{ compra.fecha | date: 'dd/MM/yyyy' }}</dd>
-        <dt>Proveedor</dt>
-        <dd>{{ compra.proveedor.razonSocial }}</dd>
-      </dl>
+        <ng-container *ngIf="compra">
+            <dl>
+                <dt>Fecha</dt>
+                <dd>{{ compra.fecha | date: 'dd/MM/yyyy' }}</dd>
+                <dt>Proveedor</dt>
+                <dd>{{ compra.proveedor.razonSocial }}</dd>
+            </dl>
 
-      <ngx-datatable class="material striped" [rows]="compra.comprasItems" [columnMode]="'force'" [headerHeight]="50"
-        [footerHeight]="50" rowHeight="auto" [externalSorting]="true"
-        [externalPaging]="true" [count]="compra.comprasItems.length" [offset]="page.offset"
-        [limit]="page.size">
+            <ngx-datatable [columnMode]="'force'" [count]="compra.comprasItems.length" [externalPaging]="true"
+                           [externalSorting]="true"
+                           [footerHeight]="50" [headerHeight]="50" [limit]="page.size"
+                           [offset]="page.offset" [rows]="compra.comprasItems" class="material striped"
+                           rowHeight="auto">
 
-        <ngx-datatable-column name="Producto" prop="producto.descripcion" [sortable]="false"></ngx-datatable-column>
-        <ngx-datatable-column name="Cantidad" prop="cantidad" [sortable]="false"></ngx-datatable-column>
-        <ngx-datatable-column name="Precio" prop="precio" [sortable]="false"></ngx-datatable-column>
+                <ngx-datatable-column [sortable]="false" name="Producto"
+                                      prop="producto.descripcion"></ngx-datatable-column>
+                <ngx-datatable-column [sortable]="false" name="Cantidad" prop="cantidad"></ngx-datatable-column>
+                <ngx-datatable-column [sortable]="false" name="Precio" prop="precio"></ngx-datatable-column>
 
-      </ngx-datatable>
-    </ng-container>
+            </ngx-datatable>
+        </ng-container>
 
-    <div class="button-form">
-      <button type="button" class="btn btn-secondary" (click)="previousState()" title="Volver">
-        <fa-icon icon="arrow-left"></fa-icon>&nbsp;Volver
-      </button>
+        <div class="button-form">
+            <button (click)="previousState()" class="btn btn-secondary" title="Volver" type="button">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;Volver
+            </button>
+        </div>
     </div>
-  </div>
 </div>

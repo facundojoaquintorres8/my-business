@@ -1,9 +1,9 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 
 @Component({
-  selector: 'app-layout',
-  templateUrl: './public-layout.component.html',
-  styleUrls: ['public-layout.component.scss']
+    selector: 'app-layout',
+    templateUrl: './public-layout.component.html',
+    styleUrls: ['public-layout.component.scss']
 })
 export class PublicLayoutComponent {
 

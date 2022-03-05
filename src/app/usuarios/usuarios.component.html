@@ -1,84 +1,87 @@
 <div class="container">
-  <h2>
-    <button type="button" [routerLink]="['new']" class="btn btn-primary btn-icon" title="Dar de Alta un Usuario">
-      <fa-icon icon="plus"></fa-icon>
-    </button> Usuarios
-  </h2>
-  <div class="card">
-    <form class="form-filter" name="myForm" role="form" novalidate (ngSubmit)="onFilter()" [formGroup]="myForm" >
-      <fa-icon *ngIf="collapsedFilter" icon="chevron-up" class="pointer filter-icon"
-               (click)="collapsedFilter = !collapsedFilter">
-      </fa-icon>
-      <fa-icon *ngIf="!collapsedFilter" icon="chevron-down" class="pointer filter-icon"
-               (click)="collapsedFilter = !collapsedFilter">
-      </fa-icon>
-      <ng-container *ngIf="!collapsedFilter" >
-        <div class="row">
-          <div class="col-lg-4" >
-            <label for="usuario" class="form-label">Usuario</label>
-            <input type="text" class="form-control" name="usuario" id="usuario" formControlName="usuario">
-          </div>
-          <div class="col-lg-4">
-            <label for="rol" class="form-label">Rol</label>
-            <select class="form-select" name="rol" id="rol" formControlName="rol" >
-              <option value="" [selected]="true">Seleccione</option>
-             <option *ngFor="let r of roles" value={{r}} >{{r}}</option>
-            </select>
-          </div>
-          <div class="col-lg-1" >
-            <div class="form-check form-switch">
-              <label class="form-check-label" for="verInactivos" >Inactivos</label>
-              <input class="form-check-input" type="checkbox" name="verInactivos" id="verInactivos" formControlName="verInactivos" >
-            </div>
-          </div>
-        </div>
-        <div class="button-form-filter">
-          <button type="button" class="btn btn-secondary" (click)="clearFilter()" title="Limpiar" >
-            <fa-icon icon="broom"></fa-icon>&nbsp;Limpiar
-          </button>
-          <button type="submit" [disabled]="loading" class="btn btn-primary" title="Filtrar">
-            <fa-icon icon="filter"></fa-icon>&nbsp;Filtrar
-          </button>
-        </div>
-      </ng-container>
-    </form>
-  </div>
-  <ngx-datatable
-    class="material striped"
-    [rows]="rows"
-    [columnMode]="'force'"
-    [headerHeight]="50"
-    [footerHeight]="50"
-    rowHeight="auto"
-    [loadingIndicator]="loading"
-    [externalSorting]="true"
-    (sort)="onSort($event)"
-    [externalPaging]="true"
-    [count]="page.totalElements"
-    [offset]="page.offset"
-    [limit]="page.size"
-    (page)="setPage($event)"
-  >
-    <ngx-datatable-column name="Usuario" prop="usuario"></ngx-datatable-column>
-    <ngx-datatable-column name="Rol" prop="rol"></ngx-datatable-column>
-    <ngx-datatable-column  name="Activo" prop="activo" >
-      <ng-template   let-value="value" let-row="row" ngx-datatable-cell-template >
-        <fa-icon *ngIf="value" icon="check-square" class="text-success"></fa-icon>
-        <fa-icon *ngIf="!value" icon="square" class="text-danger"></fa-icon>
-      </ng-template>
-    </ngx-datatable-column>
-    <ngx-datatable-column name="" prop="id" [sortable]="false" [cellClass]="'column-actions'">
-      <ng-template let-value="value" let-row="row" ngx-datatable-cell-template>
-        <button type="button" [routerLink]="['./',value,'edit']" class="btn btn-primary" title="Editar" >
-          <fa-icon icon="pencil-alt"></fa-icon>
+    <h2>
+        <button [routerLink]="['new']" class="btn btn-primary btn-icon" title="Dar de Alta un Usuario" type="button">
+            <fa-icon icon="plus"></fa-icon>
         </button>
-        <button type="button" [routerLink]="['./', value, 'view']" class="btn btn-primary" title="Ver">
-          <fa-icon icon="eye"></fa-icon>
-        </button>
-        <button type="button" class="btn btn-danger" title="Eliminar" (click)="delete(value)">
-          <fa-icon icon="times"></fa-icon>
-        </button>
-      </ng-template>
-    </ngx-datatable-column>
-  </ngx-datatable>
+        Usuarios
+    </h2>
+    <div class="card">
+        <form (ngSubmit)="onFilter()" [formGroup]="myForm" class="form-filter" name="myForm" novalidate role="form">
+            <fa-icon (click)="collapsedFilter = !collapsedFilter" *ngIf="collapsedFilter" class="pointer filter-icon"
+                     icon="chevron-up">
+            </fa-icon>
+            <fa-icon (click)="collapsedFilter = !collapsedFilter" *ngIf="!collapsedFilter" class="pointer filter-icon"
+                     icon="chevron-down">
+            </fa-icon>
+            <ng-container *ngIf="!collapsedFilter">
+                <div class="row">
+                    <div class="col-lg-4">
+                        <label class="form-label" for="usuario">Usuario</label>
+                        <input class="form-control" formControlName="usuario" id="usuario" name="usuario" type="text">
+                    </div>
+                    <div class="col-lg-4">
+                        <label class="form-label" for="rol">Rol</label>
+                        <select class="form-select" formControlName="rol" id="rol" name="rol">
+                            <option [selected]="true" value="">Seleccione</option>
+                            <option *ngFor="let r of roles" value={{r}}>{{r}}</option>
+                        </select>
+                    </div>
+                    <div class="col-lg-1">
+                        <div class="form-check form-switch">
+                            <label class="form-check-label" for="verInactivos">Inactivos</label>
+                            <input class="form-check-input" formControlName="verInactivos" id="verInactivos"
+                                   name="verInactivos"
+                                   type="checkbox">
+                        </div>
+                    </div>
+                </div>
+                <div class="button-form-filter">
+                    <button (click)="clearFilter()" class="btn btn-secondary" title="Limpiar" type="button">
+                        <fa-icon icon="broom"></fa-icon>&nbsp;Limpiar
+                    </button>
+                    <button [disabled]="loading" class="btn btn-primary" title="Filtrar" type="submit">
+                        <fa-icon icon="filter"></fa-icon>&nbsp;Filtrar
+                    </button>
+                </div>
+            </ng-container>
+        </form>
+    </div>
+    <ngx-datatable
+            (page)="setPage($event)"
+            (sort)="onSort($event)"
+            [columnMode]="'force'"
+            [count]="page.totalElements"
+            [externalPaging]="true"
+            [externalSorting]="true"
+            [footerHeight]="50"
+            [headerHeight]="50"
+            [limit]="page.size"
+            [loadingIndicator]="loading"
+            [offset]="page.offset"
+            [rows]="rows"
+            class="material striped"
+            rowHeight="auto"
+    >
+        <ngx-datatable-column name="Usuario" prop="usuario"></ngx-datatable-column>
+        <ngx-datatable-column name="Rol" prop="rol"></ngx-datatable-column>
+        <ngx-datatable-column name="Activo" prop="activo">
+            <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                <fa-icon *ngIf="value" class="text-success" icon="check-square"></fa-icon>
+                <fa-icon *ngIf="!value" class="text-danger" icon="square"></fa-icon>
+            </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column [cellClass]="'column-actions'" [sortable]="false" name="" prop="id">
+            <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                <button [routerLink]="['./',value,'edit']" class="btn btn-primary" title="Editar" type="button">
+                    <fa-icon icon="pencil-alt"></fa-icon>
+                </button>
+                <button [routerLink]="['./', value, 'view']" class="btn btn-primary" title="Ver" type="button">
+                    <fa-icon icon="eye"></fa-icon>
+                </button>
+                <button (click)="delete(value)" class="btn btn-danger" title="Eliminar" type="button">
+                    <fa-icon icon="times"></fa-icon>
+                </button>
+            </ng-template>
+        </ngx-datatable-column>
+    </ngx-datatable>
 </div>

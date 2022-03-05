@@ -1,4 +1,4 @@
-import { PAGE_LIMIT } from "../app.constants";
+import {PAGE_LIMIT} from '../app.constants';
 
 export interface IPage {
     size: number;
@@ -17,10 +17,10 @@ export const newPage = (filter: any, order?: string[]): IPage => {
         offset: 0,
         filter: filter,
         order: order,
-    }
-}
+    };
+};
 
 export const totalPages = (size: number, totalElements: number): number => {
     const count = size < 1 ? 1 : Math.ceil(totalElements / size);
     return Math.max(count || 0, 1);
-}
+};

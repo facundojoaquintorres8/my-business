@@ -1,16 +1,16 @@
 <div class="container">
-    <form name="myForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="myForm">
+    <form (ngSubmit)="save()" [formGroup]="myForm" name="myForm" novalidate role="form">
         <h2>Crear Proveedor</h2>
         <div class="card">
             <div class="row">
                 <div class="col-lg-6">
                     <div class="form-group">
                         <label class="form-control-label required" for="razonSocial">Razón Social</label>
-                        <input type="text" class="form-control" name="razonSocial" id="razonSocial"
-                            formControlName="razonSocial" />
+                        <input class="form-control" formControlName="razonSocial" id="razonSocial" name="razonSocial"
+                               type="text"/>
                         <div
-                            *ngIf="myForm.get('razonSocial')!.invalid && (myForm.get('razonSocial')!.dirty || myForm.get('razonSocial')!.touched)">
-                            <small class="form-text text-danger" *ngIf="myForm.get('razonSocial')?.errors?.required">
+                                *ngIf="myForm.get('razonSocial')!.invalid && (myForm.get('razonSocial')!.dirty || myForm.get('razonSocial')!.touched)">
+                            <small *ngIf="myForm.get('razonSocial')?.errors?.required" class="form-text text-danger">
                                 El campo es requerido.
                             </small>
                         </div>
@@ -19,17 +19,17 @@
                 <div class="col-lg-6">
                     <div class="form-group">
                         <label class="form-control-label required" for="cuitDni">CUIT/DNI (Solo números)</label>
-                        <input type="text" class="form-control" name="cuitDni" id="cuitDni"
-                            formControlName="cuitDni"/>
+                        <input class="form-control" formControlName="cuitDni" id="cuitDni" name="cuitDni"
+                               type="text"/>
                         <div
-                            *ngIf="myForm.get('cuitDni')!.invalid && (myForm.get('cuitDni')!.dirty || myForm.get('cuitDni')!.touched)">
-                            <small class="form-text text-danger" *ngIf="myForm.get('cuitDni')?.errors?.required">
+                                *ngIf="myForm.get('cuitDni')!.invalid && (myForm.get('cuitDni')!.dirty || myForm.get('cuitDni')!.touched)">
+                            <small *ngIf="myForm.get('cuitDni')?.errors?.required" class="form-text text-danger">
                                 El campo es requerido.
                             </small>
-                            <small class="form-text text-danger" *ngIf="myForm.get('cuitDni')?.errors?.minlength">
+                            <small *ngIf="myForm.get('cuitDni')?.errors?.minlength" class="form-text text-danger">
                                 Debe ingresar entre 8 y 11 dígitos.
                             </small>
-                            <small class="form-text text-danger" *ngIf="myForm.get('cuitDni')?.errors?.maxlength">
+                            <small *ngIf="myForm.get('cuitDni')?.errors?.maxlength" class="form-text text-danger">
                                 Debe ingresar entre 8 y 11 dígitos.
                             </small>
                         </div>
@@ -38,24 +38,24 @@
                 <div class="col-lg-6">
                     <div class="form-group">
                         <label class="form-control-label" for="telefono">Teléfono</label>
-                        <input type="text" class="form-control" name="telefono" id="telefono"
-                            formControlName="telefono" />
+                        <input class="form-control" formControlName="telefono" id="telefono" name="telefono"
+                               type="text"/>
                     </div>
                 </div>
                 <div class="col-lg-6">
                     <div class="form-group">
                         <label class="form-control-label" for="email">Email</label>
-                        <input type="email" class="form-control" name="email" id="email"
-                            formControlName="email" />
+                        <input class="form-control" formControlName="email" id="email" name="email"
+                               type="email"/>
                     </div>
                 </div>
             </div>
 
             <div class="button-form mt-4">
-                <button type="button" class="btn btn-secondary" (click)="cancel()" title="Cancelar">
+                <button (click)="cancel()" class="btn btn-secondary" title="Cancelar" type="button">
                     <fa-icon icon="ban"></fa-icon>&nbsp;Cancelar
                 </button>
-                <button type="submit" [disabled]="myForm.invalid" class="btn btn-primary" title="Guardar">
+                <button [disabled]="myForm.invalid" class="btn btn-primary" title="Guardar" type="submit">
                     <fa-icon icon="save"></fa-icon>&nbsp;Guardar
                 </button>
             </div>

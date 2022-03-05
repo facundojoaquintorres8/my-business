@@ -1,75 +1,77 @@
-<div class="container" >
-  <form name="myForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="myForm">
-    <h2 *ngIf="!myForm.get('id')!.value">Crear Usuario</h2>
-    <h2 *ngIf="myForm.get('id')!.value">Editar Usuario</h2>
-      <div class="card">
-        <div class="row">
-          <div class="col-lg-4">
-            <div class="form-group">
-              <label class="form-control-label required" for="usuario">Nombre Usuario</label>
-              <input type="text" class="form-control" name="usuario" id="usuario" [readOnly]="isUpdate"
-                     formControlName="usuario" />
-              <div
-                *ngIf="myForm.get('usuario')!.invalid && (myForm.get('usuario')!.dirty || myForm.get('usuario')!.touched)">
-                <small class="form-text text-danger" *ngIf="myForm.get('usuario')?.errors?.required">
-                  El campo es requerido.
-                </small>
-              </div>
+<div class="container">
+    <form (ngSubmit)="save()" [formGroup]="myForm" name="myForm" novalidate role="form">
+        <h2 *ngIf="!myForm.get('id')!.value">Crear Usuario</h2>
+        <h2 *ngIf="myForm.get('id')!.value">Editar Usuario</h2>
+        <div class="card">
+            <div class="row">
+                <div class="col-lg-4">
+                    <div class="form-group">
+                        <label class="form-control-label required" for="usuario">Nombre Usuario</label>
+                        <input [readOnly]="isUpdate" class="form-control" formControlName="usuario" id="usuario"
+                               name="usuario"
+                               type="text"/>
+                        <div
+                                *ngIf="myForm.get('usuario')!.invalid && (myForm.get('usuario')!.dirty || myForm.get('usuario')!.touched)">
+                            <small *ngIf="myForm.get('usuario')?.errors?.required" class="form-text text-danger">
+                                El campo es requerido.
+                            </small>
+                        </div>
+                    </div>
+                </div>
+                <div [hidden]="isUpdate" class="col-lg-4">
+                    <div class="form-group">
+                        <label class="form-control-label required" for="clave">Contraseña</label>
+                        <input [type]="show ? 'text' : 'password' " class="form-control" formControlName="clave"
+                               id="clave"
+                               name="clave"/>
+                        <div
+                                *ngIf="myForm.get('clave')!.invalid && (myForm.get('clave')!.dirty || myForm.get('clave')!.touched)">
+                            <small *ngIf="myForm.get('clave')?.errors?.required" class="form-text text-danger">
+                                El campo es requerido.
+                            </small>
+                            <small *ngIf="myForm.get('clave')?.errors?.pattern " class="form-text text-danger">
+                                <p>
+                                    La contraseña debe tener:<br>
+                                    - Debe ser entre 8 y 32 caracteres<br>
+                                    - Debe tener al menos una minuscula<br>
+                                    - Debe tener al menos una mayuscula<br>
+                                    - Debe tener al menos un numero<br>
+                                </p>
+                            </small>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <div class="form-group">
+                        <label class="form-control-label required" for="rol">Rol</label>
+                        <select class="form-select" formControlName="rol" id="rol" name="rol">
+                            <option [selected]="true" value="">Seleccione</option>
+                            <option *ngFor="let r of roles" value={{r}}>{{r}}</option>
+                        </select>
+                        <div
+                                *ngIf="myForm.get('rol')!.invalid && (myForm.get('rol')!.dirty || myForm.get('rol')!.touched)">
+                            <small *ngIf="myForm.get('rol')?.errors?.required" class="form-text text-danger">
+                                El campo es requerido.
+                            </small>
+                        </div>
+                    </div>
+                </div>
+                <div *ngIf="myForm.get('id')!.value" class="col-lg-1">
+                    <div class="form-check form-switch">
+                        <label class="form-check-label" for="activo">Activo</label>
+                        <input class="form-check-input" formControlName="activo" id="activo" name="activo"
+                               type="checkbox">
+                    </div>
+                </div>
             </div>
-          </div>
-          <div class="col-lg-4" [hidden]="isUpdate" >
-            <div class="form-group">
-              <label class="form-control-label required" for="clave">Contraseña</label>
-              <input [type]="show ? 'text' : 'password' "  class="form-control" name="clave" id="clave"
-                     formControlName="clave" />
-              <div
-                *ngIf="myForm.get('clave')!.invalid && (myForm.get('clave')!.dirty || myForm.get('clave')!.touched)">
-                <small class="form-text text-danger" *ngIf="myForm.get('clave')?.errors?.required">
-                  El campo es requerido.
-                </small>
-                <small class="form-text text-danger" *ngIf="myForm.get('clave')?.errors?.pattern ">
-                  <p>
-                    La contraseña debe tener:<br>
-                    - Debe ser entre 8 y 32 caracteres<br>
-                    - Debe tener al menos una minuscula<br>
-                    - Debe tener al menos una mayuscula<br>
-                    - Debe tener al menos un numero<br>
-                  </p>
-                </small>
-              </div>
+            <div class="button-form mt-4">
+                <button (click)="previousState()" class="btn btn-secondary" title="Cancelar" type="button">
+                    <fa-icon icon="ban"></fa-icon>&nbsp;Cancelar
+                </button>
+                <button [disabled]="myForm.invalid || isSaving" class="btn btn-primary" title="Guardar" type="submit">
+                    <fa-icon icon="save"></fa-icon>&nbsp;Guardar
+                </button>
             </div>
-          </div>
-          <div class="col-lg-3">
-            <div class="form-group">
-              <label class="form-control-label required" for="rol">Rol</label>
-              <select class="form-select" name="rol" id="rol" formControlName="rol" >
-                <option value="" [selected]="true">Seleccione</option>
-                <option *ngFor="let r of roles" value={{r}} >{{r}}</option>
-              </select>
-              <div
-                *ngIf="myForm.get('rol')!.invalid && (myForm.get('rol')!.dirty || myForm.get('rol')!.touched)">
-                <small class="form-text text-danger" *ngIf="myForm.get('rol')?.errors?.required">
-                  El campo es requerido.
-                </small>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-1" *ngIf="myForm.get('id')!.value">
-            <div class="form-check form-switch">
-              <label class="form-check-label" for="activo">Activo</label>
-              <input class="form-check-input" type="checkbox" name="activo" id="activo"
-                     formControlName="activo">
-            </div>
-          </div>
         </div>
-        <div class="button-form mt-4">
-          <button type="button" class="btn btn-secondary" (click)="previousState()" title="Cancelar">
-            <fa-icon icon="ban"></fa-icon>&nbsp;Cancelar
-          </button>
-          <button type="submit" [disabled]="myForm.invalid || isSaving" class="btn btn-primary" title="Guardar">
-            <fa-icon icon="save"></fa-icon>&nbsp;Guardar
-          </button>
-        </div>
-      </div>
-  </form>
+    </form>
 </div>

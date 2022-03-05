@@ -1,5 +1,5 @@
 <div class="container">
-    <form name="myForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="myForm">
+    <form (ngSubmit)="save()" [formGroup]="myForm" name="myForm" novalidate role="form">
         <h2 *ngIf="!myForm.get('id')!.value">Crear Categoría de Producto</h2>
         <h2 *ngIf="myForm.get('id')!.value">Editar Categoría de Producto</h2>
         <div class="card">
@@ -7,30 +7,30 @@
                 <div class="col-lg-4">
                     <div class="form-group">
                         <label class="form-control-label required" for="descripcion">Descripción</label>
-                        <input type="text" class="form-control" name="descripcion" id="descripcion"
-                            formControlName="descripcion" />
+                        <input class="form-control" formControlName="descripcion" id="descripcion" name="descripcion"
+                               type="text"/>
                         <div
-                            *ngIf="myForm.get('descripcion')!.invalid && (myForm.get('descripcion')!.dirty || myForm.get('descripcion')!.touched)">
-                            <small class="form-text text-danger" *ngIf="myForm.get('descripcion')?.errors?.required">
+                                *ngIf="myForm.get('descripcion')!.invalid && (myForm.get('descripcion')!.dirty || myForm.get('descripcion')!.touched)">
+                            <small *ngIf="myForm.get('descripcion')?.errors?.required" class="form-text text-danger">
                                 El campo es requerido.
                             </small>
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-3" *ngIf="myForm.get('id')!.value">
+                <div *ngIf="myForm.get('id')!.value" class="col-lg-3">
                     <div class="form-check form-switch">
                         <label class="form-check-label" for="activa">Activa</label>
-                        <input class="form-check-input" type="checkbox" name="activa" id="activa"
-                            formControlName="activa">
+                        <input class="form-check-input" formControlName="activa" id="activa" name="activa"
+                               type="checkbox">
                     </div>
                 </div>
             </div>
 
             <div class="button-form mt-4">
-                <button type="button" class="btn btn-secondary" (click)="previousState()" title="Cancelar">
+                <button (click)="previousState()" class="btn btn-secondary" title="Cancelar" type="button">
                     <fa-icon icon="ban"></fa-icon>&nbsp;Cancelar
                 </button>
-                <button type="submit" [disabled]="myForm.invalid || isSaving" class="btn btn-primary" title="Guardar">
+                <button [disabled]="myForm.invalid || isSaving" class="btn btn-primary" title="Guardar" type="submit">
                     <fa-icon icon="save"></fa-icon>&nbsp;Guardar
                 </button>
             </div>

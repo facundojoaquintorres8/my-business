@@ -1,20 +1,22 @@
-<form *ngIf="cliente" name="deleteForm" (ngSubmit)="confirmDelete(cliente?.dni!)">
-  <div class="modal-header">
-    <h4 class="model-title">Confirmar operación</h4>
-  </div>
+<form (ngSubmit)="confirmDelete(cliente?.dni!)" *ngIf="cliente" name="deleteForm">
+    <div class="modal-header">
+        <h4 class="model-title">Confirmar operación</h4>
+    </div>
 
-  <div class="modal-body">
-    <p>
-      ¿Está seguro que desea eliminar el Cliente <strong>{{cliente.nombre + ' ' + cliente.apellido}}</strong>
-    </p>
-  </div>
+    <div class="modal-body">
+        <p>
+            ¿Está seguro que desea eliminar el Cliente <strong>{{cliente.nombre + ' ' + cliente.apellido}}</strong>
+        </p>
+    </div>
 
-  <div class="modal-footer">
-    <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="cancel()" title="Cancelar">
-      <fa-icon icon="ban"></fa-icon>Cancelar
-    </button>
-    <button type="submit" class="btn btn-danger" title="Eliminar">
-      <fa-icon icon="times"></fa-icon>Eliminar
-    </button>
-  </div>
+    <div class="modal-footer">
+        <button (click)="cancel()" class="btn btn-secondary" data-dismiss="modal" title="Cancelar" type="button">
+            <fa-icon icon="ban"></fa-icon>
+            Cancelar
+        </button>
+        <button class="btn btn-danger" title="Eliminar" type="submit">
+            <fa-icon icon="times"></fa-icon>
+            Eliminar
+        </button>
+    </div>
 </form>

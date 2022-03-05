@@ -1,37 +1,37 @@
-import { ICategoriaProducto } from "../categorias-productos/categorias-productos.models";
-import { IProveedor } from "../proveedores/proveedores.models";
+import {ICategoriaProducto} from '../categorias-productos/categorias-productos.models';
+import {IProveedor} from '../proveedores/proveedores.models';
 
 export interface IProducto {
-  id: number;
-  descripcion: string;
-  stock: number;
-  cantidadMinima: number;
-  precioVenta: number;
-  categoria: ICategoriaProducto;
-  activo: boolean;
+    id: number;
+    descripcion: string;
+    stock: number;
+    cantidadMinima: number;
+    precioVenta: number;
+    categoria: ICategoriaProducto;
+    activo: boolean;
 }
 
 export interface IProductoUpdate {
-  id: number;
-  descripcion: string;
-  stock: number;
-  cantidadMinima: number;
-  precioVenta: number;
-  categoriaId: number;
-  activo: boolean;
+    id: number;
+    descripcion: string;
+    stock: number;
+    cantidadMinima: number;
+    precioVenta: number;
+    categoriaId: number;
+    activo: boolean;
 }
 
 export interface IQuickProducto {
-  descripcion: string;
-  cantidadMinima: number;
-  precioVenta: number;
-  categoriaId: number;
+    descripcion: string;
+    cantidadMinima: number;
+    precioVenta: number;
+    categoriaId: number;
 }
 
 export interface IPrecios {
-  id: number;
-  fecha: Date;
-  precio: number;
-  producto: IProducto;
-  proveedor: IProveedor;
+    id: number;
+    fecha: Date;
+    precio: number;
+    producto: IProducto;
+    proveedor: IProveedor;
 }
