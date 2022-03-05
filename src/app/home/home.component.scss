@@ -1,3 +1,41 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap');
+
+.home-container{
+
+    margin-top: 150px;
+    background-image: url("../../assets/images/fondo.jpg");
+
+    height: 100%;
+
+  filter: blur(5px);
+  //-webkit-filter: blur(8px);
+
+    /* Center and scale the image nicely */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+.bg-text  {
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0, 0.4); /* Black w/opacity/see-through */
+  color: white;
+  font-weight: bold;
+  border: 3px solid #f1f1f1;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  width: 20%;
+  padding: 20px;
+  text-align: center;
+}
+
+.saludo{
+  position: absolute;
+  top: 10%;
+  left: 5%;
+}
 button {
   width: 70%;
   font-size: xx-large;
@@ -13,19 +51,23 @@ button {
   width: 95%;
 
 }
+.perfil{
+  position: absolute;
+  top: 40%;
 
+}
 .foto {
-  background-color: cornflowerblue;
-  margin: 0 5px;
+  background-color: #47a856;
+  margin: 1px 5px;
+  border-radius: 10px;
+}
+.foto:hover{
+  background-color: #05ef22;
+  border: solid black 2px;
+  font-weight: bold;
 }
 
-.userSquare {
-  border-width: 1px;
-  border-style: solid;
-  border-color: black;
 
-}
-
-.home-img {
-  height: 100%;
+h1{
+  color: #0d384f;
 }

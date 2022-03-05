@@ -1,9 +1,14 @@
 .navbar-light .navbar-nav .nav-link {
   color: #0dcaf0;
 }
-
+a:hover{
+  font-weight: bold;
+}
 .userSquare {
-
   border: 1px solid brown;
   border-radius: 10px;
+}
+.form-select:hover{
+  font-weight: bold;
+  border: 1px solid black;
 }
