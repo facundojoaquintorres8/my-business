@@ -7,6 +7,8 @@ import {IUsuario} from './usuarios.models';
 import {UsuariosService} from './usuarios.service';
 import {DeleteUsuariosModalComponent} from './delete-usuarios-modal.component';
 import {Roles} from '../util/rolesUsuarios';
+import {ITokenUser} from '../auth/auth.models';
+import {AuthService} from '../auth/auth.service'
 
 @Component({
     selector: 'app-usuarios',
@@ -25,19 +27,22 @@ export class UsuariosComponent implements OnInit {
     loading = false;
     roles = Roles;
     private ngbModalRef: NgbModalRef | undefined;
+    tokenUser!: ITokenUser;
 
     constructor(
         private router: Router,
         private activatedRoute: ActivatedRoute,
         private usuariosService: UsuariosService,
         private modalService: NgbModal,
-        private fb: FormBuilder) {
+        private fb: FormBuilder,
+        private authService : AuthService) {
         this.activatedRoute.data.subscribe(data => {
             this.page = data.pagingParams ? data.pagingParams : newPage({activo: true}, ['id', 'ASC']);
         });
     }
 
     ngOnInit(): void {
+        this.tokenUser = this.authService.getSessionUser();
         this.findAll();
     }
 
@@ -52,6 +57,7 @@ export class UsuariosComponent implements OnInit {
             }
         }).subscribe(res => {
             this.rows = res.body.rows;
+            this.rows = this.rows.filter(row => row.id != this.tokenUser.id);
             this.loading = false;
             this.page.totalElements = res.body.count;
             this.page.totalPages = totalPages(this.page.size, this.page.totalElements);

@@ -5,6 +5,7 @@ import {ActivatedRoute} from '@angular/router';
 import {Observable} from 'rxjs';
 import {ProveedorService} from './proveedores.service';
 import {IProveedor} from './proveedores.models';
+import {ToastService} from '../toast/toast.service'
 
 @Component({
     selector: 'app-update-proveedores',
@@ -27,8 +28,8 @@ export class UpdateProveedorComponent implements OnInit {
         private proveedorService: ProveedorService,
         private activatedRoute: ActivatedRoute,
         private fb: FormBuilder,
-    ) {
-    }
+        private toastService: ToastService
+    ) {};
 
     ngOnInit(): void {
         const id = this.activatedRoute.snapshot.paramMap.get('id');
@@ -69,18 +70,26 @@ export class UpdateProveedorComponent implements OnInit {
         return {
             id: this.myForm.get(['id'])!.value,
             razonSocial: this.myForm.get(['razonSocial'])!.value,
-            cuitDni: this.myForm.get(['cuitDni'])!.value,
+            cuitDni: this.myForm.get(['cuitDni'])!.value.trim(),
             telefono: this.myForm.get(['telefono'])!.value,
             email: this.myForm.get(['email'])!.value,
             direccion: this.myForm.get(['direccion'])!.value,
             activo: this.myForm.get(['activo'])!.value,
         };
+
     }
 
     private subscribeToSaveResponse(result: Observable<HttpResponse<IProveedor>>): void {
         result.subscribe(
             () => this.previousState(),
-            () => this.isSaving = false
+            (error) => {
+                this.isSaving = false
+                this.toastService.changeMessage({
+                    isError: true,
+                    message: 'El CUIT / DNI ingresado ya existe',
+                }
+                );
+            }
         );
     }
 }
