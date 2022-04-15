@@ -21,14 +21,16 @@
                         <div class="col-sm-12">
                             <div class="form-group">
                                 <label class="form-control-label required" for="clave">Contraseña</label>
-                                <input class="form-control" formControlName="clave" id="clave" name="clave"
-                                       type="password"/>
-                                <div
-                                        *ngIf="mensaje">
-                                    <small class="form-text text-danger">
-                                        {{mensaje}}
-                                    </small>
+                                <div class="input-group">
+                                    <input class="form-control" formControlName="clave" id="clave" name="clave"
+                                           [type]="show ? 'text' : 'password'" />
+
+                                        <button class="btn btn-primary" type="button" title="cambiar" (click)="toggle()" >
+                                            <fa-icon icon="eye"></fa-icon>
+                                        </button>
+                                    
                                 </div>
+
                             </div>
                         </div>
                     </div>

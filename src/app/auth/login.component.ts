@@ -16,7 +16,7 @@ import {FormBuilder} from '@angular/forms';
 export class LoginComponent implements OnInit {
 
     isSaving = false;
-    mensaje?: string;
+    show = false;
     myForm = this.fb.group({
         usuario: [null],
         clave: []
@@ -69,7 +69,9 @@ export class LoginComponent implements OnInit {
             }
         );
     }
-
+    toggle(){
+        this.show = !this.show;
+    }
 }
 
 
