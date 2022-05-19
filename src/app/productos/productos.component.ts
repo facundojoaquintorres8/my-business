@@ -1,13 +1,13 @@
-import {Component, OnInit} from '@angular/core';
-import {NgbModal, NgbModalRef} from '@ng-bootstrap/ng-bootstrap';
-import {DeleteProductoModalComponent} from './delete-productos-modal.component';
-import {ProductoService} from './productos.service';
-import {IProducto} from './productos.models';
-import {FormBuilder} from '@angular/forms';
-import {IPage, newPage, totalPages} from '../shared/page.models';
-import {ActivatedRoute, Router} from '@angular/router';
-import {ICategoriaProducto} from '../categorias-productos/categorias-productos.models';
-import {CategoriaProductoService} from '../categorias-productos/categorias-productos.service';
+import { Component, OnInit } from '@angular/core';
+import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
+import { DeleteProductoModalComponent } from './delete-productos-modal.component';
+import { ProductoService } from './productos.service';
+import { IProducto } from './productos.models';
+import { FormBuilder } from '@angular/forms';
+import { IPage, newPage, totalPages } from '../shared/page.models';
+import { ActivatedRoute, Router } from '@angular/router';
+import { ICategoriaProducto } from '../categorias-productos/categorias-productos.models';
+import { CategoriaProductoService } from '../categorias-productos/categorias-productos.service';
 
 @Component({
     selector: 'app-productos',
@@ -36,7 +36,7 @@ export class ProductoComponent implements OnInit {
         private fb: FormBuilder,
     ) {
         this.activatedRoute.data.subscribe(data => {
-            this.page = data.pagingParams ? data.pagingParams : newPage({activo: true}, ['descripcion', 'ASC']);
+            this.page = data.pagingParams ? data.pagingParams : newPage({ activo: true }, ['descripcion', 'ASC']);
         });
     }
 
@@ -115,7 +115,7 @@ export class ProductoComponent implements OnInit {
     }
 
     clearFilter(): void {
-        this.page.filter = {activo: true};
+        this.page.filter = { activo: true };
         this.page = newPage(this.page.filter, this.page.order);
         this.myForm.get(['verInactivos'])!.setValue(false);
         this.myForm.get(['descripcion'])!.setValue('');
@@ -130,7 +130,7 @@ export class ProductoComponent implements OnInit {
     }
 
     delete(id: number): void {
-        this.ngbModalRef = this.modalService.open(DeleteProductoModalComponent, {size: 'lg', backdrop: 'static'});
+        this.ngbModalRef = this.modalService.open(DeleteProductoModalComponent, { size: 'lg', backdrop: 'static' });
         this.ngbModalRef.componentInstance.id = id;
         this.ngbModalRef.result.then(
             () => {

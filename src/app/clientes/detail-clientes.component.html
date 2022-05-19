@@ -1,35 +1,76 @@
-<div class="container">
+<div class="container" *ngIf="cliente">
     <h2>Detalle</h2>
+
     <div class="card">
-        <dl *ngIf="cliente">
-            <dt>Dni</dt>
-            <dd>{{cliente.dni}}</dd>
-            <dt>Nombre</dt>
-            <dd>{{cliente.nombre}}</dd>
-            <dt>Apelido</dt>
-            <dd>{{cliente.apellido}}</dd>
-            <dt>Telefono</dt>
-            <dd>{{cliente.telefono}}</dd>
-            <dt>direcion</dt>
-            <dd>{{cliente.direccion}}</dd>
-            <dt>Tipo de Cliente</dt>
-            <dd *ngIf="cliente.tipo === 'MAYORISTA'">MAYORISTA</dd>
-            <dd *ngIf="cliente.tipo === 'MINORISTA'">MINORISTA</dd>
-        </dl>
-        <div class="button-form">
-            <button (click)="previousState()" class="btn btn-secondary" title="Volver" type="button">
-                <fa-icon icon="arrow-left"></fa-icon>
-                Volver
-            </button>
-            <button [routerLink]="['../../', cliente?.dni, 'edit']" class="btn btn-primary" title="Editar"
-                    type="button">
-                <fa-icon icon="pencil-alt"></fa-icon>
-                Editar
-            </button>
-            <button (click)="delete(cliente.dni)" class="btn btn-danger" title="Eliminar" type="button">
-                <fa-icon icon="times"></fa-icon>
-                Eliminar
-            </button>
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="card-header">
+                    DNI
+                </div>
+                <div class="card-body">
+                    <h6 class="card-subtitle text-muted">{{ cliente.dni }}
+                    </h6>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="card-header">
+                    Apellido
+                </div>
+                <div class="card-body">
+                    <h6 class="card-subtitle text-muted">{{ cliente.apellido }}
+                    </h6>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="card-header">
+                    Nombre
+                </div>
+                <div class="card-body">
+                    <h6 class="card-subtitle text-muted">{{ cliente.nombre }}
+                    </h6>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="card-header">
+                    Teléfono
+                </div>
+                <div class="card-body">
+                    <h6 class="card-subtitle text-muted">{{ cliente.telefono }}
+                    </h6>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="card-header">
+                    Dirección
+                </div>
+                <div class="card-body">
+                    <h6 class="card-subtitle text-muted">{{ cliente.direccion }}
+                    </h6>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="card-header">
+                    Tipo
+                </div>
+                <div class="card-body">
+                    <h6 class="card-subtitle text-muted">{{ cliente.tipo }}</h6>
+                </div>
+            </div>
         </div>
+    </div>
+
+    <div class="button-form">
+        <button (click)="previousState()" class="btn btn-secondary" title="Volver" type="button">
+            <fa-icon icon="arrow-left"></fa-icon>
+            Volver
+        </button>
+        <button [routerLink]="['../../', cliente?.dni, 'edit']" class="btn btn-primary" title="Editar" type="button">
+            <fa-icon icon="pencil-alt"></fa-icon>
+            Editar
+        </button>
+        <button (click)="delete(cliente.dni)" class="btn btn-danger" title="Eliminar" type="button">
+            <fa-icon icon="times"></fa-icon>
+            Eliminar
+        </button>
     </div>
 </div>

@@ -1,10 +1,10 @@
-import {Component, OnInit} from '@angular/core';
-import {HttpResponse} from '@angular/common/http';
-import {FormBuilder, Validators} from '@angular/forms';
-import {ActivatedRoute} from '@angular/router';
-import {Observable} from 'rxjs';
-import {CategoriaProductoService} from './categorias-productos.service';
-import {ICategoriaProducto} from './categorias-productos.models';
+import { Component, OnInit } from '@angular/core';
+import { HttpResponse } from '@angular/common/http';
+import { FormBuilder, Validators } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
+import { Observable } from 'rxjs';
+import { CategoriaProductoService } from './categorias-productos.service';
+import { ICategoriaProducto } from './categorias-productos.models';
 
 @Component({
     selector: 'app-update-categorias-productos',
@@ -23,8 +23,7 @@ export class UpdateCategoriaProductoComponent implements OnInit {
         private categoriaProductoService: CategoriaProductoService,
         private activatedRoute: ActivatedRoute,
         private fb: FormBuilder,
-    ) {
-    }
+    ) { }
 
     ngOnInit(): void {
         const id = this.activatedRoute.snapshot.paramMap.get('id');

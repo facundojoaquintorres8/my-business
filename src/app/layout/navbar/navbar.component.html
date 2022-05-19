@@ -2,30 +2,31 @@
     <div class="container-fluid">
         <a class="navbar-brand" href="/home"><img alt="image" src="/assets/images/icon-32x32.png"> Mi Negocio</a>
         <button aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"
-                class="navbar-toggler"
-                data-bs-target="#navbarSupportedContent" data-bs-toggle="collapse" type="button">
+            class="navbar-toggler" data-bs-target="#navbarSupportedContent" data-bs-toggle="collapse" type="button">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li *ngIf="user.rol !== 'Compras'" class="nav-item">
+                    <a class="nav-link" href="/ventas">Ventas</a>
+                </li>
+                <li *ngIf="user.rol !== 'Compras'" class="nav-item">
+                    <a class="nav-link" href="/clientes">Clientes</a>
+                </li>
+
+                <li *ngIf="user.rol !== 'Ventas'" class="nav-item">
+                    <a class="nav-link" href="/compras">Compras</a>
+                </li>
+                <li *ngIf="user.rol !== 'Ventas'" class="nav-item">
+                    <a class="nav-link" href="/proveedores">Proveedores</a>
+                </li>
                 <li class="nav-item">
                     <a class="nav-link" href="/categorias-productos">Categorías</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="/productos">Productos</a>
                 </li>
-                <li *ngIf="user.rol !== 'Ventas'" class="nav-item">
-                    <a class="nav-link" href="/proveedores">Proveedores</a>
-                </li>
-                <li *ngIf="user.rol !== 'Ventas'" class="nav-item">
-                    <a class="nav-link" href="/compras">Compras</a>
-                </li>
-                <li *ngIf="user.rol !== 'Compras'" class="nav-item">
-                    <a class="nav-link" href="/clientes">Clientes</a>
-                </li>
-                <li *ngIf="user.rol !== 'Compras'" class="nav-item">
-                    <a class="nav-link" href="/ventas">Ventas</a>
-                </li>
+
                 <li *ngIf="user.rol === 'Administrador'" class="nav-item">
                     <a class="nav-link" href="/usuarios">Usuarios</a>
                 </li>
@@ -33,11 +34,11 @@
         </div>
         <div class="d-flex flex-row-reverse" id="navbarSupportedContent2">
             <form [formGroup]="myForm" class="form-filter" name="myForm" novalidate role="form">
-                <select (change)="onChangeValue($event)" class="form-select" formControlName="select" id="rol"
-                        name="rol">
+                <select (change)="onChangeValue($event)" class="form-select pointer" formControlName="select" id="rol"
+                    name="rol">
                     <option [selected]="true" value="1"> Usuario: {{user.usuario}} | Rol: {{user.rol}}</option>
                     <option value="2">Cambiar Contraseña</option>
-                    <option value="3">Cerrar Sesion</option>
+                    <option value="3">Cerrar Sesión</option>
                 </select>
             </form>
         </div>

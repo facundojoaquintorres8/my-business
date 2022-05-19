@@ -1,11 +1,11 @@
-import {Component, OnInit} from '@angular/core';
-import {NgbModal, NgbModalRef} from '@ng-bootstrap/ng-bootstrap';
-import {DeleteCategoriaProductoModalComponent} from './delete-categorias-productos-modal.component';
-import {CategoriaProductoService} from './categorias-productos.service';
-import {ICategoriaProducto} from './categorias-productos.models';
-import {FormBuilder} from '@angular/forms';
-import {IPage, newPage, totalPages} from '../shared/page.models';
-import {ActivatedRoute, Router} from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
+import { DeleteCategoriaProductoModalComponent } from './delete-categorias-productos-modal.component';
+import { CategoriaProductoService } from './categorias-productos.service';
+import { ICategoriaProducto } from './categorias-productos.models';
+import { FormBuilder } from '@angular/forms';
+import { IPage, newPage, totalPages } from '../shared/page.models';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
     selector: 'app-categorias-productos',
@@ -30,7 +30,7 @@ export class CategoriaProductoComponent implements OnInit {
         private fb: FormBuilder,
     ) {
         this.activatedRoute.data.subscribe(data => {
-            this.page = data.pagingParams ? data.pagingParams : newPage({activa: true}, ['descripcion', 'ASC']);
+            this.page = data.pagingParams ? data.pagingParams : newPage({ activa: true }, ['descripcion', 'ASC']);
         });
     }
 
@@ -88,7 +88,7 @@ export class CategoriaProductoComponent implements OnInit {
     }
 
     clearFilter(): void {
-        this.page.filter = {activa: true};
+        this.page.filter = { activa: true };
         this.page = newPage(this.page.filter, this.page.order);
         this.myForm.get(['verInactivas'])!.setValue(false);
         this.myForm.get(['descripcion'])!.setValue('');

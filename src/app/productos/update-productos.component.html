@@ -8,9 +8,9 @@
                     <div class="form-group">
                         <label class="form-control-label required" for="descripcion">Descripción</label>
                         <input class="form-control" formControlName="descripcion" id="descripcion" name="descripcion"
-                               type="text"/>
+                            type="text" />
                         <div
-                                *ngIf="myForm.get('descripcion')!.invalid && (myForm.get('descripcion')!.dirty || myForm.get('descripcion')!.touched)">
+                            *ngIf="myForm.get('descripcion')!.invalid && (myForm.get('descripcion')!.dirty || myForm.get('descripcion')!.touched)">
                             <small *ngIf="myForm.get('descripcion')?.errors?.required" class="form-text text-danger">
                                 El campo es requerido.
                             </small>
@@ -21,13 +21,13 @@
                     <div class="form-group">
                         <label class="form-control-label required" for="categoriaId">Categoría</label>
                         <select class="form-control" formControlName="categoriaId" id="categoriaId" name="categoriaId"
-                                type="text">
+                            type="text">
                             <option [ngValue]="null">Seleccione</option>
-                            <option *ngFor="let categoria of categorias"
-                                    [value]="categoria.id">{{categoria.descripcion}}</option>
+                            <option *ngFor="let categoria of categorias" [value]="categoria.id">
+                                {{categoria.descripcion}}</option>
                         </select>
                         <div
-                                *ngIf="myForm.get('categoriaId')!.invalid && (myForm.get('categoriaId')!.dirty || myForm.get('categoriaId')!.touched)">
+                            *ngIf="myForm.get('categoriaId')!.invalid && (myForm.get('categoriaId')!.dirty || myForm.get('categoriaId')!.touched)">
                             <small *ngIf="myForm.get('categoriaId')?.errors?.required" class="form-text text-danger">
                                 El campo es requerido.
                             </small>
@@ -37,10 +37,9 @@
                 <div class="col-lg-2">
                     <div class="form-group">
                         <label class="form-control-label required" for="stock">Stock</label>
-                        <input class="form-control" formControlName="stock" id="stock" name="stock"
-                               type="number"/>
+                        <input class="form-control" formControlName="stock" id="stock" name="stock" type="number" />
                         <div
-                                *ngIf="myForm.get('stock')!.invalid && (myForm.get('stock')!.dirty || myForm.get('stock')!.touched)">
+                            *ngIf="myForm.get('stock')!.invalid && (myForm.get('stock')!.dirty || myForm.get('stock')!.touched)">
                             <small *ngIf="myForm.get('stock')?.errors?.required" class="form-text text-danger">
                                 El campo es requerido.
                             </small>
@@ -54,10 +53,9 @@
                     <div class="form-group">
                         <label class="form-control-label required" for="cantidadMinima">Cantidad mínima</label>
                         <input class="form-control" formControlName="cantidadMinima" id="cantidadMinima"
-                               name="cantidadMinima"
-                               type="number"/>
+                            name="cantidadMinima" type="number" />
                         <div
-                                *ngIf="myForm.get('cantidadMinima')!.invalid && (myForm.get('cantidadMinima')!.dirty || myForm.get('cantidadMinima')!.touched)">
+                            *ngIf="myForm.get('cantidadMinima')!.invalid && (myForm.get('cantidadMinima')!.dirty || myForm.get('cantidadMinima')!.touched)">
                             <small *ngIf="myForm.get('cantidadMinima')?.errors?.required" class="form-text text-danger">
                                 El campo es requerido.
                             </small>
@@ -71,9 +69,9 @@
                     <div class="form-group">
                         <label class="form-control-label required" for="precioVenta">Precio Venta</label>
                         <input class="form-control" formControlName="precioVenta" id="precioVenta" name="precioVenta"
-                               type="number"/>
+                            type="number" />
                         <div
-                                *ngIf="myForm.get('precioVenta')!.invalid && (myForm.get('precioVenta')!.dirty || myForm.get('precioVenta')!.touched)">
+                            *ngIf="myForm.get('precioVenta')!.invalid && (myForm.get('precioVenta')!.dirty || myForm.get('precioVenta')!.touched)">
                             <small *ngIf="myForm.get('precioVenta')?.errors?.required" class="form-text text-danger">
                                 El campo es requerido.
                             </small>
@@ -87,19 +85,20 @@
                     <div class="form-check form-switch">
                         <label class="form-check-label" for="activo">Activo</label>
                         <input class="form-check-input" formControlName="activo" id="activo" name="activo"
-                               type="checkbox">
+                            type="checkbox">
                     </div>
                 </div>
             </div>
 
-            <div class="button-form mt-4">
-                <button (click)="previousState()" class="btn btn-secondary" title="Cancelar" type="button">
-                    <fa-icon icon="ban"></fa-icon>&nbsp;Cancelar
-                </button>
-                <button [disabled]="myForm.invalid || isSaving" class="btn btn-primary" title="Guardar" type="submit">
-                    <fa-icon icon="save"></fa-icon>&nbsp;Guardar
-                </button>
-            </div>
+        </div>
+
+        <div class="button-form">
+            <button (click)="previousState()" class="btn btn-secondary" title="Cancelar" type="button">
+                <fa-icon icon="ban"></fa-icon>&nbsp;Cancelar
+            </button>
+            <button [disabled]="myForm.invalid || isSaving" class="btn btn-primary" title="Guardar" type="submit">
+                <fa-icon icon="save"></fa-icon>&nbsp;Guardar
+            </button>
         </div>
     </form>
 </div>

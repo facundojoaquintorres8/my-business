@@ -1,12 +1,12 @@
-import {Component, OnInit} from '@angular/core';
-import {AuthService} from './auth.service';
-import {HttpResponse} from '@angular/common/http';
-import {Router} from '@angular/router';
-import {IUsuarioLogin} from '../usuarios/usuarios.models';
-import {Observable} from 'rxjs';
-import {ILoginUser} from './auth.models';
-import {ToastService} from '../toast/toast.service';
-import {FormBuilder} from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { AuthService } from './auth.service';
+import { HttpResponse } from '@angular/common/http';
+import { Router } from '@angular/router';
+import { IUsuarioLogin } from '../usuarios/usuarios.models';
+import { Observable } from 'rxjs';
+import { ILoginUser } from './auth.models';
+import { ToastService } from '../toast/toast.service';
+import { FormBuilder } from '@angular/forms';
 
 @Component({
     selector: 'app-login',
@@ -69,7 +69,7 @@ export class LoginComponent implements OnInit {
             }
         );
     }
-    toggle(){
+    toggle() {
         this.show = !this.show;
     }
 }

@@ -7,8 +7,9 @@
                     <div class="form-group">
                         <label class="form-control-label required" for="apellido">Apellido</label>
                         <input class="form-control" formControlName="apellido" id="apellido" name="apellido"
-                               type="text">
-                        <div *ngIf="myForm.get('apellido')!.invalid && (myForm.get('apellido')!.dirty || myForm.get('apellido')!.touched)">
+                            type="text">
+                        <div
+                            *ngIf="myForm.get('apellido')!.invalid && (myForm.get('apellido')!.dirty || myForm.get('apellido')!.touched)">
                             <small *ngIf="myForm.get('apellido')?.errors?.required" class="form-text text-danger">
                                 El campo es requerido.
                             </small>
@@ -19,7 +20,8 @@
                     <div class="form-group">
                         <label class="form-control-label required" for="nombre">Nombre</label>
                         <input class="form-control" formControlName="nombre" id="nombre" name="nombre" type="text">
-                        <div *ngIf="myForm.get('nombre')!.invalid && (myForm.get('nombre')!.dirty || myForm.get('nombre')!.touched)">
+                        <div
+                            *ngIf="myForm.get('nombre')!.invalid && (myForm.get('nombre')!.dirty || myForm.get('nombre')!.touched)">
                             <small *ngIf="myForm.get('nombre')?.errors?.required" class="form-text text-danger">
                                 El campo es requerido.
                             </small>
@@ -30,9 +32,9 @@
                     <div class="form-group">
                         <label class="form-control-label required" for="dni">DNI</label>
                         <input [readOnly]="!myForm.get('id')!.value" class="form-control" formControlName="dni" id="dni"
-                               name="dni"
-                               type="text">
-                        <div *ngIf="myForm.get('dni')!.invalid && (myForm.get('dni')!.dirty || myForm.get('dni')!.touched)">
+                            name="dni" type="text">
+                        <div
+                            *ngIf="myForm.get('dni')!.invalid && (myForm.get('dni')!.dirty || myForm.get('dni')!.touched)">
                             <small *ngIf="myForm.get('dni')?.errors?.required" class="form-text text-danger">
                                 El campo es requerido.
                             </small>
@@ -47,7 +49,7 @@
                             <option value="MINORISTA">MINORISTA</option>
                         </select>
                         <div
-                                *ngIf="myForm.get('tipo')!.invalid && (myForm.get('tipo')!.dirty || myForm.get('tipo')!.touched)">
+                            *ngIf="myForm.get('tipo')!.invalid && (myForm.get('tipo')!.dirty || myForm.get('tipo')!.touched)">
                             <small *ngIf="myForm.get('tipo')?.errors?.required" class="form-text text-danger">
                                 El campo es requerido.
                             </small>
@@ -58,12 +60,12 @@
                     <div class="form-group">
                         <label class="form-control-label" for="telefono">Teléfono</label>
                         <input class="form-control" formControlName="telefono" id="telefono" name="telefono"
-                               type="text">
+                            type="text">
                     </div>
                 </div>
             </div>
 
-            <div class="button-form mt-4">
+            <div class="button-form">
                 <button (click)="cancel()" class="btn btn-secondary" title="Cancelar" type="button">
                     <fa-icon icon="ban"></fa-icon>&nbsp;Cancelar
                 </button>

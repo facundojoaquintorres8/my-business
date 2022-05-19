@@ -1,5 +1,5 @@
-import {PagingParamsResolve} from '../util/paging-params-resolve';
-import {LoginComponent} from './login.component';
+import { PagingParamsResolve } from '../util/paging-params-resolve';
+import { LoginComponent } from './login.component';
 
 export const authRoute = [
     {

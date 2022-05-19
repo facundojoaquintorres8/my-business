@@ -1,12 +1,12 @@
-import {Component, OnInit} from '@angular/core';
-import {HttpResponse} from '@angular/common/http';
-import {FormBuilder, Validators} from '@angular/forms';
-import {ActivatedRoute, Router} from '@angular/router';
-import {Observable} from 'rxjs';
-import {IUser, IUsuario} from './usuarios.models';
-import {UsuariosService} from './usuarios.service';
-import {Roles} from '../util/rolesUsuarios';
-import {ToastService} from '../toast/toast.service';
+import { Component, OnInit } from '@angular/core';
+import { HttpResponse } from '@angular/common/http';
+import { FormBuilder, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Observable } from 'rxjs';
+import { IUser, IUsuario } from './usuarios.models';
+import { UsuariosService } from './usuarios.service';
+import { Roles } from '../util/rolesUsuarios';
+import { ToastService } from '../toast/toast.service';
 
 @Component({
     selector: 'app-update-usuario',
@@ -51,6 +51,7 @@ export class UpdateUsuarioComponent implements OnInit {
             );
         }
     }
+
     cambiarClave(id: number): void {
         this.router.navigate([`/${id}`]);
     }

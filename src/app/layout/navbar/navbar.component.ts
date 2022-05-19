@@ -1,8 +1,8 @@
-import {Component, OnInit} from '@angular/core';
-import {IUser} from '../../usuarios/usuarios.models';
-import {AuthService} from '../../auth/auth.service';
-import {Router} from '@angular/router';
-import {FormBuilder, ReactiveFormsModule} from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { IUser } from '../../usuarios/usuarios.models';
+import { AuthService } from '../../auth/auth.service';
+import { Router } from '@angular/router';
+import { FormBuilder } from '@angular/forms';
 
 @Component({
     selector: 'app-navbar',
@@ -32,10 +32,10 @@ export class NavbarComponent implements OnInit {
     onChangeValue(event: any): void {
         let valor = event.target.value;
         if (valor === '2') {
-            this.myForm.setValue({select: '1'});
+            this.myForm.setValue({ select: '1' });
             this.router.navigate(['cuenta/cambiar-clave']);
         } else if (valor === '3') {
-            this.myForm.setValue({select: '1'});
+            this.myForm.setValue({ select: '1' });
             this.logout();
         }
 

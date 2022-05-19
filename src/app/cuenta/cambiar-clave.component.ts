@@ -1,13 +1,13 @@
-import {Component, OnInit} from '@angular/core';
-import {FormBuilder, Validators} from '@angular/forms';
-import {IUser, IUsuarioClave} from '../usuarios/usuarios.models';
-import {CuentaService} from './cuenta.service';
-import {Observable} from 'rxjs';
-import {HttpResponse} from '@angular/common/http';
-import {ValidarClaveRepetida} from '../shared/custom-validators';
-import {AuthService} from '../auth/auth.service';
-import {ToastService} from '../toast/toast.service';
-import {Router} from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, Validators } from '@angular/forms';
+import { IUser, IUsuarioClave } from '../usuarios/usuarios.models';
+import { CuentaService } from './cuenta.service';
+import { Observable } from 'rxjs';
+import { HttpResponse } from '@angular/common/http';
+import { ValidarClaveRepetida } from '../shared/custom-validators';
+import { AuthService } from '../auth/auth.service';
+import { ToastService } from '../toast/toast.service';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-cambiar-clave',

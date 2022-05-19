@@ -1,5 +1,5 @@
-import {Component, OnInit} from '@angular/core';
-import {ToastService} from '../toast/toast.service';
+import { Component, OnInit } from '@angular/core';
+import { ToastService } from '../toast/toast.service';
 
 @Component({
     selector: 'app-home',
@@ -8,8 +8,7 @@ import {ToastService} from '../toast/toast.service';
 })
 export class HomeComponent implements OnInit {
 
-    constructor(private toastService: ToastService) {
-    }
+    constructor(private toastService: ToastService) { }
 
     ngOnInit(): void {
         this.toastService.changeMessage(

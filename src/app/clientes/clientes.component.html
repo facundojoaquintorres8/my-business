@@ -8,10 +8,10 @@
     <div class="card">
         <form (ngSubmit)="onFilter()" [formGroup]="myForm" class="form-filter" name="myForm" novalidate role="form">
             <fa-icon (click)="collapsedFilter = !collapsedFilter" *ngIf="collapsedFilter" class="pointer filter-icon"
-                     icon="chevron-up">
+                icon="chevron-up">
             </fa-icon>
             <fa-icon (click)="collapsedFilter = !collapsedFilter" *ngIf="!collapsedFilter" class="pointer filter-icon"
-                     icon="chevron-down">
+                icon="chevron-down">
             </fa-icon>
             <ng-container *ngIf="!collapsedFilter">
                 <div class="row">
@@ -19,30 +19,29 @@
                         <label class="form-label" for="dni">DNI</label>
                         <input class="form-control" formControlName="dni" id="dni" name="dni" type="text">
                     </div>
-                    <div class="col-lg-4">
+                    <div class="col-lg-3">
+                        <label class="form-label" for="apellido">Apellido</label>
+                        <input class="form-control" formControlName="apellido" id="apellido" name="apellido"
+                            type="text">
+                    </div>
+                    <div class="col-lg-3">
                         <label class="form-label" for="nombre">Nombre</label>
                         <input class="form-control" formControlName="nombre" id="nombre" name="nombre" type="text">
                     </div>
-                    <div class="col-lg-4">
-                        <label class="form-label" for="apellido">Apellido</label>
-                        <input class="form-control" formControlName="apellido" id="apellido" name="apellido"
-                               type="text">
-                    </div>
-                    <div class="col-lg-1">
-                        <div class="form-check form-switch">
-                            <label class="form-check-label" for="verInactivos">Inactivos</label>
-                            <input class="form-check-input" formControlName="verInactivos" id="verInactivos"
-                                   name="verInactivos"
-                                   type="checkbox">
-                        </div>
-                    </div>
-                    <div class="col-lg-4">
+                    <div class="col-lg-2">
                         <label class="form-label" for="tipo">Tipo Cliente</label>
                         <select class="form-select" formControlName="tipo" id="tipo" name="tipo">
                             <option [selected]="true" value="">TODOS</option>
                             <option value="mayorista">MAYORISTA</option>
                             <option value="minorista">MINORISTA</option>
                         </select>
+                    </div>
+                    <div class="col-lg-2">
+                        <div class="form-check form-switch">
+                            <label class="form-check-label" for="verInactivos">Inactivos</label>
+                            <input class="form-check-input" formControlName="verInactivos" id="verInactivos"
+                                name="verInactivos" type="checkbox">
+                        </div>
                     </div>
                 </div>
                 <div class="button-form-filter">
@@ -56,24 +55,12 @@
             </ng-container>
         </form>
     </div>
-    <ngx-datatable
-            (page)="setPage($event)"
-            (sort)="onSort($event)"
-            [columnMode]="'force'"
-            [count]="page.totalElements"
-            [externalPaging]="true"
-            [externalSorting]="true"
-            [footerHeight]="50"
-            [headerHeight]="50"
-            [limit]="page.size"
-            [loadingIndicator]="loading"
-            [offset]="page.offset"
-            [rows]="rows"
-            class="material striped"
-            rowHeight="auto">
+    <ngx-datatable (page)="setPage($event)" (sort)="onSort($event)" [columnMode]="'force'" [count]="page.totalElements"
+        [externalPaging]="true" [externalSorting]="true" [footerHeight]="50" [headerHeight]="50" [limit]="page.size"
+        [loadingIndicator]="loading" [offset]="page.offset" [rows]="rows" class="material striped" rowHeight="auto">
+        <ngx-datatable-column name="DNI" prop="dni"></ngx-datatable-column>
         <ngx-datatable-column name="Apellido" prop="apellido"></ngx-datatable-column>
         <ngx-datatable-column name="Nombre" prop="nombre"></ngx-datatable-column>
-        <ngx-datatable-column name="DNI" prop="dni"></ngx-datatable-column>
         <ngx-datatable-column name="Tipo" prop="tipo"></ngx-datatable-column>
         <ngx-datatable-column name="Teléfono" prop="telefono"></ngx-datatable-column>
         <ngx-datatable-column name="Activo" prop="activo">

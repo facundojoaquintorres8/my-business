@@ -1,17 +1,17 @@
-import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
-import {NgModule} from '@angular/core';
-import {BrowserModule} from '@angular/platform-browser';
-import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
-import {AppRoutingModule} from './app-routing.module';
-import {AppComponent} from './app.component';
-import {PublicLayoutComponent} from './layout/public/public-layout.component';
-import {PrivateLayoutComponent} from './layout/private/private-layout.component';
-import {NavbarComponent} from './layout/navbar/navbar.component';
-import {AuthGuards} from './security/auth-guards';
-import {TokenInterceptor} from './security/token-interceptor';
-import {ToastComponent} from './toast/toast.component';
-import {ReactiveFormsModule} from '@angular/forms';
+import { AppRoutingModule } from './app-routing.module';
+import { AppComponent } from './app.component';
+import { PublicLayoutComponent } from './layout/public/public-layout.component';
+import { PrivateLayoutComponent } from './layout/private/private-layout.component';
+import { NavbarComponent } from './layout/navbar/navbar.component';
+import { AuthGuards } from './security/auth-guards';
+import { TokenInterceptor } from './security/token-interceptor';
+import { ToastComponent } from './toast/toast.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 const APP_CONTAINERS = [
     PublicLayoutComponent,
@@ -42,5 +42,5 @@ const APP_CONTAINERS = [
     ],
     bootstrap: [AppComponent]
 })
-export class AppModule {
-}
+
+export class AppModule { }

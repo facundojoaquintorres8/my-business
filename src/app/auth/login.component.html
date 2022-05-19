@@ -11,7 +11,7 @@
                             <div class="form-group">
                                 <label class="form-control-label required" for="usuario">Usuario</label>
                                 <input class="form-control" formControlName="usuario" id="usuario" name="usuario"
-                                       type="text"/>
+                                    type="text" />
                             </div>
                         </div>
                     </div>
@@ -21,15 +21,15 @@
                                 <label class="form-control-label required" for="clave">Contraseña</label>
                                 <div class="input-group">
                                     <input class="form-control" formControlName="clave" id="clave" name="clave"
-                                           [type]="show ? 'text' : 'password'" />
-                                        <button class="btn btn-primary" type="button" title="cambiar" (click)="toggle()" >
-                                            <fa-icon icon="eye"></fa-icon>
-                                        </button>
+                                        [type]="show ? 'text' : 'password'" />
+                                    <button class="btn btn-primary" type="button" title="cambiar" (click)="toggle()">
+                                        <fa-icon icon="eye"></fa-icon>
+                                    </button>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="button-form mt-4">
+                    <div class="button-form">
                         <button [disabled]="!myForm.valid" class="btn btn-primary" title="Confirmar" type="submit">
                             &nbsp;Confirmar
                         </button>
@@ -39,5 +39,3 @@
         </div>
     </div>
 </div>
-
-

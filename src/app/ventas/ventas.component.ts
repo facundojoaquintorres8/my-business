@@ -1,11 +1,11 @@
-import {Component, OnInit} from '@angular/core';
-import {IVenta, IVentaItem} from './ventas.model';
-import {IPage, newPage, totalPages} from '../shared/page.models';
-import {ActivatedRoute, Router} from '@angular/router';
-import {FormBuilder} from '@angular/forms';
-import {VentasService} from './ventas.service';
-import {ICliente} from '../clientes/clientes.models';
-import {ClientesService} from '../clientes/clientes.service';
+import { Component, OnInit } from '@angular/core';
+import { IVenta } from './ventas.model';
+import { IPage, newPage, totalPages } from '../shared/page.models';
+import { ActivatedRoute, Router } from '@angular/router';
+import { FormBuilder } from '@angular/forms';
+import { VentasService } from './ventas.service';
+import { ICliente } from '../clientes/clientes.models';
+import { ClientesService } from '../clientes/clientes.service';
 
 @Component({
     selector: 'app-ventas',
@@ -116,12 +116,5 @@ export class VentasComponent implements OnInit {
                 },
                 replaceUrl: true
             });
-    }
-
-    calculateMonto(ventasItems: IVentaItem[]): number {
-        return ventasItems.reduce(
-            (a: number, b: IVentaItem) => a + (b.precio * b.cantidad),
-            0
-        );
     }
 }

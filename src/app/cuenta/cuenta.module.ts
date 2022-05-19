@@ -1,9 +1,9 @@
-import {NgModule} from '@angular/core';
-import {CommonModule} from '@angular/common';
-import {RouterModule} from '@angular/router';
-import {SharedModule} from '../shared/shared.module';
-import {CambiarClaveComponent} from './cambiar-clave.component';
-import {cuentaRoute} from './cuenta.route';
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
+import { SharedModule } from '../shared/shared.module';
+import { CambiarClaveComponent } from './cambiar-clave.component';
+import { cuentaRoute } from './cuenta.route';
 
 
 @NgModule({
@@ -16,5 +16,4 @@ import {cuentaRoute} from './cuenta.route';
         RouterModule.forChild(cuentaRoute)
     ]
 })
-export class CuentaModule {
-}
+export class CuentaModule { }

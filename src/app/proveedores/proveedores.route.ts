@@ -1,9 +1,9 @@
-import {Routes} from '@angular/router';
-import {DetailProveedorComponent} from './detail-proveedores.component';
-import {UpdateProveedorComponent} from './update-proveedores.component';
-import {ProveedorComponent} from './proveedores.component';
-import {PagingParamsResolve} from '../util/paging-params-resolve';
-import {AuthGuards} from '../security/auth-guards';
+import { Routes } from '@angular/router';
+import { DetailProveedorComponent } from './detail-proveedores.component';
+import { UpdateProveedorComponent } from './update-proveedores.component';
+import { ProveedorComponent } from './proveedores.component';
+import { PagingParamsResolve } from '../util/paging-params-resolve';
+import { AuthGuards } from '../security/auth-guards';
 
 export const productoRoutes: Routes = [
     {

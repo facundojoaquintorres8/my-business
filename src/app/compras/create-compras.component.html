@@ -6,9 +6,9 @@
                 <div class="col-lg-3">
                     <div class="form-group">
                         <label class="form-control-label required" for="fecha">Fecha</label>
-                        <input class="form-control" formControlName="fecha" id="fecha" name="fecha" type="date"/>
+                        <input class="form-control" formControlName="fecha" id="fecha" name="fecha" type="date" />
                         <div
-                                *ngIf="myForm.get('fecha')!.invalid && (myForm.get('fecha')!.dirty || myForm.get('fecha')!.touched)">
+                            *ngIf="myForm.get('fecha')!.invalid && (myForm.get('fecha')!.dirty || myForm.get('fecha')!.touched)">
                             <small *ngIf="myForm.get('fecha')?.errors?.required" class="form-text text-danger">
                                 El campo es requerido.
                             </small>
@@ -20,21 +20,20 @@
                         <label class="form-control-label required" for="proveedor">Proveedor</label>
                         <div class="input-group">
                             <select class="form-control" formControlName="proveedor" id="proveedor" name="proveedor"
-                                    type="text">
+                                type="text">
                                 <option [ngValue]="null">Seleccione</option>
                                 <option *ngFor="let proveedor of proveedores" [ngValue]="proveedor">
                                     {{proveedor.razonSocial}}</option>
                             </select>
                             <div class="input-group-prepend" style="align-self: center;margin-left: 2px;">
                                 <button (click)="addProveedor()" class="btn btn-outline-primary"
-                                        title="Agregar Proveedor"
-                                        type="button">
+                                    title="Agregar Proveedor" type="button">
                                     <fa-icon icon="plus"></fa-icon>
                                 </button>
                             </div>
                         </div>
                         <div
-                                *ngIf="myForm.get('proveedor')!.invalid && (myForm.get('proveedor')!.dirty || myForm.get('proveedor')!.touched)">
+                            *ngIf="myForm.get('proveedor')!.invalid && (myForm.get('proveedor')!.dirty || myForm.get('proveedor')!.touched)">
                             <small *ngIf="myForm.get('proveedor')?.errors?.required" class="form-text text-danger">
                                 El campo es requerido.
                             </small>
@@ -58,21 +57,20 @@
                             <label class="form-control-label required" for="producto_{{i}}">Producto</label>
                             <div class="input-group">
                                 <select class="form-control" formControlName="producto" id="producto_{{i}}"
-                                        name="producto_{{i}}"
-                                        type="text">
+                                    name="producto_{{i}}" type="text">
                                     <option [ngValue]="null">Seleccione</option>
                                     <option *ngFor="let producto of productos" [ngValue]="producto">
                                         {{producto.descripcion}}</option>
                                 </select>
                                 <div class="input-group-prepend" style="align-self: center;margin-left: 2px;">
                                     <button (click)="addProducto(i)" class="btn btn-outline-primary"
-                                            title="Agregar Producto"
-                                            type="button">
+                                        title="Agregar Producto" type="button">
                                         <fa-icon icon="plus"></fa-icon>
                                     </button>
                                 </div>
                             </div>
-                            <div *ngIf="item.get('producto')!.invalid && (item.get('producto')!.dirty || item.get('producto')!.touched)">
+                            <div
+                                *ngIf="item.get('producto')!.invalid && (item.get('producto')!.dirty || item.get('producto')!.touched)">
                                 <small *ngIf="item.get('producto')?.errors?.required" class="form-text text-danger">
                                     El campo es requerido.
                                 </small>
@@ -82,10 +80,9 @@
                         <div class="col-lg-3 form-group">
                             <label class="form-control-label required" for="cantidad_{{i}}">Cantidad</label>
                             <input class="form-control" formControlName="cantidad" id="cantidad_{{i}}"
-                                   name="cantidad_{{i}}"
-                                   type="number"/>
+                                name="cantidad_{{i}}" type="number" />
                             <div
-                                    *ngIf="item.get('cantidad')!.invalid && (item.get('cantidad')!.dirty || item.get('cantidad')!.touched)">
+                                *ngIf="item.get('cantidad')!.invalid && (item.get('cantidad')!.dirty || item.get('cantidad')!.touched)">
                                 <small *ngIf="item.get('cantidad')?.errors?.required" class="form-text text-danger">
                                     El campo es requerido.
                                 </small>
@@ -97,9 +94,9 @@
                         <div class="col-lg-3 form-group">
                             <label class="form-control-label required" for="precio_{{i}}">Precio</label>
                             <input class="form-control" formControlName="precio" id="precio_{{i}}" name="precio_{{i}}"
-                                   type="number"/>
+                                type="number" />
                             <div
-                                    *ngIf="item.get('precio')!.invalid && (item.get('precio')!.dirty || item.get('precio')!.touched)">
+                                *ngIf="item.get('precio')!.invalid && (item.get('precio')!.dirty || item.get('precio')!.touched)">
                                 <small *ngIf="item.get('precio')?.errors?.required" class="form-text text-danger">
                                     El campo es requerido.
                                 </small>
@@ -117,16 +114,13 @@
                 </div>
             </div>
 
-            <div class="button-form mt-4">
+            <div class="button-form">
                 <button (click)="previousState()" class="btn btn-secondary" title="Cancelar" type="button">
                     <fa-icon icon="ban"></fa-icon>&nbsp;Cancelar
                 </button>
                 <button [disabled]="myForm.invalid || isSaving" class="btn btn-primary" title="Guardar" type="submit">
                     <fa-icon icon="save"></fa-icon>&nbsp;Guardar
                 </button>
-                <!-- <button type="submit" class="btn btn-primary" title="Guardar">
-                    <fa-icon icon="save"></fa-icon>&nbsp;Guardar
-                </button> -->
             </div>
         </div>
     </form>

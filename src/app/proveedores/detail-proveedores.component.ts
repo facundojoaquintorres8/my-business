@@ -1,10 +1,10 @@
-import {HttpResponse} from '@angular/common/http';
-import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
-import {NgbModal, NgbModalRef} from '@ng-bootstrap/ng-bootstrap';
-import {IProveedor} from './proveedores.models';
-import {ProveedorService} from './proveedores.service';
-import {DeleteProveedorModalComponent} from './delete-proveedores-modal.component';
+import { HttpResponse } from '@angular/common/http';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
+import { IProveedor } from './proveedores.models';
+import { ProveedorService } from './proveedores.service';
+import { DeleteProveedorModalComponent } from './delete-proveedores-modal.component';
 
 @Component({
     selector: 'app-detail-proveedores',
@@ -31,7 +31,7 @@ export class DetailProveedorComponent implements OnInit {
     }
 
     delete(id: number): void {
-        this.ngbModalRef = this.modalService.open(DeleteProveedorModalComponent, {size: 'lg', backdrop: 'static'});
+        this.ngbModalRef = this.modalService.open(DeleteProveedorModalComponent, { size: 'lg', backdrop: 'static' });
         this.ngbModalRef.componentInstance.id = id;
         this.ngbModalRef.result.then(
             () => {

@@ -1,28 +1,40 @@
-<div class="container">
+<div class="container" *ngIf="categoriaProducto">
     <h2>Detalle</h2>
+
     <div class="card">
-
-        <dl *ngIf="categoriaProducto">
-            <dt>Descripción</dt>
-            <dd>{{ categoriaProducto.descripcion }}</dd>
-            <dt>Activa</dt>
-            <dd>{{ categoriaProducto.activa ? 'Si' : 'No' }}</dd>
-        </dl>
-
-        <div class="button-form">
-            <button (click)="previousState()" class="btn btn-secondary" title="Volver" type="button">
-                <fa-icon icon="arrow-left"></fa-icon>&nbsp;Volver
-            </button>
-
-            <button [routerLink]="['../../', categoriaProducto?.id, 'edit']" class="btn btn-primary" title="Editar"
-                    type="button">
-                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;Editar
-            </button>
-
-            <button (click)="delete(categoriaProducto.id)" class="btn btn-danger" title="Eliminar"
-                    type="button">
-                <fa-icon icon="times"></fa-icon>&nbsp;Eliminar
-            </button>
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="card-header">
+                    Descripción
+                </div>
+                <div class="card-body">
+                    <h6 class="card-subtitle text-muted">{{ categoriaProducto.descripcion }}
+                    </h6>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="card-header">
+                    Activa
+                </div>
+                <div class="card-body">
+                    <h6 class="card-subtitle text-muted">{{ categoriaProducto.activa ? 'Si' : 'No' }}</h6>
+                </div>
+            </div>
         </div>
+    </div>
+
+    <div class="button-form">
+        <button (click)="previousState()" class="btn btn-secondary" title="Volver" type="button">
+            <fa-icon icon="arrow-left"></fa-icon>&nbsp;Volver
+        </button>
+
+        <button [routerLink]="['../../', categoriaProducto?.id, 'edit']" class="btn btn-primary" title="Editar"
+            type="button">
+            <fa-icon icon="pencil-alt"></fa-icon>&nbsp;Editar
+        </button>
+
+        <button (click)="delete(categoriaProducto.id)" class="btn btn-danger" title="Eliminar" type="button">
+            <fa-icon icon="times"></fa-icon>&nbsp;Eliminar
+        </button>
     </div>
 </div>

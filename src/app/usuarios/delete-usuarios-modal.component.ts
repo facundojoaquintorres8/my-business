@@ -1,7 +1,7 @@
-import {Component, OnInit} from '@angular/core';
-import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
-import {UsuariosService} from './usuarios.service';
-import {IUser} from './usuarios.models';
+import { Component, OnInit } from '@angular/core';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { UsuariosService } from './usuarios.service';
+import { IUser } from './usuarios.models';
 
 @Component({
     templateUrl: './delete-usuarios-modal.component.html'

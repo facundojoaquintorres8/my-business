@@ -1,7 +1,7 @@
-import {Component, OnInit} from '@angular/core';
-import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
-import {IProducto} from './productos.models';
-import {ProductoService} from './productos.service';
+import { Component, OnInit } from '@angular/core';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { IProducto } from './productos.models';
+import { ProductoService } from './productos.service';
 
 @Component({
     templateUrl: './delete-productos-modal.component.html'

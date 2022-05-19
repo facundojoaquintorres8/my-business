@@ -1,8 +1,7 @@
-import {Component, OnInit} from '@angular/core';
-import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
-import {ICliente} from './clientes.models';
-import {ClientesService} from './clientes.service';
-
+import { Component, OnInit } from '@angular/core';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { ICliente } from './clientes.models';
+import { ClientesService } from './clientes.service';
 
 @Component({
     templateUrl: './delete-clientes-modal.component.html'

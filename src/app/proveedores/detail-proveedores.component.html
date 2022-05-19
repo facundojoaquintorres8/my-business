@@ -1,36 +1,75 @@
-<div class="container">
+<div class="container" *ngIf="proveedor">
     <h2>Detalle</h2>
+
     <div class="card">
-
-        <dl *ngIf="proveedor">
-            <dt>Razón Social</dt>
-            <dd>{{ proveedor.razonSocial }}</dd>
-            <dt>CUIT/DNI</dt>
-            <dd>{{ proveedor.cuitDni }}</dd>
-            <dt>Teléfono</dt>
-            <dd>{{ proveedor.telefono ? proveedor.telefono : '-' }}</dd>
-            <dt>Email</dt>
-            <dd>{{ proveedor.email ? proveedor.email : '-' }}</dd>
-            <dt>Dirección</dt>
-            <dd>{{ proveedor.direccion ? proveedor.direccion : '-' }}</dd>
-            <dt>Activo</dt>
-            <dd>{{ proveedor.activo ? 'Si' : 'No' }}</dd>
-        </dl>
-
-        <div class="button-form">
-            <button (click)="previousState()" class="btn btn-secondary" title="Volver" type="button">
-                <fa-icon icon="arrow-left"></fa-icon>&nbsp;Volver
-            </button>
-
-            <button [routerLink]="['../../', proveedor?.id, 'edit']" class="btn btn-primary" title="Editar"
-                    type="button">
-                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;Editar
-            </button>
-
-            <button (click)="delete(proveedor.id)" class="btn btn-danger" title="Eliminar"
-                    type="button">
-                <fa-icon icon="times"></fa-icon>&nbsp;Eliminar
-            </button>
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="card-header">
+                    CUIT/DNI
+                </div>
+                <div class="card-body">
+                    <h6 class="card-subtitle text-muted">{{ proveedor.cuitDni }}
+                    </h6>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="card-header">
+                    Razón Social
+                </div>
+                <div class="card-body">
+                    <h6 class="card-subtitle text-muted">{{ proveedor.razonSocial }}
+                    </h6>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="card-header">
+                    Teléfono
+                </div>
+                <div class="card-body">
+                    <h6 class="card-subtitle text-muted">{{ proveedor.telefono ? proveedor.telefono : '-' }}
+                    </h6>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="card-header">
+                    Email
+                </div>
+                <div class="card-body">
+                    <h6 class="card-subtitle text-muted">{{ proveedor.email ? proveedor.email : '-' }}
+                    </h6>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="card-header">
+                    Dirección
+                </div>
+                <div class="card-body">
+                    <h6 class="card-subtitle text-muted">{{ proveedor.direccion ? proveedor.direccion : '-' }}
+                    </h6>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="card-header">
+                    Activo
+                </div>
+                <div class="card-body">
+                    <h6 class="card-subtitle text-muted">{{ proveedor.activo ? 'Si' : 'No' }}</h6>
+                </div>
+            </div>
         </div>
+    </div>
+
+    <div class="button-form">
+        <button (click)="previousState()" class="btn btn-secondary" title="Volver" type="button">
+            <fa-icon icon="arrow-left"></fa-icon>&nbsp;Volver
+        </button>
+
+        <button [routerLink]="['../../', proveedor?.id, 'edit']" class="btn btn-primary" title="Editar" type="button">
+            <fa-icon icon="pencil-alt"></fa-icon>&nbsp;Editar
+        </button>
+
+        <button (click)="delete(proveedor.id)" class="btn btn-danger" title="Eliminar" type="button">
+            <fa-icon icon="times"></fa-icon>&nbsp;Eliminar
+        </button>
     </div>
 </div>

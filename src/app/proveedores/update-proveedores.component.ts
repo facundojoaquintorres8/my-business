@@ -1,11 +1,11 @@
-import {Component, OnInit} from '@angular/core';
-import {HttpResponse} from '@angular/common/http';
-import {FormBuilder, Validators} from '@angular/forms';
-import {ActivatedRoute} from '@angular/router';
-import {Observable} from 'rxjs';
-import {ProveedorService} from './proveedores.service';
-import {IProveedor} from './proveedores.models';
-import {ToastService} from '../toast/toast.service'
+import { Component, OnInit } from '@angular/core';
+import { HttpResponse } from '@angular/common/http';
+import { FormBuilder, Validators } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
+import { Observable } from 'rxjs';
+import { ProveedorService } from './proveedores.service';
+import { IProveedor } from './proveedores.models';
+import { ToastService } from '../toast/toast.service'
 
 @Component({
     selector: 'app-update-proveedores',
@@ -29,7 +29,7 @@ export class UpdateProveedorComponent implements OnInit {
         private activatedRoute: ActivatedRoute,
         private fb: FormBuilder,
         private toastService: ToastService
-    ) {};
+    ) { };
 
     ngOnInit(): void {
         const id = this.activatedRoute.snapshot.paramMap.get('id');

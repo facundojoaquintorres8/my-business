@@ -9,10 +9,10 @@
     <div class="card">
         <form (ngSubmit)="onFilter()" [formGroup]="myForm" class="form-filter" name="myForm" novalidate role="form">
             <fa-icon (click)="collapsedFilter = !collapsedFilter" *ngIf="collapsedFilter" class="pointer filter-icon"
-                     icon="chevron-up">
+                icon="chevron-up">
             </fa-icon>
             <fa-icon (click)="collapsedFilter = !collapsedFilter" *ngIf="!collapsedFilter" class="pointer filter-icon"
-                     icon="chevron-down">
+                icon="chevron-down">
             </fa-icon>
 
             <ng-container *ngIf="!collapsedFilter">
@@ -20,19 +20,19 @@
                     <div class="col-lg-3">
                         <label class="form-label" for="proveedorId">Proveedor</label>
                         <select class="form-control" formControlName="proveedorId" id="proveedorId" name="proveedorId"
-                                type="text">
-                            <option [ngValue]="null">Seleccione</option>
-                            <option *ngFor="let proveedor of proveedores"
-                                    [value]="proveedor.id">{{proveedor.razonSocial}}</option>
+                            type="text">
+                            <option [ngValue]="null">Todos</option>
+                            <option *ngFor="let proveedor of proveedores" [value]="proveedor.id">
+                                {{proveedor.razonSocial}}</option>
                         </select>
                     </div>
                     <div class="col-lg-3">
                         <label class="form-label" for="desde">Desde</label>
-                        <input class="form-control" formControlName="desde" id="desde" name="desde" type="date"/>
+                        <input class="form-control" formControlName="desde" id="desde" name="desde" type="date" />
                     </div>
                     <div class="col-lg-3">
                         <label class="form-label" for="proveedorId">Hasta</label>
-                        <input class="form-control" formControlName="hasta" id="hasta" name="hasta" type="date"/>
+                        <input class="form-control" formControlName="hasta" id="hasta" name="hasta" type="date" />
                     </div>
                 </div>
                 <div class="button-form-filter">
@@ -50,10 +50,8 @@
     </div>
 
     <ngx-datatable (page)="setPage($event)" (sort)="onSort($event)" [columnMode]="'force'" [count]="page.totalElements"
-                   [externalPaging]="true"
-                   [externalSorting]="true" [footerHeight]="50" [headerHeight]="50" [limit]="page.size"
-                   [loadingIndicator]="loading" [offset]="page.offset" [rows]="rows" class="material striped"
-                   rowHeight="auto">
+        [externalPaging]="true" [externalSorting]="true" [footerHeight]="50" [headerHeight]="50" [limit]="page.size"
+        [loadingIndicator]="loading" [offset]="page.offset" [rows]="rows" class="material striped" rowHeight="auto">
 
         <ngx-datatable-column name="Fecha" prop="fecha">
             <ng-template let-value="value" ngx-datatable-cell-template>

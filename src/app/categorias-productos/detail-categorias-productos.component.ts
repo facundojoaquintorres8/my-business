@@ -1,10 +1,10 @@
-import {HttpResponse} from '@angular/common/http';
-import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
-import {NgbModal, NgbModalRef} from '@ng-bootstrap/ng-bootstrap';
-import {ICategoriaProducto} from './categorias-productos.models';
-import {CategoriaProductoService} from './categorias-productos.service';
-import {DeleteCategoriaProductoModalComponent} from './delete-categorias-productos-modal.component';
+import { HttpResponse } from '@angular/common/http';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
+import { ICategoriaProducto } from './categorias-productos.models';
+import { CategoriaProductoService } from './categorias-productos.service';
+import { DeleteCategoriaProductoModalComponent } from './delete-categorias-productos-modal.component';
 
 @Component({
     selector: 'app-detail-categorias-productos',
@@ -18,8 +18,7 @@ export class DetailCategoriaProductoComponent implements OnInit {
         private categoriaProductoService: CategoriaProductoService,
         private activatedRoute: ActivatedRoute,
         private modalService: NgbModal,
-    ) {
-    }
+    ) { }
 
     ngOnInit(): void {
         const id = this.activatedRoute.snapshot.paramMap.get('id');

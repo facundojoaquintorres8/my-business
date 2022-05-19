@@ -1,36 +1,84 @@
-<div class="container">
+<div class="container" *ngIf="producto">
     <h2>Detalle</h2>
+
     <div class="card">
-
-        <dl *ngIf="producto">
-            <dt>Descripción</dt>
-            <dd>{{ producto.descripcion }}</dd>
-            <dt>Categoría</dt>
-            <dd>{{ producto.categoria.descripcion }}</dd>
-            <dt>Stock</dt>
-            <dd>{{ producto.stock }}</dd>
-            <dt>Cantidad mínima</dt>
-            <dd>{{ producto.cantidadMinima }}</dd>
-            <dt>Precio venta</dt>
-            <dd>{{ producto.precioVenta | currency :'$':'symbol':'1.2-2' }}</dd>
-            <dt>Activo</dt>
-            <dd>{{ producto.activo ? 'Si' : 'No' }}</dd>
-        </dl>
-
-        <div class="button-form">
-            <button (click)="previousState()" class="btn btn-secondary" title="Volver" type="button">
-                <fa-icon icon="arrow-left"></fa-icon>&nbsp;Volver
-            </button>
-
-            <button [routerLink]="['../../', producto?.id, 'edit']" class="btn btn-primary" title="Editar"
-                    type="button">
-                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;Editar
-            </button>
-
-            <button (click)="delete(producto.id)" class="btn btn-danger" title="Eliminar"
-                    type="button">
-                <fa-icon icon="times"></fa-icon>&nbsp;Eliminar
-            </button>
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="card-header">
+                    Descripción
+                </div>
+                <div class="card-body">
+                    <h6 class="card-subtitle text-muted">{{ producto.descripcion }}</h6>
+                </div>
+                <div class="card-header">
+                    Categoría
+                </div>
+                <div class="card-body">
+                    <h6 class="card-subtitle text-muted">{{ producto.categoria.descripcion }}</h6>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="card-header">
+                    Stock
+                </div>
+                <div class="card-body">
+                    <h6 class="card-subtitle text-muted">{{ producto.stock }}</h6>
+                </div>
+                <div class="card-header">
+                    Cantidad mínima
+                </div>
+                <div class="card-body">
+                    <h6 class="card-subtitle text-muted">{{ producto.cantidadMinima }}</h6>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="card-header">
+                    Precio venta
+                </div>
+                <div class="card-body">
+                    <h6 class="card-subtitle text-muted">{{ getPrecioVenta(producto) | currency :'$':'symbol':'1.2-2' }}
+                    </h6>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="card-header">
+                    Activo
+                </div>
+                <div class="card-body">
+                    <h6 class="card-subtitle text-muted">{{ producto.activo ? 'Si' : 'No' }}</h6>
+                </div>
+            </div>
         </div>
+    </div>
+
+    <h4 class="mt-4">Historial precios</h4>
+    <ngx-datatable [columnMode]="'force'" [count]="producto.preciosVenta.length" [footerHeight]="50" [headerHeight]="50"
+        [limit]="10" [sorts]="[{prop: 'fecha', dir: 'desc'}]" [rows]="producto.preciosVenta" class="material striped"
+        rowHeight="auto">
+        <ngx-datatable-column name="Fecha" prop="fecha">
+            <ng-template let-value="value" ngx-datatable-cell-template>
+                {{ value | date: 'dd/MM/yyyy HH:mm' }}
+            </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="Precio" prop="precio">
+            <ng-template let-value="value" ngx-datatable-cell-template>
+                {{ value | currency :'$':'symbol':'1.2-2' }}
+            </ng-template>
+        </ngx-datatable-column>
+    </ngx-datatable>
+
+
+    <div class="button-form">
+        <button (click)="previousState()" class="btn btn-secondary" title="Volver" type="button">
+            <fa-icon icon="arrow-left"></fa-icon>&nbsp;Volver
+        </button>
+
+        <button [routerLink]="['../../', producto?.id, 'edit']" class="btn btn-primary" title="Editar" type="button">
+            <fa-icon icon="pencil-alt"></fa-icon>&nbsp;Editar
+        </button>
+
+        <button (click)="delete(producto.id)" class="btn btn-danger" title="Eliminar" type="button">
+            <fa-icon icon="times"></fa-icon>&nbsp;Eliminar
+        </button>
     </div>
 </div>

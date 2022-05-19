@@ -9,10 +9,10 @@
     <div class="card">
         <form (ngSubmit)="onFilter()" [formGroup]="myForm" class="form-filter" name="myForm" novalidate role="form">
             <fa-icon (click)="collapsedFilter = !collapsedFilter" *ngIf="collapsedFilter" class="pointer filter-icon"
-                     icon="chevron-up">
+                icon="chevron-up">
             </fa-icon>
             <fa-icon (click)="collapsedFilter = !collapsedFilter" *ngIf="!collapsedFilter" class="pointer filter-icon"
-                     icon="chevron-down">
+                icon="chevron-down">
             </fa-icon>
 
             <ng-container *ngIf="!collapsedFilter">
@@ -20,16 +20,16 @@
                     <div class="col-lg-4">
                         <label class="form-label" for="descripcion">Descripción</label>
                         <input class="form-control" formControlName="descripcion" id="descripcion" name="descripcion"
-                               type="text"/>
+                            type="text" />
                     </div>
 
                     <div class="col-lg-3">
                         <label class="form-label" for="categoriaId">Categoría</label>
                         <select class="form-control" formControlName="categoriaId" id="categoriaId" name="categoriaId"
-                                type="text">
-                            <option [ngValue]="null">Seleccione</option>
-                            <option *ngFor="let categoria of categorias"
-                                    [value]="categoria.id">{{categoria.descripcion}}</option>
+                            type="text">
+                            <option [ngValue]="null">Todas</option>
+                            <option *ngFor="let categoria of categorias" [value]="categoria.id">
+                                {{categoria.descripcion}}</option>
                         </select>
                     </div>
 
@@ -37,8 +37,7 @@
                         <div class="form-check form-switch">
                             <label class="form-check-label" for="verInactivos">Ver inactivos</label>
                             <input class="form-check-input" formControlName="verInactivos" id="verInactivos"
-                                   name="verInactivos"
-                                   type="checkbox">
+                                name="verInactivos" type="checkbox">
                         </div>
                     </div>
 
@@ -46,8 +45,7 @@
                         <div class="form-check form-switch">
                             <label class="form-check-label" for="requiereStock">Requieren stock</label>
                             <input class="form-check-input" formControlName="requiereStock" id="requiereStock"
-                                   name="requiereStock"
-                                   type="checkbox">
+                                name="requiereStock" type="checkbox">
                         </div>
                     </div>
                 </div>
@@ -65,16 +63,14 @@
     </div>
 
     <ngx-datatable (page)="setPage($event)" (sort)="onSort($event)" [columnMode]="'force'" [count]="page.totalElements"
-                   [externalPaging]="true"
-                   [externalSorting]="true" [footerHeight]="50" [headerHeight]="50" [limit]="page.size"
-                   [loadingIndicator]="loading" [offset]="page.offset" [rows]="rows" class="material striped"
-                   rowHeight="auto">
+        [externalPaging]="true" [externalSorting]="true" [footerHeight]="50" [headerHeight]="50" [limit]="page.size"
+        [loadingIndicator]="loading" [offset]="page.offset" [rows]="rows" class="material striped" rowHeight="auto">
         <ngx-datatable-column name="Descripción" prop="descripcion"></ngx-datatable-column>
         <ngx-datatable-column name="Categoría" prop="categoria.descripcion"></ngx-datatable-column>
         <ngx-datatable-column name="Stock" prop="stock"></ngx-datatable-column>
         <ngx-datatable-column name="Cant. mín" prop="cantidadMinima"></ngx-datatable-column>
         <ngx-datatable-column name="Precio Venta" prop="precioVenta">
-            <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+            <ng-template let-value="value" ngx-datatable-cell-template>
                 {{ value | currency :'$':'symbol':'1.2-2' }}
             </ng-template>
         </ngx-datatable-column>

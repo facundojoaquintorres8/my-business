@@ -1,10 +1,10 @@
-import {NgModule} from '@angular/core';
-import {CommonModule} from '@angular/common';
-import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
-import {FaIconLibrary, FontAwesomeModule} from '@fortawesome/angular-fontawesome';
-import {fontAwesomeIcons} from './font-awesome-icons';
-import {NgxDatatableModule} from '@swimlane/ngx-datatable';
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { FaIconLibrary, FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { fontAwesomeIcons } from './font-awesome-icons';
+import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 
 @NgModule({
     imports: [

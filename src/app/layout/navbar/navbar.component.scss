@@ -1,13 +1,19 @@
 .navbar-light .navbar-nav .nav-link {
-  color: #0dcaf0;
+  color: #0566dfb8;
 }
+
+.navbar-brand {
+  color: #0d384f;
+}
+
+.navbar-brand:hover {
+  color: #0d384f;
+}
+
 a:hover{
   font-weight: bold;
 }
-.userSquare {
-  border: 1px solid brown;
-  border-radius: 10px;
-}
+
 .form-select:hover{
   font-weight: bold;
   border: 1px solid black;

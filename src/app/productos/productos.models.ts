@@ -1,12 +1,11 @@
-import {ICategoriaProducto} from '../categorias-productos/categorias-productos.models';
-import {IProveedor} from '../proveedores/proveedores.models';
+import { ICategoriaProducto } from '../categorias-productos/categorias-productos.models';
 
 export interface IProducto {
     id: number;
     descripcion: string;
     stock: number;
     cantidadMinima: number;
-    precioVenta: number;
+    preciosVenta: IPrecios[];
     categoria: ICategoriaProducto;
     activo: boolean;
 }
@@ -33,5 +32,12 @@ export interface IPrecios {
     fecha: Date;
     precio: number;
     producto: IProducto;
-    proveedor: IProveedor;
+}
+
+export function getLastPrecioVenta(producto: IProducto): number {
+    const lastPrecio = producto.preciosVenta.reduce((a, b) => a.fecha > b.fecha ? a : b);
+    if (lastPrecio) {
+        return lastPrecio.precio;
+    }
+    return 0;
 }

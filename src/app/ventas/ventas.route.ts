@@ -19,7 +19,7 @@ export const ventasRoute: Routes = [
         path: 'new',
         component: CreateVentaComponent,
         data: {
-            title: 'Ventar',
+            title: 'Vender',
         },
     },
     {

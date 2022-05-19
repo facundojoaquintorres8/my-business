@@ -1,11 +1,11 @@
-import {Component, OnInit} from '@angular/core';
-import {NgbModal, NgbModalRef} from '@ng-bootstrap/ng-bootstrap';
-import {DeleteProveedorModalComponent} from './delete-proveedores-modal.component';
-import {ProveedorService} from './proveedores.service';
-import {IProveedor} from './proveedores.models';
-import {FormBuilder} from '@angular/forms';
-import {IPage, newPage, totalPages} from '../shared/page.models';
-import {ActivatedRoute, Router} from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
+import { DeleteProveedorModalComponent } from './delete-proveedores-modal.component';
+import { ProveedorService } from './proveedores.service';
+import { IProveedor } from './proveedores.models';
+import { FormBuilder } from '@angular/forms';
+import { IPage, newPage, totalPages } from '../shared/page.models';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
     selector: 'app-proveedores',
@@ -16,8 +16,7 @@ export class ProveedorComponent implements OnInit {
     page!: IPage;
     myForm = this.fb.group({
         razonSocial: [null],
-        telefono: [null],
-        email: [null],
+        cuitDni: [null],
         direccion: [null],
         verInactivos: [null],
     });
@@ -33,7 +32,7 @@ export class ProveedorComponent implements OnInit {
         private fb: FormBuilder,
     ) {
         this.activatedRoute.data.subscribe(data => {
-            this.page = data.pagingParams ? data.pagingParams : newPage({activo: true}, ['razonSocial', 'ASC']);
+            this.page = data.pagingParams ? data.pagingParams : newPage({ activo: true }, ['razonSocial', 'ASC']);
         });
     }
 
@@ -43,11 +42,8 @@ export class ProveedorComponent implements OnInit {
         if (this.page.filter.razonSocial) {
             this.myForm.get(['razonSocial'])!.setValue(this.page.filter.razonSocial);
         }
-        if (this.page.filter.telefono) {
-            this.myForm.get(['telefono'])!.setValue(this.page.filter.telefono);
-        }
-        if (this.page.filter.email) {
-            this.myForm.get(['email'])!.setValue(this.page.filter.email);
+        if (this.page.filter.cuitDni) {
+            this.myForm.get(['cuitDni'])!.setValue(this.page.filter.cuitDni);
         }
         if (this.page.filter.direccion) {
             this.myForm.get(['direccion'])!.setValue(this.page.filter.direccion);
@@ -88,14 +84,9 @@ export class ProveedorComponent implements OnInit {
                 razonSocial: this.myForm.get(['razonSocial'])!.value.toLowerCase()
             });
         }
-        if (this.myForm.get(['telefono'])!.value) {
+        if (this.myForm.get(['cuitDni'])!.value) {
             Object.assign(this.page.filter, {
-                telefono: this.myForm.get(['telefono'])!.value.toLowerCase()
-            });
-        }
-        if (this.myForm.get(['email'])!.value) {
-            Object.assign(this.page.filter, {
-                email: this.myForm.get(['email'])!.value.toLowerCase()
+                cuitDni: this.myForm.get(['cuitDni'])!.value.toLowerCase()
             });
         }
         if (this.myForm.get(['direccion'])!.value) {
@@ -113,13 +104,12 @@ export class ProveedorComponent implements OnInit {
     }
 
     clearFilter(): void {
-        this.page.filter = {activo: true};
+        this.page.filter = { activo: true };
         this.page = newPage(this.page.filter, this.page.order);
-        this.myForm.get(['verInactivos'])!.setValue(false);
         this.myForm.get(['razonSocial'])!.setValue('');
-        this.myForm.get(['telefono'])!.setValue('');
-        this.myForm.get(['email'])!.setValue('');
+        this.myForm.get(['cuitDni'])!.setValue('');
         this.myForm.get(['direccion'])!.setValue('');
+        this.myForm.get(['verInactivos'])!.setValue(false);
         this.findAll();
     }
 
@@ -129,7 +119,7 @@ export class ProveedorComponent implements OnInit {
     }
 
     delete(id: number): void {
-        this.ngbModalRef = this.modalService.open(DeleteProveedorModalComponent, {size: 'lg', backdrop: 'static'});
+        this.ngbModalRef = this.modalService.open(DeleteProveedorModalComponent, { size: 'lg', backdrop: 'static' });
         this.ngbModalRef.componentInstance.id = id;
         this.ngbModalRef.result.then(
             () => {

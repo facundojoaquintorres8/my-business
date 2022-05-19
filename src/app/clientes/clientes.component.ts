@@ -1,16 +1,15 @@
-import {Component, OnInit} from '@angular/core';
-import {NgbModal, NgbModalRef} from '@ng-bootstrap/ng-bootstrap';
-import {FormBuilder} from '@angular/forms';
-import {IPage, newPage, totalPages} from '../shared/page.models';
-import {ActivatedRoute, Router} from '@angular/router';
-import {ClientesService} from './clientes.service';
-import {ICliente} from './clientes.models';
-import {DeleteClientesModalComponent} from './delete-clientes-modal.component';
+import { Component, OnInit } from '@angular/core';
+import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
+import { FormBuilder } from '@angular/forms';
+import { IPage, newPage, totalPages } from '../shared/page.models';
+import { ActivatedRoute, Router } from '@angular/router';
+import { ClientesService } from './clientes.service';
+import { ICliente } from './clientes.models';
+import { DeleteClientesModalComponent } from './delete-clientes-modal.component';
 
 @Component({
     selector: 'app-clientes',
-    templateUrl: './clientes.component.html',
-    styleUrls: ['./clientes.component.scss']
+    templateUrl: './clientes.component.html'
 })
 export class ClientesComponent implements OnInit {
     collapsedFilter = false;
@@ -34,7 +33,7 @@ export class ClientesComponent implements OnInit {
         private fb: FormBuilder,
     ) {
         this.activatedRoute.data.subscribe(data => {
-            this.page = data.pagingParams ? data.pagingParams : newPage({activo: true}, ['apellido', 'ASC']);
+            this.page = data.pagingParams ? data.pagingParams : newPage({ activo: true }, ['apellido', 'ASC']);
         });
     }
 
@@ -115,7 +114,7 @@ export class ClientesComponent implements OnInit {
     }
 
     clearFilter(): void {
-        this.page.filter = {activo: true};
+        this.page.filter = { activo: true };
         this.page = newPage(this.page.filter, this.page.order);
         this.myForm.get(['dni'])!.setValue('');
         this.myForm.get(['nombre'])!.setValue('');
@@ -124,7 +123,7 @@ export class ClientesComponent implements OnInit {
     }
 
     delete(dni: string): void {
-        this.ngbModalRef = this.modelService.open(DeleteClientesModalComponent, {size: 'lg', backdrop: 'static'});
+        this.ngbModalRef = this.modelService.open(DeleteClientesModalComponent, { size: 'lg', backdrop: 'static' });
         this.ngbModalRef.componentInstance.dni = dni;
         this.ngbModalRef.result.then(
             () => {

@@ -1,9 +1,9 @@
-import {Routes} from '@angular/router';
-import {DetailCategoriaProductoComponent} from './detail-categorias-productos.component';
-import {UpdateCategoriaProductoComponent} from './update-categorias-productos.component';
-import {CategoriaProductoComponent} from './categorias-productos.component';
-import {PagingParamsResolve} from '../util/paging-params-resolve';
-import {AuthGuards} from '../security/auth-guards';
+import { Routes } from '@angular/router';
+import { DetailCategoriaProductoComponent } from './detail-categorias-productos.component';
+import { UpdateCategoriaProductoComponent } from './update-categorias-productos.component';
+import { CategoriaProductoComponent } from './categorias-productos.component';
+import { PagingParamsResolve } from '../util/paging-params-resolve';
+import { AuthGuards } from '../security/auth-guards';
 
 export const categoriaProductoRoutes: Routes = [
     {

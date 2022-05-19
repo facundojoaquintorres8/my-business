@@ -1,7 +1,7 @@
-import {Component} from '@angular/core';
-import {FormBuilder, Validators} from '@angular/forms';
-import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
-import {IQuickProveedor} from './proveedores.models';
+import { Component } from '@angular/core';
+import { FormBuilder, Validators } from '@angular/forms';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { IQuickProveedor } from './proveedores.models';
 
 @Component({
     templateUrl: './add-quick-proveedores-modal.component.html'

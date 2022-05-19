@@ -10,9 +10,9 @@
                         <div class="form-group">
                             <label class="form-control-label required" for="claveVieja">Contraseña anterior</label>
                             <input class="form-control" formControlName="claveVieja" id="claveVieja" name="claveVieja"
-                                   type="password"/>
+                                type="password" />
                             <div
-                                    *ngIf="myForm.get('claveVieja')!.invalid && (myForm.get('claveVieja')!.dirty || myForm.get('claveVieja')!.touched)">
+                                *ngIf="myForm.get('claveVieja')!.invalid && (myForm.get('claveVieja')!.dirty || myForm.get('claveVieja')!.touched)">
                                 <small *ngIf="myForm.get('claveVieja')?.errors?.required" class="form-text text-danger">
                                     El campo es requerido.
                                 </small>
@@ -25,19 +25,19 @@
                         <div class="form-group">
                             <label class="form-control-label required" for="claveNueva">Contraseña Nueva</label>
                             <input class="form-control" formControlName="claveNueva" id="claveNueva" name="claveNueva"
-                                   type="password"/>
+                                type="password" />
                             <div
-                                    *ngIf="myForm.get('claveNueva')!.invalid && (myForm.get('claveNueva')!.dirty || myForm.get('claveNueva')!.touched)">
+                                *ngIf="myForm.get('claveNueva')!.invalid && (myForm.get('claveNueva')!.dirty || myForm.get('claveNueva')!.touched)">
                                 <small *ngIf="myForm.get('claveNueva')?.errors?.required" class="form-text text-danger">
                                     El campo es requerido.
                                 </small>
                                 <small *ngIf="myForm.get('claveNueva')?.errors?.pattern " class="form-text text-danger">
                                     <p>
-                                        La contraseña debe tener:<br>
+                                        Requisitos de contraseña:<br>
                                         - Debe ser entre 8 y 32 caracteres<br>
-                                        - Debe tener al menos una minuscula<br>
-                                        - Debe tener al menos una mayuscula<br>
-                                        - Debe tener al menos un numero<br>
+                                        - Debe tener al menos una minúscula<br>
+                                        - Debe tener al menos una mayúscula<br>
+                                        - Debe tener al menos un número<br>
                                     </p>
                                 </small>
                             </div>
@@ -50,17 +50,15 @@
                             <label class="form-control-label required" for="claveNuevaRepetida">Repita Contraseña
                                 Nueva</label>
                             <input class="form-control" formControlName="claveNuevaRepetida" id="claveNuevaRepetida"
-                                   name="claveNuevaRepetida"
-
-                                   type="password"/>
+                                name="claveNuevaRepetida" type="password" />
                             <div
-                                    *ngIf="myForm.get('claveNuevaRepetida')!.invalid && (myForm.get('claveNuevaRepetida')!.dirty || myForm.get('claveNuevaRepetida')!.touched)">
+                                *ngIf="myForm.get('claveNuevaRepetida')!.invalid && (myForm.get('claveNuevaRepetida')!.dirty || myForm.get('claveNuevaRepetida')!.touched)">
                                 <small *ngIf="myForm.get('claveNuevaRepetida')?.errors?.required"
-                                       class="form-text text-danger">
+                                    class="form-text text-danger">
                                     El campo es requerido.
                                 </small>
                                 <small *ngIf="myForm.get('claveNuevaRepetida')?.errors?.errorClaveNevaRepetida"
-                                       class="form-text text-danger">
+                                    class="form-text text-danger">
                                     Las Contraseñas no coinciden.
                                 </small>
                             </div>
@@ -69,7 +67,7 @@
                 </div>
 
 
-                <div class="button-form mt-4">
+                <div class="button-form">
                     <button [disabled]="!myForm.valid" class="btn btn-primary" title="Confirmar" type="submit">
                         &nbsp;Confirmar
                     </button>

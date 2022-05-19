@@ -1,7 +1,7 @@
-import {Component} from '@angular/core';
-import {FormBuilder, Validators} from '@angular/forms';
-import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
-import {IQuickCliente} from './clientes.models';
+import { Component } from '@angular/core';
+import { FormBuilder, Validators } from '@angular/forms';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { IQuickCliente } from './clientes.models';
 
 @Component({
     templateUrl: './add-quick-clientes-modal.component.html'

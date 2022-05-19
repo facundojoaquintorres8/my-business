@@ -1,30 +1,51 @@
-<div class="container">
+<div class="container" *ngIf="user">
     <h2>Detalle</h2>
+
     <div class="card">
-        <dl *ngIf="user">
-            <dt>Nombre usuario</dt>
-            <dd>{{user.usuario}}</dd>
-            <dt>Rol</dt>
-            <dd>{{user.rol}}</dd>
-            <dt>Activo</dt>
-            <dd>{{ user.activo ? 'Si' : 'No' }}</dd>
-        </dl>
-        <div class="button-form">
-            <button (click)="previousState()" class="btn btn-secondary" title="Volver" type="button">
-                <fa-icon icon="arrow-left"></fa-icon>
-                Volver
-            </button>
-            <ng-container *ngIf="tokenUser?.rol === 'Administrador' && tokenUser?.id !== user?.id">
-                <button [routerLink]="['../../', user?.id, 'edit']" class="btn btn-primary" title="Editar"
-                        type="button">
-                    <fa-icon icon="pencil-alt"></fa-icon>
-                    Editar
-                </button>
-                <button (click)="delete(user.id)" class="btn btn-danger" title="Eliminar" type="button">
-                    <fa-icon icon="times"></fa-icon>
-                    Eliminar
-                </button>
-            </ng-container>
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="card-header">
+                    Usuario
+                </div>
+                <div class="card-body">
+                    <h6 class="card-subtitle text-muted">{{ user.usuario }}
+                    </h6>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="card-header">
+                    Rol
+                </div>
+                <div class="card-body">
+                    <h6 class="card-subtitle text-muted">{{ user.rol }}
+                    </h6>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="card-header">
+                    Activo
+                </div>
+                <div class="card-body">
+                    <h6 class="card-subtitle text-muted">{{ user.activo ? 'Si' : 'No' }}</h6>
+                </div>
+            </div>
         </div>
+    </div>
+
+
+    <div class="button-form">
+        <button (click)="previousState()" class="btn btn-secondary" title="Volver" type="button">
+            <fa-icon icon="arrow-left"></fa-icon>
+            Volver
+        </button>
+        <button [routerLink]="['../../', user?.id, 'edit']" class="btn btn-primary" title="Editar" type="button">
+            <fa-icon icon="pencil-alt"></fa-icon>
+            Editar
+        </button>
+        <button (click)="delete(user.id)" class="btn btn-danger" title="Eliminar" type="button"
+            [disabled]="sessionUser.id === user.id">
+            <fa-icon icon="times"></fa-icon>
+            Eliminar
+        </button>
     </div>
 </div>

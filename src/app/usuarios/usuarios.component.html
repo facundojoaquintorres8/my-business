@@ -8,30 +8,29 @@
     <div class="card">
         <form (ngSubmit)="onFilter()" [formGroup]="myForm" class="form-filter" name="myForm" novalidate role="form">
             <fa-icon (click)="collapsedFilter = !collapsedFilter" *ngIf="collapsedFilter" class="pointer filter-icon"
-                     icon="chevron-up">
+                icon="chevron-up">
             </fa-icon>
             <fa-icon (click)="collapsedFilter = !collapsedFilter" *ngIf="!collapsedFilter" class="pointer filter-icon"
-                     icon="chevron-down">
+                icon="chevron-down">
             </fa-icon>
             <ng-container *ngIf="!collapsedFilter">
                 <div class="row">
-                    <div class="col-lg-4">
+                    <div class="col-lg-3">
                         <label class="form-label" for="usuario">Usuario</label>
                         <input class="form-control" formControlName="usuario" id="usuario" name="usuario" type="text">
                     </div>
-                    <div class="col-lg-4">
+                    <div class="col-lg-3">
                         <label class="form-label" for="rol">Rol</label>
                         <select class="form-select" formControlName="rol" id="rol" name="rol">
-                            <option [selected]="true" value="">Seleccione</option>
+                            <option [selected]="true" value="">Todos</option>
                             <option *ngFor="let r of roles" value={{r}}>{{r}}</option>
                         </select>
                     </div>
-                    <div class="col-lg-1">
+                    <div class="col-lg-2">
                         <div class="form-check form-switch">
                             <label class="form-check-label" for="verInactivos">Inactivos</label>
                             <input class="form-check-input" formControlName="verInactivos" id="verInactivos"
-                                   name="verInactivos"
-                                   type="checkbox">
+                                name="verInactivos" type="checkbox">
                         </div>
                     </div>
                 </div>
@@ -46,22 +45,9 @@
             </ng-container>
         </form>
     </div>
-    <ngx-datatable
-            (page)="setPage($event)"
-            (sort)="onSort($event)"
-            [columnMode]="'force'"
-            [count]="page.totalElements"
-            [externalPaging]="true"
-            [externalSorting]="true"
-            [footerHeight]="50"
-            [headerHeight]="50"
-            [limit]="page.size"
-            [loadingIndicator]="loading"
-            [offset]="page.offset"
-            [rows]="rows"
-            class="material striped"
-            rowHeight="auto"
-    >
+    <ngx-datatable (page)="setPage($event)" (sort)="onSort($event)" [columnMode]="'force'" [count]="page.totalElements"
+        [externalPaging]="true" [externalSorting]="true" [footerHeight]="50" [headerHeight]="50" [limit]="page.size"
+        [loadingIndicator]="loading" [offset]="page.offset" [rows]="rows" class="material striped" rowHeight="auto">
         <ngx-datatable-column name="Usuario" prop="usuario"></ngx-datatable-column>
         <ngx-datatable-column name="Rol" prop="rol"></ngx-datatable-column>
         <ngx-datatable-column name="Activo" prop="activo">
@@ -78,7 +64,8 @@
                 <button [routerLink]="['./', value, 'view']" class="btn btn-primary" title="Ver" type="button">
                     <fa-icon icon="eye"></fa-icon>
                 </button>
-                <button (click)="delete(value)" class="btn btn-danger" title="Eliminar" type="button">
+                <button (click)="delete(value)" class="btn btn-danger" title="Eliminar" type="button"
+                    [disabled]="sessionUser.id === row.id">
                     <fa-icon icon="times"></fa-icon>
                 </button>
             </ng-template>

@@ -9,43 +9,36 @@
     <div class="card">
         <form (ngSubmit)="onFilter()" [formGroup]="myForm" class="form-filter" name="myForm" novalidate role="form">
             <fa-icon (click)="collapsedFilter = !collapsedFilter" *ngIf="collapsedFilter" class="pointer filter-icon"
-                     icon="chevron-up">
+                icon="chevron-up">
             </fa-icon>
             <fa-icon (click)="collapsedFilter = !collapsedFilter" *ngIf="!collapsedFilter" class="pointer filter-icon"
-                     icon="chevron-down">
+                icon="chevron-down">
             </fa-icon>
 
             <ng-container *ngIf="!collapsedFilter">
                 <div class="row">
-                    <div class="col-lg-4">
+                    <div class="col-lg-3">
+                        <label class="form-label" for="cuitDni">CUIT/DNI</label>
+                        <input class="form-control" formControlName="cuitDni" id="cuitDni" name="cuitDni" type="text">
+                    </div>
+
+                    <div class="col-lg-3">
                         <label class="form-label" for="razonSocial">Razón Social</label>
                         <input class="form-control" formControlName="razonSocial" id="razonSocial" name="razonSocial"
-                               type="text"/>
+                            type="text" />
                     </div>
 
-                    <div class="col-lg-4">
-                        <label class="form-label" for="telefono">Teléfono</label>
-                        <input class="form-control" formControlName="telefono" id="telefono" name="telefono"
-                               type="text"/>
-                    </div>
-
-                    <div class="col-lg-4">
-                        <label class="form-label" for="email">Email</label>
-                        <input class="form-control" formControlName="email" id="email" name="email" type="text"/>
-                    </div>
-
-                    <div class="col-lg-4">
+                    <div class="col-lg-3">
                         <label class="form-label" for="direccion">Dirección</label>
                         <input class="form-control" formControlName="direccion" id="direccion" name="direccion"
-                               type="text"/>
+                            type="text" />
                     </div>
 
-                    <div class="col-lg-2">
+                    <div class="col-lg-3">
                         <div class="form-check form-switch">
                             <label class="form-check-label" for="verInactivos">Ver inactivos</label>
                             <input class="form-check-input" formControlName="verInactivos" id="verInactivos"
-                                   name="verInactivos"
-                                   type="checkbox">
+                                name="verInactivos" type="checkbox">
                         </div>
                     </div>
 
@@ -64,12 +57,10 @@
     </div>
 
     <ngx-datatable (page)="setPage($event)" (sort)="onSort($event)" [columnMode]="'force'" [count]="page.totalElements"
-                   [externalPaging]="true"
-                   [externalSorting]="true" [footerHeight]="50" [headerHeight]="50" [limit]="page.size"
-                   [loadingIndicator]="loading" [offset]="page.offset" [rows]="rows" class="material striped"
-                   rowHeight="auto">
-        <ngx-datatable-column name="Razón Social" prop="razonSocial"></ngx-datatable-column>
+        [externalPaging]="true" [externalSorting]="true" [footerHeight]="50" [headerHeight]="50" [limit]="page.size"
+        [loadingIndicator]="loading" [offset]="page.offset" [rows]="rows" class="material striped" rowHeight="auto">
         <ngx-datatable-column name="CUIT/DNI" prop="cuitDni"></ngx-datatable-column>
+        <ngx-datatable-column name="Razón Social" prop="razonSocial"></ngx-datatable-column>
         <ngx-datatable-column name="Teléfono" prop="telefono">
             <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
                 {{ value ? value : '-'}}

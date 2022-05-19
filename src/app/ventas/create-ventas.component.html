@@ -1,6 +1,6 @@
 <div class="container">
     <form (ngSubmit)="save()" [formGroup]="myForm" name="myForm" novalidate role="form">
-        <h2>Ventar</h2>
+        <h2>Vender</h2>
         <div class="card">
             <div class="row">
                 <div class="col-lg-3">
@@ -51,7 +51,7 @@
                 </button>
             </h4>
 
-            <div formArrayName="itemsVentas">
+            <div formArrayName="ventasItems">
                 <div *ngFor="let item of getControls(); let i=index">
                     <div class="row" formGroupName="{{i}}">
                         <div class="col-lg-4 form-group">
@@ -110,7 +110,7 @@
                 </div>
             </div>
 
-            <div class="button-form mt-4">
+            <div class="button-form">
                 <button (click)="previousState()" class="btn btn-secondary" title="Cancelar" type="button">
                     <fa-icon icon="ban"></fa-icon>&nbsp;Cancelar
                 </button>

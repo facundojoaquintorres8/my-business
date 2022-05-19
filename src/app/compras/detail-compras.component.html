@@ -11,13 +11,11 @@
             </dl>
 
             <ngx-datatable [columnMode]="'force'" [count]="compra.comprasItems.length" [externalPaging]="true"
-                           [externalSorting]="true"
-                           [footerHeight]="50" [headerHeight]="50" [limit]="page.size"
-                           [offset]="page.offset" [rows]="compra.comprasItems" class="material striped"
-                           rowHeight="auto">
+                [externalSorting]="true" [footerHeight]="50" [headerHeight]="50" [limit]="page.size"
+                [offset]="page.offset" [rows]="compra.comprasItems" class="material striped" rowHeight="auto">
 
-                <ngx-datatable-column [sortable]="false" name="Producto"
-                                      prop="producto.descripcion"></ngx-datatable-column>
+                <ngx-datatable-column [sortable]="false" name="Producto" prop="producto.descripcion">
+                </ngx-datatable-column>
                 <ngx-datatable-column [sortable]="false" name="Cantidad" prop="cantidad"></ngx-datatable-column>
                 <ngx-datatable-column [sortable]="false" name="Precio" prop="precio"></ngx-datatable-column>
 

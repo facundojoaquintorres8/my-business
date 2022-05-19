@@ -1,14 +1,14 @@
-import {Component, OnInit} from '@angular/core';
-import {NgbModal, NgbModalRef} from '@ng-bootstrap/ng-bootstrap';
-import {FormBuilder} from '@angular/forms';
-import {IPage, newPage, totalPages} from '../shared/page.models';
-import {ActivatedRoute, Router} from '@angular/router';
-import {IUsuario} from './usuarios.models';
-import {UsuariosService} from './usuarios.service';
-import {DeleteUsuariosModalComponent} from './delete-usuarios-modal.component';
-import {Roles} from '../util/rolesUsuarios';
-import {ITokenUser} from '../auth/auth.models';
-import {AuthService} from '../auth/auth.service'
+import { Component, OnInit } from '@angular/core';
+import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
+import { FormBuilder } from '@angular/forms';
+import { IPage, newPage, totalPages } from '../shared/page.models';
+import { ActivatedRoute, Router } from '@angular/router';
+import { IUsuario } from './usuarios.models';
+import { UsuariosService } from './usuarios.service';
+import { DeleteUsuariosModalComponent } from './delete-usuarios-modal.component';
+import { Roles } from '../util/rolesUsuarios';
+import { ISessionUser } from '../auth/auth.models';
+import { AuthService } from '../auth/auth.service'
 
 @Component({
     selector: 'app-usuarios',
@@ -27,7 +27,7 @@ export class UsuariosComponent implements OnInit {
     loading = false;
     roles = Roles;
     private ngbModalRef: NgbModalRef | undefined;
-    tokenUser!: ITokenUser;
+    sessionUser!: ISessionUser;
 
     constructor(
         private router: Router,
@@ -35,14 +35,14 @@ export class UsuariosComponent implements OnInit {
         private usuariosService: UsuariosService,
         private modalService: NgbModal,
         private fb: FormBuilder,
-        private authService : AuthService) {
+        private authService: AuthService) {
         this.activatedRoute.data.subscribe(data => {
-            this.page = data.pagingParams ? data.pagingParams : newPage({activo: true}, ['id', 'ASC']);
+            this.page = data.pagingParams ? data.pagingParams : newPage({ activo: true }, ['id', 'ASC']);
         });
     }
 
     ngOnInit(): void {
-        this.tokenUser = this.authService.getSessionUser();
+        this.sessionUser = this.authService.getSessionUser();
         this.findAll();
     }
 
@@ -57,7 +57,6 @@ export class UsuariosComponent implements OnInit {
             }
         }).subscribe(res => {
             this.rows = res.body.rows;
-            this.rows = this.rows.filter(row => row.id != this.tokenUser.id);
             this.loading = false;
             this.page.totalElements = res.body.count;
             this.page.totalPages = totalPages(this.page.size, this.page.totalElements);
@@ -85,7 +84,7 @@ export class UsuariosComponent implements OnInit {
     }
 
     clearFilter(): void {
-        this.page.filter = {activo: true};
+        this.page.filter = { activo: true };
         this.page = newPage(this.page.filter, this.page.order);
         this.myForm.get(['usuario'])!.setValue('');
         this.myForm.get(['rol'])!.setValue('');
@@ -113,7 +112,7 @@ export class UsuariosComponent implements OnInit {
     }
 
     delete(id: number): void {
-        this.ngbModalRef = this.modalService.open(DeleteUsuariosModalComponent, {size: 'lg', backdrop: 'static'});
+        this.ngbModalRef = this.modalService.open(DeleteUsuariosModalComponent, { size: 'lg', backdrop: 'static' });
         this.ngbModalRef.componentInstance.id = id;
         this.ngbModalRef.result.then(
             () => {

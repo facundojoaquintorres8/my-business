@@ -1,5 +1,5 @@
-import {IProducto} from '../productos/productos.models';
-import {IProveedor} from '../proveedores/proveedores.models';
+import { IProducto } from '../productos/productos.models';
+import { IProveedor } from '../proveedores/proveedores.models';
 
 export interface ICompra {
     id: number;

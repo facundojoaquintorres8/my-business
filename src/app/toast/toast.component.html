@@ -1,24 +1,10 @@
-<div
-        *ngIf="message"
-        [class.bg-danger]="isError"
-        [class.bg-info]="isInfo"
-        [class.bg-success]="isSuccess"
-        aria-atomic="true"
-        aria-live="assertive"
-        class="toast-message text-white"
-        role="alert">
+<div *ngIf="message" [class.bg-danger]="isError" [class.bg-info]="isInfo" [class.bg-success]="isSuccess"
+    aria-atomic="true" aria-live="assertive" class="toast-message text-white" role="alert">
     <div class="toast-header">
         <strong class="ms-2 mr-auto"> {{ isError ? 'Error' : isSuccess ? 'Éxito' : 'Info' }} </strong>
-        <button
-                (click)="closeAllToast()"
-                [class.btn-danger-outline]="isError"
-                [class.btn-info-outline]="isInfo"
-                [class.btn-success-outline]="isSuccess"
-                aria-label="Close"
-                class="btn btn-toast-close"
-                data-dismiss="toast"
-                title="Cerrar"
-                type="button">
+        <button (click)="closeAllToast()" [class.btn-danger-outline]="isError" [class.btn-info-outline]="isInfo"
+            [class.btn-success-outline]="isSuccess" aria-label="Close" class="btn btn-toast-close" data-dismiss="toast"
+            title="Cerrar" type="button">
             X
         </button>
     </div>

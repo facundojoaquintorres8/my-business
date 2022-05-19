@@ -1,15 +1,15 @@
-import {Component, OnInit} from '@angular/core';
-import {HttpResponse} from '@angular/common/http';
-import {AbstractControl, FormArray, FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {Observable} from 'rxjs';
-import {VentasService} from './ventas.service';
-import {IVenta, IVentaCreate} from './ventas.model';
-import {ICliente} from '../clientes/clientes.models';
-import {ProductoService} from '../productos/productos.service';
-import {IProducto} from '../productos/productos.models';
-import {NgbModal, NgbModalRef} from '@ng-bootstrap/ng-bootstrap';
-import {AddQuickClienteModalComponent} from '../clientes/add-quick-clientes-modal.component';
-import {ClientesService} from '../clientes/clientes.service';
+import { Component, OnInit } from '@angular/core';
+import { HttpResponse } from '@angular/common/http';
+import { AbstractControl, FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Observable } from 'rxjs';
+import { VentasService } from './ventas.service';
+import { IVenta, IVentaCreate, IVentaItem } from './ventas.model';
+import { ICliente } from '../clientes/clientes.models';
+import { ProductoService } from '../productos/productos.service';
+import { getLastPrecioVenta, IProducto } from '../productos/productos.models';
+import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
+import { AddQuickClienteModalComponent } from '../clientes/add-quick-clientes-modal.component';
+import { ClientesService } from '../clientes/clientes.service';
 
 @Component({
     selector: 'app-create-ventas',
@@ -22,7 +22,7 @@ export class CreateVentaComponent implements OnInit {
     myForm = this.fb.group({
         fecha: [new Date().toISOString().substring(0, 10), [Validators.required]],
         cliente: [null, [Validators.required]],
-        itemsVentas: this.fb.array([
+        ventasItems: this.fb.array([
             this.initItems()
         ])
     });
@@ -37,16 +37,16 @@ export class CreateVentaComponent implements OnInit {
     ) {
     }
 
-    get itemsVentas(): any {
-        return this.myForm.get('itemsVentas') as FormArray;
+    get ventasItems(): any {
+        return this.myForm.get('ventasItems') as FormArray;
     }
 
     ngOnInit(): void {
-        this.clienteService.findAll({limit: 0, activo: true}).subscribe(
+        this.clienteService.findAll({ limit: 0, activo: true }).subscribe(
             (res) => this.clientes = res.body.rows
         );
 
-        this.productoService.findAll({limit: 0, activo: true}).subscribe(
+        this.productoService.findAll({ limit: 0, activo: true }).subscribe(
             (res) => this.productos = res.body.rows
         );
     }
@@ -60,20 +60,20 @@ export class CreateVentaComponent implements OnInit {
     }
 
     addItem(): void {
-        const control = <FormArray> this.myForm.controls['itemsVentas'];
+        const control = <FormArray>this.myForm.controls['ventasItems'];
         control.push(this.initItems());
     }
 
     deleteItem(index: any): void {
-        this.itemsVentas.removeAt(index);
+        this.ventasItems.removeAt(index);
     }
 
     getControls(): AbstractControl[] {
-        return (<FormArray> this.myForm.get('itemsVentas')).controls;
+        return (<FormArray>this.myForm.get('ventasItems')).controls;
     }
 
     addCliente(): void {
-        this.ngbModalRef = this.modelService.open(AddQuickClienteModalComponent, {size: 'md', backdrop: 'static'});
+        this.ngbModalRef = this.modelService.open(AddQuickClienteModalComponent, { size: 'md', backdrop: 'static' });
         this.ngbModalRef.result.then(
             res => {
                 this.ngbModalRef = undefined;
@@ -95,6 +95,19 @@ export class CreateVentaComponent implements OnInit {
         );
     }
 
+    onProductoChange(item: IVentaItem) {
+        // actualizo precio según fecha
+    }
+
+    getPrecioByFecha(idProducto: number): number {
+        // this.productoService.getPrecioByFecha(idProducto, this.myForm.get(['fecha'])!.value).subscribe(
+        //     (res: any) => {
+        //         return res.precio;
+        //     }, () => { return 0; }
+        // )
+        return 0;
+    }
+
     previousState(): void {
         window.history.back();
     }
@@ -108,8 +121,20 @@ export class CreateVentaComponent implements OnInit {
         return {
             fecha: this.myForm.get(['fecha'])!.value,
             cliente: this.myForm.get(['cliente'])!.value,
-            itemsVentas: this.myForm.get(['itemsVentas'])!.value,
+            formaPago: this.myForm.get(['formaPago'])!.value,
+            porcentajeDescuento: this.myForm.get(['porcentajeDescuento'])!.value,
+            total: this.getTotalVenta(),
+            ventasItems: this.myForm.get(['ventasItems'])!.value,
         };
+    }
+
+    private getTotalVenta(): number {
+        let total: number = 0;
+        this.myForm.get(['ventasItems'])!.value.forEach((item: IVentaItem) => {
+            total += getLastPrecioVenta(item.producto);
+            ;
+        });
+        return total;
     }
 
     private subscribeToSaveResponse(result: Observable<HttpResponse<IVenta>>): void {

@@ -1,5 +1,5 @@
-import {HttpParams} from '@angular/common/http';
-import {PAGE_LIMIT} from '../app.constants';
+import { HttpParams } from '@angular/common/http';
+import { PAGE_LIMIT } from '../app.constants';
 
 export const createRequestOption = (req?: any): HttpParams => {
     let options: HttpParams = new HttpParams();

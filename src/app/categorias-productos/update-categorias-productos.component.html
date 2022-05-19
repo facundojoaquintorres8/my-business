@@ -8,9 +8,9 @@
                     <div class="form-group">
                         <label class="form-control-label required" for="descripcion">Descripción</label>
                         <input class="form-control" formControlName="descripcion" id="descripcion" name="descripcion"
-                               type="text"/>
+                            type="text" />
                         <div
-                                *ngIf="myForm.get('descripcion')!.invalid && (myForm.get('descripcion')!.dirty || myForm.get('descripcion')!.touched)">
+                            *ngIf="myForm.get('descripcion')!.invalid && (myForm.get('descripcion')!.dirty || myForm.get('descripcion')!.touched)">
                             <small *ngIf="myForm.get('descripcion')?.errors?.required" class="form-text text-danger">
                                 El campo es requerido.
                             </small>
@@ -21,12 +21,12 @@
                     <div class="form-check form-switch">
                         <label class="form-check-label" for="activa">Activa</label>
                         <input class="form-check-input" formControlName="activa" id="activa" name="activa"
-                               type="checkbox">
+                            type="checkbox">
                     </div>
                 </div>
             </div>
 
-            <div class="button-form mt-4">
+            <div class="button-form">
                 <button (click)="previousState()" class="btn btn-secondary" title="Cancelar" type="button">
                     <fa-icon icon="ban"></fa-icon>&nbsp;Cancelar
                 </button>

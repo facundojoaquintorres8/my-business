@@ -1,4 +1,4 @@
-import {PAGE_LIMIT} from '../app.constants';
+import { PAGE_LIMIT } from '../app.constants';
 
 export interface IPage {
     size: number;

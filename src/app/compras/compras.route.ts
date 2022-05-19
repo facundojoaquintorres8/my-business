@@ -1,8 +1,8 @@
-import {Routes} from '@angular/router';
-import {PagingParamsResolve} from '../util/paging-params-resolve';
-import {CompraComponent} from './compras.component';
-import {CreateCompraComponent} from './create-compras.component';
-import {DetailCompraComponent} from './detail-compras.component';
+import { Routes } from '@angular/router';
+import { PagingParamsResolve } from '../util/paging-params-resolve';
+import { CompraComponent } from './compras.component';
+import { CreateCompraComponent } from './create-compras.component';
+import { DetailCompraComponent } from './detail-compras.component';
 
 export const comprasRoute: Routes = [
     {

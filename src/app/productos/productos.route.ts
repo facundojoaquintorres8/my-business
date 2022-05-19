@@ -1,9 +1,9 @@
-import {Routes} from '@angular/router';
-import {DetailProductoComponent} from './detail-productos.component';
-import {UpdateProductoComponent} from './update-productos.component';
-import {ProductoComponent} from './productos.component';
-import {PagingParamsResolve} from '../util/paging-params-resolve';
-import {AuthGuards} from '../security/auth-guards';
+import { Routes } from '@angular/router';
+import { DetailProductoComponent } from './detail-productos.component';
+import { UpdateProductoComponent } from './update-productos.component';
+import { ProductoComponent } from './productos.component';
+import { PagingParamsResolve } from '../util/paging-params-resolve';
+import { AuthGuards } from '../security/auth-guards';
 
 export const productoRoutes: Routes = [
     {

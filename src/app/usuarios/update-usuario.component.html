@@ -8,10 +8,9 @@
                     <div class="form-group">
                         <label class="form-control-label required" for="usuario">Nombre Usuario</label>
                         <input [readOnly]="isUpdate" class="form-control" formControlName="usuario" id="usuario"
-                               name="usuario"
-                               type="text"/>
+                            name="usuario" type="text" />
                         <div
-                                *ngIf="myForm.get('usuario')!.invalid && (myForm.get('usuario')!.dirty || myForm.get('usuario')!.touched)">
+                            *ngIf="myForm.get('usuario')!.invalid && (myForm.get('usuario')!.dirty || myForm.get('usuario')!.touched)">
                             <small *ngIf="myForm.get('usuario')?.errors?.required" class="form-text text-danger">
                                 El campo es requerido.
                             </small>
@@ -22,20 +21,19 @@
                     <div class="form-group">
                         <label class="form-control-label required" for="clave">Contraseña</label>
                         <input [type]="show ? 'text' : 'password' " class="form-control" formControlName="clave"
-                               id="clave"
-                               name="clave"/>
+                            id="clave" name="clave" />
                         <div
-                                *ngIf="myForm.get('clave')!.invalid && (myForm.get('clave')!.dirty || myForm.get('clave')!.touched)">
+                            *ngIf="myForm.get('clave')!.invalid && (myForm.get('clave')!.dirty || myForm.get('clave')!.touched)">
                             <small *ngIf="myForm.get('clave')?.errors?.required" class="form-text text-danger">
                                 El campo es requerido.
                             </small>
                             <small *ngIf="myForm.get('clave')?.errors?.pattern " class="form-text text-danger">
                                 <p>
-                                    La contraseña debe tener:<br>
+                                    Requisitos de contraseña:<br>
                                     - Debe ser entre 8 y 32 caracteres<br>
-                                    - Debe tener al menos una minuscula<br>
-                                    - Debe tener al menos una mayuscula<br>
-                                    - Debe tener al menos un numero<br>
+                                    - Debe tener al menos una minúscula<br>
+                                    - Debe tener al menos una mayúscula<br>
+                                    - Debe tener al menos un número<br>
                                 </p>
                             </small>
                         </div>
@@ -49,7 +47,7 @@
                             <option *ngFor="let r of roles" value={{r}}>{{r}}</option>
                         </select>
                         <div
-                                *ngIf="myForm.get('rol')!.invalid && (myForm.get('rol')!.dirty || myForm.get('rol')!.touched)">
+                            *ngIf="myForm.get('rol')!.invalid && (myForm.get('rol')!.dirty || myForm.get('rol')!.touched)">
                             <small *ngIf="myForm.get('rol')?.errors?.required" class="form-text text-danger">
                                 El campo es requerido.
                             </small>
@@ -60,11 +58,11 @@
                     <div class="form-check form-switch">
                         <label class="form-check-label" for="activo">Activo</label>
                         <input class="form-check-input" formControlName="activo" id="activo" name="activo"
-                               type="checkbox">
+                            type="checkbox">
                     </div>
                 </div>
             </div>
-            <div class="button-form mt-4">
+            <div class="button-form">
                 <button (click)="previousState()" class="btn btn-secondary" title="Cancelar" type="button">
                     <fa-icon icon="ban"></fa-icon>&nbsp;Cancelar
                 </button>

@@ -1,11 +1,11 @@
-import {Component, OnInit} from '@angular/core';
-import {ICompra, ICompraItem} from './compras.model';
-import {IPage, newPage, totalPages} from '../shared/page.models';
-import {ActivatedRoute, Router} from '@angular/router';
-import {FormBuilder} from '@angular/forms';
-import {ComprasService} from './compras.service';
-import {IProveedor} from '../proveedores/proveedores.models';
-import {ProveedorService} from '../proveedores/proveedores.service';
+import { Component, OnInit } from '@angular/core';
+import { ICompra, ICompraItem } from './compras.model';
+import { IPage, newPage, totalPages } from '../shared/page.models';
+import { ActivatedRoute, Router } from '@angular/router';
+import { FormBuilder } from '@angular/forms';
+import { ComprasService } from './compras.service';
+import { IProveedor } from '../proveedores/proveedores.models';
+import { ProveedorService } from '../proveedores/proveedores.service';
 
 @Component({
     selector: 'app-compras',

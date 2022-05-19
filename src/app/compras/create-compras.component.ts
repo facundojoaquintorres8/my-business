@@ -1,16 +1,16 @@
-import {Component, OnInit} from '@angular/core';
-import {HttpResponse} from '@angular/common/http';
-import {AbstractControl, FormArray, FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {Observable} from 'rxjs';
-import {ComprasService} from './compras.service';
-import {ICompra, ICompraCreate} from './compras.model';
-import {IProveedor} from '../proveedores/proveedores.models';
-import {ProveedorService} from '../proveedores/proveedores.service';
-import {ProductoService} from '../productos/productos.service';
-import {IProducto} from '../productos/productos.models';
-import {NgbModal, NgbModalRef} from '@ng-bootstrap/ng-bootstrap';
-import {AddQuickProductoModalComponent} from '../productos/add-quick-productos-modal.component';
-import {AddQuickProveedorModalComponent} from '../proveedores/add-quick-proveedores-modal.component';
+import { Component, OnInit } from '@angular/core';
+import { HttpResponse } from '@angular/common/http';
+import { AbstractControl, FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Observable } from 'rxjs';
+import { ComprasService } from './compras.service';
+import { ICompra, ICompraCreate } from './compras.model';
+import { IProveedor } from '../proveedores/proveedores.models';
+import { ProveedorService } from '../proveedores/proveedores.service';
+import { ProductoService } from '../productos/productos.service';
+import { IProducto } from '../productos/productos.models';
+import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
+import { AddQuickProductoModalComponent } from '../productos/add-quick-productos-modal.component';
+import { AddQuickProveedorModalComponent } from '../proveedores/add-quick-proveedores-modal.component';
 
 @Component({
     selector: 'app-create-compras',
@@ -38,16 +38,16 @@ export class CreateCompraComponent implements OnInit {
     ) {
     }
 
-    get itemsCompras(): any{
+    get itemsCompras(): any {
         return this.myForm.get('itemsCompras') as FormArray;
     }
 
     ngOnInit(): void {
-        this.proveedorService.findAll({limit: 0, activo: true}).subscribe(
+        this.proveedorService.findAll({ limit: 0, activo: true }).subscribe(
             (res) => this.proveedores = res.body.rows
         );
 
-        this.productoService.findAll({limit: 0, activo: true}).subscribe(
+        this.productoService.findAll({ limit: 0, activo: true }).subscribe(
             (res) => this.productos = res.body.rows
         );
     }
@@ -61,7 +61,7 @@ export class CreateCompraComponent implements OnInit {
     }
 
     addItem(): void {
-        const control = <FormArray> this.myForm.controls['itemsCompras'];
+        const control = <FormArray>this.myForm.controls['itemsCompras'];
         control.push(this.initItems());
     }
 
@@ -70,11 +70,11 @@ export class CreateCompraComponent implements OnInit {
     }
 
     getControls(): AbstractControl[] {
-        return (<FormArray> this.myForm.get('itemsCompras')).controls;
+        return (<FormArray>this.myForm.get('itemsCompras')).controls;
     }
 
     addProveedor(): void {
-        this.ngbModalRef = this.modelService.open(AddQuickProveedorModalComponent, {size: 'md', backdrop: 'static'});
+        this.ngbModalRef = this.modelService.open(AddQuickProveedorModalComponent, { size: 'md', backdrop: 'static' });
         this.ngbModalRef.result.then(
             res => {
                 this.ngbModalRef = undefined;
@@ -97,7 +97,7 @@ export class CreateCompraComponent implements OnInit {
     }
 
     addProducto(index: any): void {
-        this.ngbModalRef = this.modelService.open(AddQuickProductoModalComponent, {size: 'md', backdrop: 'static'});
+        this.ngbModalRef = this.modelService.open(AddQuickProductoModalComponent, { size: 'md', backdrop: 'static' });
         this.ngbModalRef.result.then(
             res => {
                 this.ngbModalRef = undefined;

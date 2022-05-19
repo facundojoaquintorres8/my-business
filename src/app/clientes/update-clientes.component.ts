@@ -1,12 +1,11 @@
-// tslint:disable-next-line:eofline
-import {Component, OnInit} from '@angular/core';
-import {HttpResponse} from '@angular/common/http';
-import {FormBuilder, Validators} from '@angular/forms';
-import {ActivatedRoute} from '@angular/router';
-import {Observable} from 'rxjs';
-import {ClientesService} from './clientes.service';
-import {ICliente} from './clientes.models';
-import {ToastService} from '../toast/toast.service';
+import { Component, OnInit } from '@angular/core';
+import { HttpResponse } from '@angular/common/http';
+import { FormBuilder, Validators } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
+import { Observable } from 'rxjs';
+import { ClientesService } from './clientes.service';
+import { ICliente } from './clientes.models';
+import { ToastService } from '../toast/toast.service';
 
 @Component({
     selector: 'app-update-clientes',

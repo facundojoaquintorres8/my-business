@@ -1,12 +1,12 @@
-import {Component, OnInit} from '@angular/core';
-import {HttpResponse} from '@angular/common/http';
-import {FormBuilder, Validators} from '@angular/forms';
-import {ActivatedRoute} from '@angular/router';
-import {Observable} from 'rxjs';
-import {ProductoService} from './productos.service';
-import {IProducto, IProductoUpdate} from './productos.models';
-import {ICategoriaProducto} from '../categorias-productos/categorias-productos.models';
-import {CategoriaProductoService} from '../categorias-productos/categorias-productos.service';
+import { Component, OnInit } from '@angular/core';
+import { HttpResponse } from '@angular/common/http';
+import { FormBuilder, Validators } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
+import { Observable } from 'rxjs';
+import { ProductoService } from './productos.service';
+import { getLastPrecioVenta, IProducto, IProductoUpdate } from './productos.models';
+import { ICategoriaProducto } from '../categorias-productos/categorias-productos.models';
+import { CategoriaProductoService } from '../categorias-productos/categorias-productos.service';
 
 @Component({
     selector: 'app-update-productos',
@@ -58,7 +58,7 @@ export class UpdateProductoComponent implements OnInit {
             categoriaId: producto.categoria ? producto.categoria.id : null,
             stock: producto.stock,
             cantidadMinima: producto.cantidadMinima,
-            precioVenta: producto.precioVenta,
+            precioVenta: getLastPrecioVenta(producto),
             activo: producto.activo,
         });
     }

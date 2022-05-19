@@ -1,9 +1,9 @@
-import {HttpResponse} from '@angular/common/http';
-import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
-import {IPage, newPage} from '../shared/page.models';
-import {ICompra} from './compras.model';
-import {ComprasService} from './compras.service';
+import { HttpResponse } from '@angular/common/http';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { IPage, newPage } from '../shared/page.models';
+import { ICompra } from './compras.model';
+import { ComprasService } from './compras.service';
 
 @Component({
     selector: 'app-detail-compras',
@@ -17,8 +17,7 @@ export class DetailCompraComponent implements OnInit {
     constructor(
         private comprasService: ComprasService,
         private activatedRoute: ActivatedRoute,
-    ) {
-    }
+    ) { }
 
     ngOnInit(): void {
         const id = this.activatedRoute.snapshot.paramMap.get('id');

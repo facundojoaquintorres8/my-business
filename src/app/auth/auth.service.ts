@@ -1,9 +1,9 @@
-import {Injectable} from '@angular/core'; // imports the class that provides local storage for token
-import {HttpClient, HttpResponse} from '@angular/common/http';
-import {Observable, throwError} from 'rxjs';
-import {SERVER_API_URL} from '../app.constants';
-import {IUsuarioClave, IUsuarioLogin} from '../usuarios/usuarios.models';
-import {ILoginUser, ITokenUser} from './auth.models';
+import { Injectable } from '@angular/core';
+import { HttpClient, HttpResponse } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { SERVER_API_URL } from '../app.constants';
+import { IUsuarioLogin } from '../usuarios/usuarios.models';
+import { ILoginUser, ISessionUser } from './auth.models';
 
 @Injectable({
     providedIn: 'root'
@@ -17,7 +17,7 @@ export class AuthService {
     }
 
     login(usuarioLogin: IUsuarioLogin): Observable<HttpResponse<ILoginUser>> {
-        return this.http.post<ILoginUser>(`${this.resourceUrl}`, usuarioLogin, {observe: 'response'});
+        return this.http.post<ILoginUser>(`${this.resourceUrl}`, usuarioLogin, { observe: 'response' });
     }
 
     public onLoginSuccess(loginUser: ILoginUser): void {
@@ -25,7 +25,7 @@ export class AuthService {
         this.setToken(loginUser.token);
     }
 
-    public getSessionUser(): ITokenUser {
+    public getSessionUser(): ISessionUser {
         return JSON.parse(localStorage.getItem('user')!);
     }
 
@@ -45,7 +45,7 @@ export class AuthService {
         localStorage.clear();
     }
 
-    private setSessionUser(user: ITokenUser): void {
+    private setSessionUser(user: ISessionUser): void {
         localStorage.setItem('user', JSON.stringify(user));
     }
 

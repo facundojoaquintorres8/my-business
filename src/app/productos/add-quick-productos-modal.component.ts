@@ -1,9 +1,9 @@
-import {Component, OnInit} from '@angular/core';
-import {FormBuilder, Validators} from '@angular/forms';
-import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
-import {ICategoriaProducto} from '../categorias-productos/categorias-productos.models';
-import {CategoriaProductoService} from '../categorias-productos/categorias-productos.service';
-import {IQuickProducto} from './productos.models';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, Validators } from '@angular/forms';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { ICategoriaProducto } from '../categorias-productos/categorias-productos.models';
+import { CategoriaProductoService } from '../categorias-productos/categorias-productos.service';
+import { IQuickProducto } from './productos.models';
 
 @Component({
     templateUrl: './add-quick-productos-modal.component.html'
@@ -27,7 +27,7 @@ export class AddQuickProductoModalComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        this.categoriaProductoService.findAll({limit: 0, activa: true}).subscribe(
+        this.categoriaProductoService.findAll({ limit: 0, activa: true }).subscribe(
             (res) => this.categorias = res.body.rows
         );
     }

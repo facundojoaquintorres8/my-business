@@ -1,6 +1,6 @@
 <div class="container">
     <h2>
-        <button [routerLink]="['new']" class="btn btn-primary btn-icon" title="Ventar" type="button">
+        <button [routerLink]="['new']" class="btn btn-primary btn-icon" title="Vender" type="button">
             <fa-icon icon="plus"></fa-icon>
         </button>
         Ventas
@@ -21,7 +21,7 @@
                         <label class="form-label" for="clienteId">Cliente</label>
                         <select class="form-control" formControlName="clienteId" id="clienteId" name="clienteId"
                                 type="text">
-                            <option [ngValue]="null">Seleccione</option>
+                            <option [ngValue]="null">Todos</option>
                             <option *ngFor="let cliente of clientes"
                                     [value]="cliente.dni">{{cliente.apellido}} {{cliente.nombre}}
                                 ({{cliente.dni}})
@@ -67,9 +67,9 @@
                 {{row.cliente.apellido}} {{row.cliente.nombre}} ({{row.cliente.dni}})
             </ng-template>
         </ngx-datatable-column>
-        <ngx-datatable-column [sortable]="false" name="Monto" prop="ventasItems">
+        <ngx-datatable-column name="Total" prop="total">
             <ng-template let-value="value" ngx-datatable-cell-template>
-                ${{calculateMonto(value)}}
+                {{ value | currency :'$':'symbol':'1.2-2' }}
             </ng-template>
         </ngx-datatable-column>
         <ngx-datatable-column [cellClass]="'column-actions'" [sortable]="false" name="" prop="id">

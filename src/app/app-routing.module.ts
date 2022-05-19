@@ -1,11 +1,11 @@
-import {NgModule} from '@angular/core';
-import {Routes, RouterModule} from '@angular/router';
-import {CompraModule} from './compras/compras.module';
-import {UsuariosModule} from './usuarios/usuarios.module';
-import {PublicLayoutComponent} from './layout/public/public-layout.component';
-import {CuentaModule} from './cuenta/cuenta.module';
-import {AuthModule} from './auth/auth.module';
-import {PrivateLayoutComponent} from './layout/private/private-layout.component';
+import { NgModule } from '@angular/core';
+import { Routes, RouterModule } from '@angular/router';
+import { CompraModule } from './compras/compras.module';
+import { UsuariosModule } from './usuarios/usuarios.module';
+import { PublicLayoutComponent } from './layout/public/public-layout.component';
+import { CuentaModule } from './cuenta/cuenta.module';
+import { AuthModule } from './auth/auth.module';
+import { PrivateLayoutComponent } from './layout/private/private-layout.component';
 
 export const routes: Routes = [
     {
@@ -74,7 +74,7 @@ export const routes: Routes = [
             }
         ]
     },
-    {path: '**', redirectTo: '/login'},
+    { path: '**', redirectTo: '/login' },
 ];
 
 @NgModule({

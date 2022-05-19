@@ -1,10 +1,10 @@
-import {Component, OnInit} from '@angular/core';
-import {ICliente} from './clientes.models';
-import {ClientesService} from './clientes.service';
-import {ActivatedRoute} from '@angular/router';
-import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
-import {HttpResponse} from '@angular/common/http';
-import {DeleteClientesModalComponent} from './delete-clientes-modal.component';
+import { Component, OnInit } from '@angular/core';
+import { ICliente } from './clientes.models';
+import { ClientesService } from './clientes.service';
+import { ActivatedRoute } from '@angular/router';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { HttpResponse } from '@angular/common/http';
+import { DeleteClientesModalComponent } from './delete-clientes-modal.component';
 
 @Component({
     selector: 'app-detail-clientes',
@@ -36,7 +36,7 @@ export class DetailClientesComponent implements OnInit {
     }
 
     delete(dni: string): void {
-        this.ngbModalRef = this.modalService.open(DeleteClientesModalComponent, {size: 'lg', backdrop: 'static'});
+        this.ngbModalRef = this.modalService.open(DeleteClientesModalComponent, { size: 'lg', backdrop: 'static' });
         this.ngbModalRef.componentInstance.dni = dni;
         this.ngbModalRef.result.then(
             () => {

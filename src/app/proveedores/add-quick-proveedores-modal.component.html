@@ -7,9 +7,9 @@
                     <div class="form-group">
                         <label class="form-control-label required" for="razonSocial">Razón Social</label>
                         <input class="form-control" formControlName="razonSocial" id="razonSocial" name="razonSocial"
-                               type="text"/>
+                            type="text" />
                         <div
-                                *ngIf="myForm.get('razonSocial')!.invalid && (myForm.get('razonSocial')!.dirty || myForm.get('razonSocial')!.touched)">
+                            *ngIf="myForm.get('razonSocial')!.invalid && (myForm.get('razonSocial')!.dirty || myForm.get('razonSocial')!.touched)">
                             <small *ngIf="myForm.get('razonSocial')?.errors?.required" class="form-text text-danger">
                                 El campo es requerido.
                             </small>
@@ -19,10 +19,9 @@
                 <div class="col-lg-6">
                     <div class="form-group">
                         <label class="form-control-label required" for="cuitDni">CUIT/DNI (Solo números)</label>
-                        <input class="form-control" formControlName="cuitDni" id="cuitDni" name="cuitDni"
-                               type="text"/>
+                        <input class="form-control" formControlName="cuitDni" id="cuitDni" name="cuitDni" type="text" />
                         <div
-                                *ngIf="myForm.get('cuitDni')!.invalid && (myForm.get('cuitDni')!.dirty || myForm.get('cuitDni')!.touched)">
+                            *ngIf="myForm.get('cuitDni')!.invalid && (myForm.get('cuitDni')!.dirty || myForm.get('cuitDni')!.touched)">
                             <small *ngIf="myForm.get('cuitDni')?.errors?.required" class="form-text text-danger">
                                 El campo es requerido.
                             </small>
@@ -39,19 +38,18 @@
                     <div class="form-group">
                         <label class="form-control-label" for="telefono">Teléfono</label>
                         <input class="form-control" formControlName="telefono" id="telefono" name="telefono"
-                               type="text"/>
+                            type="text" />
                     </div>
                 </div>
                 <div class="col-lg-6">
                     <div class="form-group">
                         <label class="form-control-label" for="email">Email</label>
-                        <input class="form-control" formControlName="email" id="email" name="email"
-                               type="email"/>
+                        <input class="form-control" formControlName="email" id="email" name="email" type="email" />
                     </div>
                 </div>
             </div>
 
-            <div class="button-form mt-4">
+            <div class="button-form">
                 <button (click)="cancel()" class="btn btn-secondary" title="Cancelar" type="button">
                     <fa-icon icon="ban"></fa-icon>&nbsp;Cancelar
                 </button>
